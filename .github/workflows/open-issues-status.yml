@@ -1,0 +1,477 @@
+name: Sync Issue Status on PR Changes
+
+on:
+  issues:
+    types:
+      - opened
+      - reopened
+
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+env:
+  PROJECT_OWNER: ${{ github.repository_owner }}
+  PROJECT_NUMBER: "50"
+
+  STATUS_FIELD_NAME: "Status"
+  READY_OPTION_NAME: "Ready"
+  IN_PROGRESS_OPTION_NAME: "In progress"
+
+jobs:
+  update-project-status:
+    name: Update project status
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+
+    steps:
+      # ---------------------------------------------------------
+      # Get project, Status attribute and options Ready and In Progress
+      # ---------------------------------------------------------
+      - name: Get personal project data
+        id: project
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PROJECT_QUERY=$(cat <<'GRAPHQL'
+          query(
+            $owner: String!,
+            $number: Int!
+          ) {
+            user(login: $owner) {
+              projectV2(number: $number) {
+                id
+
+                fields(first: 100) {
+                  nodes {
+                    ... on ProjectV2SingleSelectField {
+                      id
+                      name
+
+                      options {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          GRAPHQL
+          )
+
+          PROJECT_JSON="$(
+            gh api graphql \
+              -f query="$PROJECT_QUERY" \
+              -f owner="$PROJECT_OWNER" \
+              -F number="$PROJECT_NUMBER" \
+            | jq -c '.data.user.projectV2'
+          )"
+
+          if [[ "$PROJECT_JSON" == "null" ]]; then
+            echo "::error::Personal project ${PROJECT_OWNER}/${PROJECT_NUMBER} not found."
+            exit 1
+          fi
+
+          PROJECT_ID="$(
+            jq -r '.id' <<< "$PROJECT_JSON"
+          )"
+
+          STATUS_FIELD_ID="$(
+            jq -r \
+              --arg field "$STATUS_FIELD_NAME" \
+              '
+              [
+                .fields.nodes[]
+                | select(.name == $field)
+                | .id
+              ][0] // empty
+              ' \
+              <<< "$PROJECT_JSON"
+          )"
+
+          READY_OPTION_ID="$(
+            jq -r \
+              --arg field "$STATUS_FIELD_NAME" \
+              --arg option "$READY_OPTION_NAME" \
+              '
+              [
+                .fields.nodes[]
+                | select(.name == $field)
+                | .options[]?
+                | select(.name == $option)
+                | .id
+              ][0] // empty
+              ' \
+              <<< "$PROJECT_JSON"
+          )"
+
+          IN_PROGRESS_OPTION_ID="$(
+            jq -r \
+              --arg field "$STATUS_FIELD_NAME" \
+              --arg option "$IN_PROGRESS_OPTION_NAME" \
+              '
+              [
+                .fields.nodes[]
+                | select(.name == $field)
+                | .options[]?
+                | select(.name == $option)
+                | .id
+              ][0] // empty
+              ' \
+              <<< "$PROJECT_JSON"
+          )"
+
+          if [[ -z "$STATUS_FIELD_ID" ]]; then
+            echo "::error::Field '${STATUS_FIELD_NAME}' not found in the project."
+            exit 1
+          fi
+
+          if [[ -z "$READY_OPTION_ID" ]]; then
+            echo "::error::Option '${READY_OPTION_NAME}' not found."
+            exit 1
+          fi
+
+          if [[ -z "$IN_PROGRESS_OPTION_ID" ]]; then
+            echo "::error::Option '${IN_PROGRESS_OPTION_NAME}' not found."
+            exit 1
+          fi
+
+          {
+            echo "project_id=$PROJECT_ID"
+            echo "status_field_id=$STATUS_FIELD_ID"
+            echo "ready_option_id=$READY_OPTION_ID"
+            echo "in_progress_option_id=$IN_PROGRESS_OPTION_ID"
+          } >> "$GITHUB_OUTPUT"
+
+      # ---------------------------------------------------------
+      # ISSUE OPEN OR REOPEN
+      #
+      # Moves issue and its open subissues to Ready
+      # ---------------------------------------------------------
+      - name: Move issue and sub-issues to Ready
+        if: github.event_name == 'issues'
+        shell: bash
+        env:
+          PROJECT_ID: ${{ steps.project.outputs.project_id }}
+          STATUS_FIELD_ID: ${{ steps.project.outputs.status_field_id }}
+          READY_OPTION_ID: ${{ steps.project.outputs.ready_option_id }}
+
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+        run: |
+          set -euo pipefail
+
+          REPOSITORY_OWNER="${GITHUB_REPOSITORY%%/*}"
+          REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
+
+          ISSUE_QUERY=$(cat <<'GRAPHQL'
+          query(
+            $owner: String!,
+            $repository: String!,
+            $number: Int!
+          ) {
+            repository(owner: $owner, name: $repository) {
+              issue(number: $number) {
+                number
+                state
+                url
+
+                projectItems(first: 100) {
+                  nodes {
+                    id
+
+                    project {
+                      id
+                    }
+                  }
+                }
+
+                subIssues(first: 100) {
+                  nodes {
+                    number
+                    state
+                    url
+
+                    repository {
+                      nameWithOwner
+                    }
+                  }
+                }
+              }
+            }
+          }
+          GRAPHQL
+          )
+
+          # Cada elemento contiene:
+          # propietario|repositorio|numero|url
+          declare -a QUEUE=(
+            "${REPOSITORY_OWNER}|${REPOSITORY_NAME}|${ISSUE_NUMBER}|${ISSUE_URL}"
+          )
+
+          # Evita procesar dos veces la misma issue.
+          declare -A SEEN=()
+
+          while (( ${#QUEUE[@]} > 0 )); do
+            CURRENT="${QUEUE[0]}"
+            QUEUE=("${QUEUE[@]:1}")
+
+            IFS='|' read -r OWNER REPOSITORY NUMBER URL <<< "$CURRENT"
+
+            ISSUE_KEY="${OWNER}/${REPOSITORY}#${NUMBER}"
+
+            if [[ -n "${SEEN[$ISSUE_KEY]:-}" ]]; then
+              continue
+            fi
+
+            SEEN["$ISSUE_KEY"]=1
+
+            echo "Processing ${ISSUE_KEY}..."
+
+            if ! ISSUE_JSON="$(
+              gh api graphql \
+                -f query="$ISSUE_QUERY" \
+                -f owner="$OWNER" \
+                -f repository="$REPOSITORY" \
+                -F number="$NUMBER"
+            )"; then
+              echo "::warning::Could not read ${ISSUE_KEY}."
+              continue
+            fi
+
+            ISSUE_EXISTS="$(
+              jq -r '.data.repository.issue != null' <<< "$ISSUE_JSON"
+            )"
+
+            if [[ "$ISSUE_EXISTS" != "true" ]]; then
+              echo "::warning::Issue ${ISSUE_KEY} does not exist."
+              continue
+            fi
+
+            # Añadir sus subissues a la cola.
+            while IFS=$'\t' read -r CHILD_REPOSITORY CHILD_NUMBER CHILD_URL; do
+              [[ -z "$CHILD_REPOSITORY" ]] && continue
+
+              CHILD_OWNER="${CHILD_REPOSITORY%%/*}"
+              CHILD_REPOSITORY_NAME="${CHILD_REPOSITORY#*/}"
+
+              QUEUE+=(
+                "${CHILD_OWNER}|${CHILD_REPOSITORY_NAME}|${CHILD_NUMBER}|${CHILD_URL}"
+              )
+            done < <(
+              jq -r '
+                .data.repository.issue.subIssues.nodes[]?
+                | [
+                    .repository.nameWithOwner,
+                    (.number | tostring),
+                    .url
+                  ]
+                | @tsv
+              ' <<< "$ISSUE_JSON"
+            )
+
+            ISSUE_STATE="$(
+              jq -r '.data.repository.issue.state' <<< "$ISSUE_JSON"
+            )"
+
+            # Las subissues cerradas deben conservar su estado Done.
+            if [[ "$ISSUE_STATE" == "CLOSED" ]]; then
+              echo "${ISSUE_KEY} is closed; keeping its current project status."
+              continue
+            fi
+
+            PROJECT_ITEM_ID="$(
+              jq -r \
+                --arg project_id "$PROJECT_ID" \
+                '
+                [
+                  .data.repository.issue.projectItems.nodes[]?
+                  | select(.project.id == $project_id)
+                  | .id
+                ][0] // empty
+                ' \
+                <<< "$ISSUE_JSON"
+            )"
+
+            # Si la issue no está en el proyecto, añadirla.
+            if [[ -z "$PROJECT_ITEM_ID" ]]; then
+              echo "${ISSUE_KEY} is not in the project. Adding it..."
+
+              if ! PROJECT_ITEM_ID="$(
+                gh project item-add "$PROJECT_NUMBER" \
+                  --owner "$PROJECT_OWNER" \
+                  --url "$URL" \
+                  --format json \
+                  --jq '.id'
+              )"; then
+                echo "::warning::Could not add ${ISSUE_KEY} to the project."
+                continue
+              fi
+            fi
+
+            gh project item-edit \
+              --id "$PROJECT_ITEM_ID" \
+              --project-id "$PROJECT_ID" \
+              --field-id "$STATUS_FIELD_ID" \
+              --single-select-option-id "$READY_OPTION_ID"
+
+            echo "${ISSUE_KEY} moved to '${READY_OPTION_NAME}'."
+          done
+
+      # ---------------------------------------------------------
+      # PR OPEN OR REOPEN
+      #
+      # Moves the issues linked to an open PR to In Progress
+      # ---------------------------------------------------------
+      - name: Move issues linked to pull request to In Progress
+        if: github.event_name == 'pull_request_target'
+        shell: bash
+        env:
+          PROJECT_ID: ${{ steps.project.outputs.project_id }}
+          STATUS_FIELD_ID: ${{ steps.project.outputs.status_field_id }}
+          IN_PROGRESS_OPTION_ID: ${{ steps.project.outputs.in_progress_option_id }}
+
+          PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+
+          REPOSITORY_OWNER="${GITHUB_REPOSITORY%%/*}"
+          REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
+
+          echo "Processing pull request #${PULL_REQUEST_NUMBER}..."
+
+          PULL_REQUEST_QUERY=$(cat <<'GRAPHQL'
+          query(
+            $owner: String!,
+            $repository: String!,
+            $number: Int!
+          ) {
+            repository(owner: $owner, name: $repository) {
+              pullRequest(number: $number) {
+                closingIssuesReferences(first: 100) {
+                  nodes {
+                    number
+                    state
+                    url
+
+                    repository {
+                      nameWithOwner
+                    }
+
+                    projectItems(first: 100) {
+                      nodes {
+                        id
+
+                        project {
+                          id
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          GRAPHQL
+          )
+
+          PULL_REQUEST_JSON="$(
+            gh api graphql \
+              -f query="$PULL_REQUEST_QUERY" \
+              -f owner="$REPOSITORY_OWNER" \
+              -f repository="$REPOSITORY_NAME" \
+              -F number="$PULL_REQUEST_NUMBER"
+          )"
+
+          LINKED_ISSUES_COUNT="$(
+            jq -r '
+              .data.repository.pullRequest
+              .closingIssuesReferences.nodes
+              | length
+            ' <<< "$PULL_REQUEST_JSON"
+          )"
+
+          if [[ "$LINKED_ISSUES_COUNT" == "0" ]]; then
+            echo "Pull request #${PULL_REQUEST_NUMBER} has no linked issues."
+            exit 0
+          fi
+
+          while IFS= read -r ISSUE_JSON; do
+            ISSUE_REPOSITORY="$(
+              jq -r '.repository.nameWithOwner' <<< "$ISSUE_JSON"
+            )"
+
+            ISSUE_NUMBER="$(
+              jq -r '.number' <<< "$ISSUE_JSON"
+            )"
+
+            ISSUE_URL="$(
+              jq -r '.url' <<< "$ISSUE_JSON"
+            )"
+
+            ISSUE_STATE="$(
+              jq -r '.state' <<< "$ISSUE_JSON"
+            )"
+
+            ISSUE_KEY="${ISSUE_REPOSITORY}#${ISSUE_NUMBER}"
+
+            echo "Processing linked issue ${ISSUE_KEY}..."
+
+            if [[ "$ISSUE_STATE" == "CLOSED" ]]; then
+              echo "${ISSUE_KEY} is already closed; keeping it in Done."
+              continue
+            fi
+
+            PROJECT_ITEM_ID="$(
+              jq -r \
+                --arg project_id "$PROJECT_ID" \
+                '
+                [
+                  .projectItems.nodes[]?
+                  | select(.project.id == $project_id)
+                  | .id
+                ][0] // empty
+                ' \
+                <<< "$ISSUE_JSON"
+            )"
+
+            # Si la issue no está en el proyecto, añadirla.
+            if [[ -z "$PROJECT_ITEM_ID" ]]; then
+              echo "${ISSUE_KEY} is not in the project. Adding it..."
+
+              if ! PROJECT_ITEM_ID="$(
+                gh project item-add "$PROJECT_NUMBER" \
+                  --owner "$PROJECT_OWNER" \
+                  --url "$ISSUE_URL" \
+                  --format json \
+                  --jq '.id'
+              )"; then
+                echo "::warning::Could not add ${ISSUE_KEY} to the project."
+                continue
+              fi
+            fi
+
+            gh project item-edit \
+              --id "$PROJECT_ITEM_ID" \
+              --project-id "$PROJECT_ID" \
+              --field-id "$STATUS_FIELD_ID" \
+              --single-select-option-id "$IN_PROGRESS_OPTION_ID"
+
+            echo "${ISSUE_KEY} moved to '${IN_PROGRESS_OPTION_NAME}'."
+          done < <(
+            jq -c '
+              .data.repository.pullRequest
+              .closingIssuesReferences.nodes[]?
+            ' <<< "$PULL_REQUEST_JSON"
+          )

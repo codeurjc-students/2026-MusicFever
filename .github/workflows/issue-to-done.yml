@@ -1,0 +1,198 @@
+name: Set Closed Issues to Done
+
+on:
+  issues:
+    types:
+      - closed
+
+permissions:
+  contents: read
+  issues: read
+
+env:
+  PROJECT_OWNER: ${{ github.repository_owner }}
+  PROJECT_NUMBER: "50"
+
+  STATUS_FIELD_NAME: "Status"
+  DONE_OPTION_NAME: "Done"
+
+jobs:
+  move-to-done:
+    name: Move issue to Done
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+
+    steps:
+      - name: Move closed issue to Done
+        shell: bash
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+
+          REPOSITORY_OWNER="${GITHUB_REPOSITORY%%/*}"
+          REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
+
+          echo "Processing closed issue #${ISSUE_NUMBER}"
+
+          PROJECT_QUERY=$(cat <<'GRAPHQL'
+          query($owner: String!, $number: Int!) {
+            user(login: $owner) {
+              projectV2(number: $number) {
+                id
+
+                fields(first: 100) {
+                  nodes {
+                    ... on ProjectV2SingleSelectField {
+                      id
+                      name
+
+                      options {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          GRAPHQL
+          )
+
+          PROJECT_JSON="$(
+            gh api graphql \
+              -f query="$PROJECT_QUERY" \
+              -f owner="$PROJECT_OWNER" \
+              -F number="$PROJECT_NUMBER" \
+            | jq -c '.data.user.projectV2'
+          )"
+
+          if [[ "$PROJECT_JSON" == "null" ]]; then
+            echo "::error::Project ${PROJECT_OWNER}/${PROJECT_NUMBER} not found."
+            exit 1
+          fi
+
+          PROJECT_ID="$(
+            jq -r '.id' <<< "$PROJECT_JSON"
+          )"
+
+          PROJECT_ID="$(
+            jq -r '.id' <<< "$PROJECT_JSON"
+          )"
+
+          STATUS_FIELD_ID="$(
+            jq -r \
+              --arg field "$STATUS_FIELD_NAME" \
+              '
+              [
+                .fields.nodes[]
+                | select(.name == $field)
+                | .id
+              ][0] // empty
+              ' \
+              <<< "$PROJECT_JSON"
+          )"
+
+          DONE_OPTION_ID="$(
+            jq -r \
+              --arg field "$STATUS_FIELD_NAME" \
+              --arg option "$DONE_OPTION_NAME" \
+              '
+              [
+                .fields.nodes[]
+                | select(.name == $field)
+                | .options[]?
+                | select(.name == $option)
+                | .id
+              ][0] // empty
+              ' \
+              <<< "$PROJECT_JSON"
+          )"
+
+          if [[ -z "$STATUS_FIELD_ID" ]]; then
+            echo "::error::Field '${STATUS_FIELD_NAME}' not found in the project."
+            exit 1
+          fi
+
+          if [[ -z "$DONE_OPTION_ID" ]]; then
+            echo "::error::Option '${DONE_OPTION_NAME}' not found."
+            exit 1
+          fi
+
+          ISSUE_QUERY=$(cat <<'GRAPHQL'
+          query(
+            $owner: String!,
+            $repository: String!,
+            $number: Int!
+          ) {
+            repository(owner: $owner, name: $repository) {
+              issue(number: $number) {
+                projectItems(first: 100) {
+                  nodes {
+                    id
+
+                    project {
+                      id
+                    }
+                  }
+                }
+              }
+            }
+          }
+          GRAPHQL
+          )
+
+          ISSUE_JSON="$(
+            gh api graphql \
+              -f query="$ISSUE_QUERY" \
+              -f owner="$REPOSITORY_OWNER" \
+              -f repository="$REPOSITORY_NAME" \
+              -F number="$ISSUE_NUMBER"
+          )"
+
+          PROJECT_ITEM_ID="$(
+            jq -r \
+              --arg project_id "$PROJECT_ID" \
+              '
+              .data.repository.issue.projectItems.nodes[]
+              | select(.project.id == $project_id)
+              | .id
+              ' \
+              <<< "$ISSUE_JSON" \
+            | head -n 1
+          )"
+
+          if [[ -z "$PROJECT_ITEM_ID" ]]; then
+            echo "::warning::Issue #${ISSUE_NUMBER} is not in project ${PROJECT_NUMBER}."
+            exit 0
+          fi
+
+          UPDATE_MUTATION=$(cat <<'GRAPHQL'
+          mutation(
+            $projectId: ID!,
+            $itemId: ID!,
+            $fieldId: ID!,
+            $optionId: String!
+          ) {
+            updateProjectV2ItemFieldValue(
+              input: {
+                projectId: $projectId
+                itemId: $itemId
+                fieldId: $fieldId
+                value: {
+                  singleSelectOptionId: $optionId
+                }
+              }
+            ) {
+              projectV2Item {
+                id
+              }
+            }
+          }
+          GRAPHQL
+          )
+
+          echo "Issue #${ISSUE_NUMBER} moved to '${DONE_OPTION_NAME}'."
