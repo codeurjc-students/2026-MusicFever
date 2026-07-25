@@ -15,3 +15,31 @@
 Examples for the _How it has been used_ part:
 - When an error ocurred, the PROMPT will be copied and asked the AI to indicate the posible motives for the error to happen
 - The AI will be given a general description of the problem, then generate the mayority of the code.
+
+## GitHub Project Configuration
+
+### Entry details
+| Entry details | Value |
+|---|---|
+| **Date** | 12-07-2026|
+| **Phase** | 1 (Documentation) |
+| **Objective** | Create the GitHub Actions Workflows to automate moving issues to the appropriate column when they are created/ selected/ completed|
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+### Tool Configuration
+
+| Setting | Value |
+|---|---|
+| **Model** | GPT-5.6 Thinking |
+| **Reasoning level** | High |
+| **Interaction mode** | Chat |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | As needed |
+| **Connected tools** | None used |
+
+### Usage
+After consulting the GitHub documentation on issues and how they can be closed automatically through commits or pull requests, the relevant information was provided to the AI. The AI was then asked whether it was also possible to reflect these changes in a GitHub Project.
+
+Once this possibility was confirmed, the three required workflows were described, and the AI was asked to generate them. The resulting workflows had to be reviewed and adapted manually, particularly to replace project-specific and personal configuration details.
