@@ -1,5 +1,8 @@
 # Music Fever: A Web Application for Streaming Music and Joining Private Collaborative Queues at Gatherings and Parties
 
+# Music Fever: A Web Application for Musical Streaming with Collaborative Reproduction using Joined Queues
+
+# Music Fever: A Web Application for Musical Streaming with a new way of Sharing Music in Collaborative Sessions
 
 ## Table of Contents
 - [Presentation](#presentation)
