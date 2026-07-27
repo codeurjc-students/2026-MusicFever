@@ -43,3 +43,29 @@ Examples for the _How it has been used_ part:
 After consulting the GitHub documentation on issues and how they can be closed automatically through commits or pull requests, the relevant information was provided to the AI. The AI was then asked whether it was also possible to reflect these changes in a GitHub Project.
 
 Once this possibility was confirmed, the three required workflows were described, and the AI was asked to generate them. The resulting workflows had to be reviewed and adapted manually, particularly to replace project-specific and personal configuration details.
+
+## UI Design in Figma
+
+### Entry details
+| Entry details | Value |
+|---|---|
+| **Date** | 27-07-2026|
+| **Phase** | 1 (Documentation) |
+| **Objective** | Modify the UI previously done to make it more appealing |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+### Tool Configuration
+
+| Setting | Value |
+|---|---|
+| **Model** | GPT-5.6 Thinking |
+| **Reasoning level** | High |
+| **Interaction mode** | Chat |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | As needed |
+| **Connected tools** | None used |
+
+### Usage
+A screenshot of the UI made using Figma was given to the AI and asked what elements should be changed to make the interface more visually appealing to users. Then, it was asked to the AI to detail some of the properties of these elements (color, shadow and border) to be able to change them in the Figma prototype.
