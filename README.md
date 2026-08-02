@@ -94,7 +94,7 @@ _Finish Date_: XX/XX/XXXX
 
 > Gantt Diagram for Phase 7
 
-## Detailed Functionality
+## App's Functionality
 
 This section provides a detailed description of the application's functionalities. Each functionality will be classified according to its level of complexity and the type of user it is intended for.
 
@@ -104,12 +104,91 @@ This section provides a detailed description of the application's functionalitie
 
 
 ## Analysis
-
 This section describes the main elements that will be analysed before the development of the application. It covers the interface, data model, user roles, multimedia content, data visualisation, supporting technologies, and advanced functionality.
 
 1. **Screens and Navigation:** A mock-up of each screen will be provided, together with a brief description and the pages that can be accessed from it.
 
+### Entities
 2. **Entities:** The main entities of the application will be described, including their principal attributes and relationships.
+```mermaid
+erDiagram
+    USER ||--o{ PLAYLIST : creates
+    USER ||--o{ ROOM: hosts
+    USER }o--o{ ROOM : participate
+    USER ||--o{ REQUEST : makes
+
+    ARTIST }|--|{ ALBUM : has
+    ALBUM ||--|{ TRACK : has
+
+    PLAYLIST }o--o{ TRACK : has
+    
+    ROOM }o--o{ TRACK : plays
+
+    USER {
+        long id
+        string name
+        string email
+        string password
+        string image
+    }
+
+    ARTIST{
+        long id
+        string spotify_id
+        string apple_music_id
+        string href
+        string image
+        string name
+    }
+
+    ALBUM {
+        long id
+        date release_year
+        string spotify_id
+        string apple_music_id
+        string href
+        string name
+        string image
+        boolean explicit
+        string type
+        int total_tracks
+        string genre
+    }
+
+    TRACK {
+        long id
+        string spotify_id
+        string apple_music_id
+        string href
+        string name
+        string duration
+        boolean explicit
+        int track_number
+    }
+
+    PLAYLIST {
+        long id
+        date creation_date
+        string name
+        string image
+        string description
+        int total_tracks
+    }
+
+    ROOM {
+        long id
+        date creation_date
+    }
+
+    REQUEST {
+        long id
+        string type
+        string request 
+        string state
+        string response
+    }
+```
+
 
 3. **User Permissions:** The permissions assigned to each type of user will be defined.
 
