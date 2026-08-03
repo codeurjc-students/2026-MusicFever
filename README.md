@@ -125,24 +125,27 @@ erDiagram
     ROOM }o--o{ TRACK : plays
 
     USER {
-        long id
+        long id PK
         string name
         string email
         string password
+        date login_date
         string image
     }
 
     ARTIST{
-        long id
+        long id PK
         string spotify_id
         string apple_music_id
         string href
         string image
         string name
+        string[] genre
+        long[] albums FK
     }
 
     ALBUM {
-        long id
+        long id PK
         date release_year
         string spotify_id
         string apple_music_id
@@ -156,7 +159,7 @@ erDiagram
     }
 
     TRACK {
-        long id
+        long id PK
         string spotify_id
         string apple_music_id
         string href
@@ -164,28 +167,34 @@ erDiagram
         string duration
         boolean explicit
         int track_number
+        long album FK
     }
 
     PLAYLIST {
-        long id
+        long id PK
         date creation_date
         string name
         string image
         string description
         int total_tracks
+        long[] tracks FK
+        long user FK
     }
 
     ROOM {
-        long id
+        long id PK
         date creation_date
+        long host FK
+        long[] participants FK
     }
 
     REQUEST {
-        long id
+        long id PK
         string type
         string request 
         string state
         string response
+        long user FK
     }
 ```
 
