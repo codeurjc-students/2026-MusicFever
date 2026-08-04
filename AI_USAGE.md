@@ -69,3 +69,33 @@ Once this possibility was confirmed, the three required workflows were described
 
 ### Usage
 A screenshot of the UI made using Figma was given to the AI and asked what elements should be changed to make the interface more visually appealing to users. Then, it was asked to the AI to detail some of the properties of these elements (color, shadow and border) to be able to change them in the Figma prototype.
+
+### Entry details
+
+| Entry details    | Value                                                                             |
+| ---------------- | --------------------------------------------------------------------------------- |
+| **Date**         | 02-08-2026                                                                        |
+| **Phase**        | 1 (Documentation)                                                                 |
+| **Objective**    | Determine the most appropriate distribution of the application's analytics charts |
+| **AI Tool**      | ChatGPT                                                                           |
+| **Tool version** | GPT-5.5 (Anonymous version)                                                       |
+
+### Tool Configuration
+
+| Setting              | Value         |
+| -------------------- | ------------- |
+| **Model**            | GPT-5.5       |
+| **Reasoning level**  | Not specified |
+| **Interaction mode** | Chat          |
+| **Agent mode**       | Disabled      |
+| **Plan mode**        | Disabled      |
+| **Web search**       | Not used      |
+| **Connected tools**  | None used     |
+
+### Usage
+
+The AI was asked how the application's statistical charts should be distributed across its different pages. Since several entities have associated statistics, the initial idea was to display all of them in the Analytics section. However, the AI was also asked whether it would make sense to repeat the user-related charts on the user's profile page.
+
+The AI advised against duplicating the same charts in both sections, as this could make the interface repetitive and create uncertainty about which page should be considered the main source of analytical information. Instead, it suggested adding a summary card to the user profile containing the most relevant general statistics and a direct link to the Analytics page, where users can access the complete set of charts and more detailed information.
+
+This proposal was adopted and the statistics summary card was added to the user profile UI prototype.
