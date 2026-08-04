@@ -109,27 +109,102 @@ This section describes the main elements that will be analysed before the develo
 1. **Screens and Navigation:** A mock-up of each screen will be provided, together with a brief description and the pages that can be accessed from it.
 
 ### Entities
-2. **Entities:** The main entities of the application will be described, including their principal attributes and relationships.
+This section introduces the main entities of the application, which were previously identified in the prototypes. In this context, an __entity__ is an object whose data is stored in the database.
+
+The following list describes the main entities of Music Fever:
+- __User__: a registered user who can log in to the application.
+- __Artist__: a music artist whose tracks are available in the application.
+- __Album__: a music release that contains one or more tracks.
+- __Track__: a playable song.
+- __Room__: a collaborative session in which users can add tracks to a shared queue.
+- __Playlist__: a collection of tracks created by a user to organize their favourite songs.
+- __Request__: a request submitted by a user asking the administrators to add an artist, album, or track to the database.
+
+#### Entity Relationships
+As the entities have been presented, now it is time to determine which ones are related. The following tables show these relationships for each of the entities and its cardinality.
+
+##### User
+| Related with... | Relationship    | Cardinality |
+| --------------- | --------------- | ----------- |
+| Room            | Hosts           | 0..N        |
+| Room            | Participates in | 0..N        |
+| Playlist        | Creates         | 0..N        |
+| Request         | Makes           | 0..N        |
+
+
+> [!Note]
+> May seem that the _Room_ relation is duplicated but it shows if the user is a host (only one per room) or a participant (multiples per room). This can be seen in the upcoming _Room relationships table_.
+
+##### Artist
+| Related with... | Relationship | Cardinality |
+| --------------- | ------------ | ----------- |
+| Album           | Appears on   | 1..N        |
+
+
+##### Album
+| Related with... | Relationship | Cardinality |
+| --------------- | ------------ | ----------- |
+| Artist          | Features     | 1..N        |
+| Track           | Contains     | 1..N        |
+
+
+> [!Note]
+> One album can be associated with more than one artist as soundtracks albums or collab singles usually have more than one artist àrticipating
+
+##### Track
+| Related with... | Relationship   | Cardinality |
+| --------------- | -------------- | ----------- |
+| Album           | Belongs to     | 1..1        |
+| Room            | Is added to    | 0..N        |
+| Playlist        | Is included in | 0..N        |
+
+
+> [!Note]
+> Tracks are assumed to belong to only one album, since a track may vary depending on the album in which it appears, such as in explicit and clean versions. Standard and deluxe editions may contain some of the same tracks, but these cases will not be distinguished.
+
+##### Room
+| Related with... | Relationship     | Cardinality |
+| --------------- | ---------------- | ----------- |
+| User            | Has participants | 0..N        |
+| User            | Is hosted by     | 1..1        |
+| Track           | Contains         | 0..N        |
+
+
+##### Playlist
+| Related with... | Relationship  | Cardinality |
+| --------------- | ------------- | ----------- |
+| User            | Is created by | 1..1        |
+| Track           | Contains      | 0..N        |
+
+
+##### Request
+
+| Related with... | Relationship | Cardinality |
+| --------------- | ------------ | ----------- |
+| User            | Is made by   | 1..1        |
+
+The following ER diagram summarizes the information described above and shows the main attributes of each entity.
+
 ```mermaid
 erDiagram
     USER ||--o{ PLAYLIST : creates
     USER ||--o{ ROOM: hosts
-    USER }o--o{ ROOM : participate
+    USER }o--o{ ROOM : participates_in
     USER ||--o{ REQUEST : makes
 
-    ARTIST }|--|{ ALBUM : has
-    ALBUM ||--|{ TRACK : has
+    ARTIST }|--|{ ALBUM : appears_on
+    ALBUM ||--|{ TRACK : contains
 
-    PLAYLIST }o--o{ TRACK : has
+    PLAYLIST }o--o{ TRACK : contains
     
-    ROOM }o--o{ TRACK : plays
+    ROOM }o--o{ TRACK : contains
 
     USER {
         long id PK
         string name
         string email
         string password
-        date login_date
+        date creation_date
         string image
     }
 
@@ -140,7 +215,7 @@ erDiagram
         string href
         string image
         string name
-        string[] genre
+        string[] genres
         long[] albums FK
     }
 
@@ -197,7 +272,6 @@ erDiagram
         long user FK
     }
 ```
-
 
 3. **User Permissions:** The permissions assigned to each type of user will be defined.
 
