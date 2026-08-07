@@ -70,6 +70,8 @@ Once this possibility was confirmed, the three required workflows were described
 ### Usage
 A screenshot of the UI made using Figma was given to the AI and asked what elements should be changed to make the interface more visually appealing to users. Then, it was asked to the AI to detail some of the properties of these elements (color, shadow and border) to be able to change them in the Figma prototype.
 
+> This entry has also been used for the profile and home pages
+
 ### Entry details
 
 | Entry details    | Value                                                                             |
@@ -99,3 +101,28 @@ The AI was asked how the application's statistical charts should be distributed 
 The AI advised against duplicating the same charts in both sections, as this could make the interface repetitive and create uncertainty about which page should be considered the main source of analytical information. Instead, it suggested adding a summary card to the user profile containing the most relevant general statistics and a direct link to the Analytics page, where users can access the complete set of charts and more detailed information.
 
 This proposal was adopted and the statistics summary card was added to the user profile UI prototype.
+
+### Entry details
+| Entry details | Value |
+|---|---|
+| **Date** | 07-08-2026|
+| **Phase** | 1 (Documentation) |
+| **Objective** | Modify the UI previously done to make it more appealing |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+### Tool Configuration
+
+| Setting | Value |
+|---|---|
+| **Model** | GPT-5.6 Thinking |
+| **Reasoning level** | High |
+| **Interaction mode** | Chat |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | As needed |
+| **Connected tools** | None used |
+
+### Usage
+The AI was asked to generate 5 images for each card on the home page. It also was asked to give ideas for the texts after giving it a small description of the feature.
+
