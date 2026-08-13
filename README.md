@@ -1,7 +1,3 @@
-# Music Fever: A Web Application for Streaming Music and Joining Private Collaborative Queues at Gatherings and Parties
-
-# Music Fever: A Web Application for Musical Streaming with Collaborative Reproduction using Joined Queues
-
 # Music Fever: A Web Application for Musical Streaming with a new way of Sharing Music in Collaborative Sessions
 
 ## Table of Contents
@@ -39,7 +35,6 @@ The first phase will defined all the general characteristics of the web applicat
 _Start Date_: 07/07/2026<br>
 _Finish Date_: XX/XX/XXXX
 
-> Gantt Diagram for Phase 1
 
 #### __Phase 2__: project configuration
 The second phase will include the configuration of technologies and development tools with quality control that will be exectuded preiodically.
@@ -47,7 +42,6 @@ The second phase will include the configuration of technologies and development 
 _Start Date_: XX/XX/XXXX<br>
 _Finish Date_: XX/XX/XXXX
 
-> Gantt Diagram for Phase 2
 
 ### Iterative and incremental development
 #### __Phase 3__: first iteration
@@ -56,7 +50,6 @@ The third phase will include the implementation of the basic web functionalities
 _Start Date_: XX/XX/XXXX<br>
 _Finish Date_: XX/XX/XXXX
 
-> Gantt Diagram for Phase 3<br>
 > Version published: X.X.X (_release_)
 
 #### __Phase 4__: second iteration
@@ -65,7 +58,6 @@ The fourth phase will include the implementation of the intermediate web functio
 _Start Date_: XX/XX/XXXX<br>
 _Finish Date_: XX/XX/XXXX
 
-> Gantt Diagram for Phase 4<br>
 > Version published: X.X.X (_release_)
 
 #### __Phase 5__: third iteration
@@ -74,7 +66,6 @@ The fifth phase will include the implementation of the advance web functionaliti
 _Start Date_: XX/XX/XXXX<br>
 _Finish Date_: XX/XX/XXXX
 
-> Gantt Diagram for Phase 5<br>
 > Version published: X.X.X (_release_)
 
 ### Preparing the presentation
@@ -84,15 +75,13 @@ The sixth phase will be writing the project memory on LaTex.
 _Start Date_: XX/XX/XXXX <br>
 _Finish Date_: XX/XX/XXXX
 
-> Gantt Diagram for Phase 6
-
 #### __Phase 7__: presentation
 The seventh and last phase will be creating the presentation.
 
 _Start Date_: XX/XX/XXXX<br>
 _Finish Date_: XX/XX/XXXX
 
-> Gantt Diagram for Phase 7
+All this can be visualized in the following _Gantt Diagram_:
 
 ## App's Functionality
 
@@ -303,9 +292,12 @@ The following sections list the actions allowed for each type of user within the
 | View personal statistics         |     —     |      ✓     |              ✓             |   —   |
 | View submitted requests          |     —     |      ✓     |              ✓             |   ✓   |
 | Play songs                       |     —     |      —     |              ✓             |   —   |
+| Search and download music from external sites |     —     |      —     |              —             |   ✓   |
 | Create rooms                     |     —     |      —     |              ✓             |   —   |
 | Manage requests                  |     —     |      —     |              —             |   ✓   |
 | View administrative statistics   |     —     |      —     |              —             |   ✓   |
+| Login/ Sign in   |     ✓     |      —     |     —      |   —   |
+| Logout   |     —    |     ✓     |     ✓      |   ✓  |
 
 ##### Room Context
 | Action                                   | Participant | Host |
@@ -431,6 +423,8 @@ Using the GitHub API GraphQL (GitHub API v4) the movement of the issues through 
 
 > [!NOTE]
 > Some of the movements, as the Ready to In Progress move on sub-issues, have to be done manually because these are movements decided by the developer that do not depend on code or a file from the repository
+
+The board can be viewed via the following [link](https://github.com/orgs/codeurjc-students/projects/50).
 
 ## Author
 
