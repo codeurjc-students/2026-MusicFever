@@ -273,7 +273,50 @@ erDiagram
     }
 ```
 
-3. **User Permissions:** The permissions assigned to each type of user will be defined.
+### User Permissions
+#### Resource Ownership
+The website must be designed so that registered users own specific data or resources. In this way, the owner of a given resource is the only user allowed to modify or delete it.
+
+In MusicFever, registered users can create objects belonging to the following entities:
+
+|Entity |	Allowed Operations |	Notes
+|---|---|---|
+|Playlist|	Create - Update - Read - Delete (CRUD)	|
+|Room|	Create - Read	|
+|Request|	Create - Read|	The status of a request is modified by an administrator. Therefore, this is the only exception in which an entity can be modified by a user other than its owner.
+
+In addition, registered users have personal statistics that can only be viewed by them (see the Analytics page). These are read-only data, but they are specific to each user.
+
+> [!Note]
+> Anonymous users can submit requests, but these requests are not associated with a registered account. Therefore, anonymous users do not acquire ownership of the requests they create.
+
+#### Allowed Actions by User Role
+The following sections list the actions allowed for each type of user within the MusicFever application, as well as the pages they cannot access. In addition, the actions available within a room are described separately depending on the role assumed by the user within that room.
+
+##### Web Application Context
+ Action                           | Anonymous | Registered | Registered + Music Account | Admin |
+| -------------------------------- | ------- | -------- | ------------------------ | --- |
+| Search artists, albums and songs |     ✓     |      ✓     |              ✓             |   ✓   |
+| Join a room                      |     ✓     |      ✓     |              ✓             |   ✓   |
+| Submit requests                  |     ✓     |      ✓     |              ✓             |   ✓   |
+| Manage playlists                 |     —     |      ✓     |              ✓             |   ✓   |
+| View personal statistics         |     —     |      ✓     |              ✓             |   —   |
+| View submitted requests          |     —     |      ✓     |              ✓             |   ✓   |
+| Play songs                       |     —     |      —     |              ✓             |   —   |
+| Create rooms                     |     —     |      —     |              ✓             |   —   |
+| Manage requests                  |     —     |      —     |              —             |   ✓   |
+| View administrative statistics   |     —     |      —     |              —             |   ✓   |
+
+##### Room Context
+| Action                                   | Participant | Host |
+| ---------------------------------------- | :---------: | :--: |
+| Search for songs                         |      ✓      |   ✓  |
+| Add songs to the queue                   |      ✓      |   ✓  |
+| View the playback queue                  |      ✓      |   ✓  |
+| Submit song requests                     |      ✓      |   ✓  |
+| Leave the room                           |      ✓      |   —  |
+| Add songs in host mode (higher priority) |      —      |   ✓  |
+| Close the room                           |      —      |   ✓  |
 
 
 ### Images
