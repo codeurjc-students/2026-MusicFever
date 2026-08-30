@@ -56,62 +56,99 @@ This section describes how the project will be developed. The development proces
 The first phase will defined all the general characteristics of the web application. It will be indicated all the concrete sections that describes the general and detailed functionality of the web.
 
 _Start Date_: 07/07/2026<br>
-_Finish Date_: XX/XX/XXXX
+_Finish Date_: 31/08/2026
 
 
 #### __Phase 2__: project configuration
 The second phase will include the configuration of technologies and development tools with quality control that will be exectuded preiodically.
 
-_Start Date_: XX/XX/XXXX<br>
-_Finish Date_: XX/XX/XXXX
+_Start Date_: 01/09/2026<br>
+_Finish Date_: 15/10/2026
 
 
 ### Iterative and incremental development
 #### __Phase 3__: first iteration
 The third phase will include the implementation of the basic web functionalities and its quiality control tests.
 
-_Start Date_: XX/XX/XXXX<br>
-_Finish Date_: XX/XX/XXXX
+_Start Date_: 16/10/2026<br>
+_Finish Date_: 15/12/2026
 
-> Version published: X.X.X (_release_)
+> Version published: 0.1.0
 
 #### __Phase 4__: second iteration
 The fourth phase will include the implementation of the intermediate web functionalities and its quiality control tests.
 
-_Start Date_: XX/XX/XXXX<br>
-_Finish Date_: XX/XX/XXXX
+_Start Date_: 16/12/2026<br>
+_Finish Date_: 01/03/2027
 
-> Version published: X.X.X (_release_)
+> Version published: 0.2.0 
 
 #### __Phase 5__: third iteration
 The fifth phase will include the implementation of the advance web functionalities and its quiality control tests.
 
-_Start Date_: XX/XX/XXXX<br>
-_Finish Date_: XX/XX/XXXX
+_Start Date_: 02/03/2027<br>
+_Finish Date_: 15/04/2027
 
-> Version published: X.X.X (_release_)
+> Version published: 1.0.0
 
 ### Preparing the presentation
 #### __Phase 6__: memory
 The sixth phase will be writing the project memory on LaTex.
 
-_Start Date_: XX/XX/XXXX <br>
-_Finish Date_: XX/XX/XXXX
+_Start Date_: 16/04/2027 <br>
+_Finish Date_: 15/05/2027
 
 #### __Phase 7__: presentation
 The seventh and last phase will be creating the presentation.
 
-_Start Date_: XX/XX/XXXX<br>
-_Finish Date_: XX/XX/XXXX
+_Start Date_: 16/05/2027<br>
+_Finish Date_: 15/06/2027
 
 All this can be visualized in the following _Gantt Diagram_:
+```mermaid
+%%{init: {
+  "gantt": {
+    "leftPadding": 220,
+    "rightPadding": 40,
+    "barHeight": 28,
+    "barGap": 10,
+    "topPadding": 50,
+    "fontSize": 12,
+    "sectionFontSize": 13,
+    "useMaxWidth": false
+  }
+}}%%
 
+gantt
+    title Music Fever Project Plan
+    dateFormat  YYYY-MM-DD
+    axisFormat  %b %Y
+
+    section Planning
+    Requirements & Screens        :f1, 2026-07-07, 2026-08-31
+
+    section Setup
+    Repository, Testing & CI      :f2, 2026-09-01, 2026-10-15
+
+    section Development
+    Version 0.1                   :f3, 2026-10-16, 2026-12-15
+    Version 0.2                   :f4, 2026-12-16, 2027-03-15
+    Version 1.0                   :f5, 2027-03-16, 2027-04-15
+
+    section Documentation
+    Final Report                  :f6, 2027-04-16, 2027-05-15
+
+    section Presentation
+    Defense                       :f7, 2027-05-16, 2027-06-15
+```
 ## App's Functionality
 This section provides a detailed description of the application's functionalities. Each functionality will be classified according to its level of complexity and the type of user it is intended for.
 
 - The functionalities must be classified as basic, intermediate, or advanced.
 - The target user type for each functionality must be clearly defined.
 - The functionalities must be grouped according to their level: basic, intermediate, or advanced.
+
+> TBD
 
 
 ## Analysis
