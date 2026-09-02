@@ -126,3 +126,72 @@ This proposal was adopted and the statistics summary card was added to the user 
 ### Usage
 The AI was asked to generate 5 images for each card on the home page. It also was asked to give ideas for the texts after giving it a small description of the feature.
 
+### Entry details
+| Entry details    |Value                                                                                                               |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Date**         | 08-2026                                                                                                       |
+| **Phase**        | 1 (Documentation)                                                                                       |
+| **Objective**    | Generate a consistent set of icons for the different actions and elements used throughout the Music Fever interface |
+| **AI Tool**      | ChatGPT                                                                                                             |
+| **Tool version** | GPT-5.6 Sol                                                                                                         |
+### Tool Configuration
+| Setting              | Value            |
+| -------------------- | ---------------- |
+| **Model**            | GPT-5.6 Thinking |
+| **Reasoning level**  | High             |
+| **Interaction mode** | Chat             |
+| **Agent mode**       | Disabled         |
+| **Plan mode**        | Disabled         |
+| **Web search**       | Not required     |
+| **Connected tools**  | Image generation |
+
+### Usage
+The AI was used to generate several icons required throughout the Music Fever interface. The desired action or functionality of each icon was described to the AI, together with the visual style and colour palette of the application.
+
+The generated icons included, among others, actions such as play, add to queue, play next, add to playlist, edit, search, and icons representing different statistics and administrative information.
+
+Several iterations were performed when necessary to improve the semantic clarity of the icons and ensure that similar actions could be easily distinguished. The AI was also instructed to maintain a consistent visual language based on Music Fever's lilac and purple colour palette and to generate the icons with transparent backgrounds so they could be directly incorporated into the interface mock-ups.
+
+### Entry Details
+| Entry details    | Value                                                                                                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Date**         | 29-08-2026                                                                                                                                                    |
+| **Phase**        | 1 (Documentation)                                                                                                                                 |
+| **Objective**    | Generate the initial content for the Privacy Policy and Terms of Service pages according to the functionality and data management requirements of Music Fever |
+| **AI Tool**      | ChatGPT                                                                                                                                                       |
+| **Tool version** | GPT-5.6 Sol                                                                                                                                                   |
+### Tool Configuration
+| Setting              | Value                                                                   |
+| -------------------- | ----------------------------------------------------------------------- |
+| **Model**            | GPT-5.6 Thinking                                                        |
+| **Reasoning level**  | High                                                                    |
+| **Interaction mode** | Chat                                                                    |
+| **Agent mode**       | Disabled                                                                |
+| **Plan mode**        | Disabled                                                                |
+| **Web search**       | Used when necessary to verify legal and third-party service information |
+| **Connected tools**  | None used                                                               |
+
+### Usage
+The AI was asked to generate the initial content for the Privacy Policy and Terms of Service pages of Music Fever.
+
+Before generating the documents, the AI was explicitly instructed to ask all the questions required to understand how the application works and what information it processes. The questions covered aspects such as:
+
+- User account information stored by Music Fever.
+- Profile pictures and account creation dates.
+- Spotify authentication and playback requirements.
+- Current and future use of the Apple Music API.
+- Data stored from Rooms and their participants.
+- Data retained for anonymous or guest users.
+- Music requests submitted by users and their associated status.
+- Private and administrator-created public playlists.
+- Personal and Room statistics.
+- Cookies and analytics.
+- Advertising and payments.
+- Minimum user age.
+- Account and personal-data deletion.
+- Acceptable use of the application.
+- Applicable Spanish and European data-protection legislation.
+
+After receiving this information, the AI generated structured drafts for both pages, including sections related to personal data collection, external services, Rooms, guest users, music requests, playlists, statistics, data retention, GDPR rights, security, acceptable use, third-party services, intellectual property, service availability, account termination, liability and governing law.
+
+The generated text was subsequently incorporated into the corresponding Music Fever interface mock-ups and may be reviewed or adapted before any real-world deployment of the application.
