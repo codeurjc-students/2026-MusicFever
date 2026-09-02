@@ -116,15 +116,18 @@ The _filter_ is a pop-up container that appears when clicking the filter tab in 
 ![Request Page (User)](/src/user_requests_page.jpg)
 
 ### 7.2 Admin Request Page
-![Request Page (Admin)]()
+![Request Page (Admin)](/src/requests_admin_page.png)
 
 ## 8. Download Page
+![Download Page](/src/download_page.png)
 
 ## 9. Information Page
 ![Info Page](/src/info_page.jpeg)
 
 ## 10. Contact Us
 _Contact Us_ is a pop-up container that appears on the middle of the screen independently of the page the user is when clicking the option.
+
+![Contact Us Pop-Up](/src/contact_us.jpg)
 
 ## 11. Frequently Asked Questions
 ### 11.1 User Display
@@ -145,6 +148,7 @@ _Contact Us_ is a pop-up container that appears on the middle of the screen inde
 
 ## Error Pages
 ![Error Base Page](/src/error_base.jpeg)
+
 ### 403 Forbidden
 ![403 Forbidden](/src/error_403.jpeg)
 
