@@ -141,20 +141,38 @@ gantt
     section Presentation
     Defense                       :f7, 2027-05-16, 2027-06-15
 ```
-## App's Functionality
-This section provides a detailed description of the application's functionalities. Each functionality will be classified according to its level of complexity and the type of user it is intended for.
+## Application's Functionality
+### Basic
+- Basic search functionality.
+- Room implementation:
+  - Room creation and joining via code.
+  - Song ordering data structure.
+  - Song addition and queue management.
+- Request system implementation.
+- Music download functionality.
+- Login and registration system, including user role differentiation.
+- Playlist editor implementation.
+- Player and queue simulation.
 
-- The functionalities must be classified as basic, intermediate, or advanced.
-- The target user type for each functionality must be clearly defined.
-- The functionalities must be grouped according to their level: basic, intermediate, or advanced.
+### Intermediate
+- Statistics logic and processing.
+- Responsive application design.
+- Light and dark mode.
+- WebSocket implementation for real-time room updates across participants.
+- Song playback implementation.
+- External authentication implementation.
 
-> TBD
+### Advanced
+- Artist similarity graph.
+- Advanced search functionality.
+- Automated retrieval and import of newly released albums from Metacritic.
 
 
 ## Analysis
 This section describes the main elements that will be analysed before the development of the application. It covers the interface, data model, user roles, multimedia content, data visualisation, supporting technologies, and advanced functionality.
 
-1. **Screens and Navigation:** A mock-up of each screen will be provided, together with a brief description and the pages that can be accessed from it.
+### Screens & Navigation
+The following [document](/docs/pages_and_navigation.md) contains all the mockups designed for the application and shows the navigation flow between them.
 
 ### Entities
 This section introduces the main entities of the application, which were previously identified in the prototypes. In this context, an __entity__ is an object whose data is stored in the database.
