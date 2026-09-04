@@ -57,7 +57,7 @@ This section describes how the project will be developed. The development proces
 The first phase will defined all the general characteristics of the web application. It will be indicated all the concrete sections that describes the general and detailed functionality of the web.
 
 _Start Date_: 07/07/2026<br>
-_Finish Date_: 31/08/2026
+_Finish Date_: 05/09/2026
 
 
 #### __Phase 2__: project configuration
