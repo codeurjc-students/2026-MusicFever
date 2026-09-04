@@ -3,8 +3,8 @@ This document compiles the main resources consulted during the development of th
 
 ## 📚 Technical Documentation and APIs
 ### 🔌 APIs
-- [Spotify API for developers]()
-- [Apple Music API for developers]()
+- [Spotify API for developers](https://developer.spotify.com)
+- [Apple Music API for developers](https://developer.apple.com/documentation/applemusicapi)
 
 ### 🧜 Mermaid
 - [Mermaid Documentation](https://mermaid.js.org/syntax/entityRelationshipDiagram.html#default-class)
@@ -23,6 +23,7 @@ This document compiles the main resources consulted during the development of th
 - [Class Diagram vs. Entity Relationship](https://guides.visual-paradigm.com/class-diagram-vs-entity-relationship-diagram-erd-a-comparative-guide/)
 - [ER Model](https://www.geeksforgeeks.org/dbms/introduction-of-er-model/)
 - [Funtional vs. Technical Requirements]()
+- [History of Music in Streaming]()
 
 ## 🛠️ Applications and Tools
 - _Mermaid Live_: creating UML diagrams to add directly onto the README
@@ -30,5 +31,6 @@ This document compiles the main resources consulted during the development of th
 - _Pinterest_: getting some photos for the web and ideas for the UI
 - _Tailwind_: getting ideas for the structure of the web
 - _Muzli_: getting inspiration for the profile page
+- _Procreate_: adding navigations notes to the Figma mockups
 
 <!-- Faltaría añadir los links de las páginas consultadas en el iPad -->

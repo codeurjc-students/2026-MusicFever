@@ -1,6 +1,7 @@
-# Music Fever: A Web Application for Musical Streaming with a new way of Sharing Music in Collaborative Sessions
+# 🎼 Music Fever: A Web Application for Musical Streaming with a new way of Sharing Music in Collaborative Sessions
+![Logo](/src/better_logo.png)
 
-## Table of Contents
+## 📑 Table of Contents
 - [Presentation](#presentation)
 - [Objectives](#web-application-objectives)
 - [Methodology](#methodology)
@@ -9,17 +10,17 @@
 - [Project Tracking](#project-tracking)
 - [Author](#author)
 
-## Presentation
+## 👋 Presentation
 Music Fever is a music-streaming web application that includes the main features offered by platforms such as Spotify or Apple Music: searching for and listening to your favourite artists, albums, and songs, as well as creating playlists to enjoy them all together. The app’s main new feature is the ability to create rooms where users can listen to music with their friends through a shared and equitable listening queue. The app will also have administrator accounts whose main responsibilities will include answering users’ questions and adding new music to the app’s database. 
 
-> Next: Sketches of the main pages that shows the web functionality
+![Home Page](/src/home_page.jpg)
 
 At this point, only the functional and technical objectives of the application have been defined. The implementation of the web application has not been initialized yet.
 
-## Web Application Objectives
+## 🎯 Web Application Objectives
 This section outlines the different objectives of the application. They are classified into two categories: _functional_ and _technical_ objectives.
 
-### Functional Objectives
+### ⚙️ Functional Objectives
 Music Fever aims to be a music management and listening platform that allows users to search for and organize their favorite songs into their own playlists. The main novelty that this application brings compared to its competitors is the possibility of creating collaborative and fair playback queues, where all participants can contribute songs without monopolizing the queue. In addition, Music Fever allows users to view both personal statistics and statistics related to the rooms they have created.
 
 The main functional objectives are:
@@ -33,7 +34,7 @@ The main functional objectives are:
 * **Request management:** users will be able to send requests to administrators to load songs that are not yet available in the application.
 * **Administrator functionalities:** administrators will manage requests and search external APIs directly for data that has not yet been loaded into the system.
 
-### Technical Objectives
+### 🛠️ Technical Objectives
 From a technical perspective, the objective is to design a maintainable and modular full-stack application capable of connecting to external APIs in order to retrieve the required data and reproduce songs. Collaborative queues will synchronize their state in real time across all connected devices, allowing all participants to know what is currently playing and their estimated position in the queue.
 
 The main technical objectives are:
@@ -48,10 +49,10 @@ The main technical objectives are:
 * **Development workflow**: use of GitHub Flow as the development methodology, organizing work through feature branches and pull requests before integrating changes into the main branch.
 * **Continuous Integration and Continuous Deployment:** automation of integration and deployment processes through GitHub Actions, with deployment on Railway.
 
-## Methodology
+## 🧭 Methodology
 This section describes how the project will be developed. The development process will be divided into the following phases:
 
-### Getting Started
+### 🚀 Getting Started
 #### __Phase 1__: functionalities definition
 The first phase will defined all the general characteristics of the web application. It will be indicated all the concrete sections that describes the general and detailed functionality of the web.
 
@@ -66,7 +67,7 @@ _Start Date_: 01/09/2026<br>
 _Finish Date_: 15/10/2026
 
 
-### Iterative and incremental development
+### 🔁 Iterative and incremental development
 #### __Phase 3__: first iteration
 The third phase will include the implementation of the basic web functionalities and its quiality control tests.
 
@@ -91,7 +92,7 @@ _Finish Date_: 15/04/2027
 
 > Version published: 1.0.0
 
-### Preparing the presentation
+### 🎤 Preparing the presentation
 #### __Phase 6__: memory
 The sixth phase will be writing the project memory on LaTex.
 
@@ -125,10 +126,10 @@ gantt
     axisFormat  %b %Y
 
     section Planning
-    Requirements & Screens        :f1, 2026-07-07, 2026-08-31
+    Requirements & Screens        :f1, 2026-07-07, 2026-09-05
 
     section Setup
-    Repository, Testing & CI      :f2, 2026-09-01, 2026-10-15
+    Repository, Testing & CI      :f2, 2026-09-06, 2026-10-15
 
     section Development
     Version 0.1                   :f3, 2026-10-16, 2026-12-15
@@ -141,8 +142,8 @@ gantt
     section Presentation
     Defense                       :f7, 2027-05-16, 2027-06-15
 ```
-## Application's Functionality
-### Basic
+## 📱 Application's Functionality
+### 🟢 Basic
 - Basic search functionality.
 - Room implementation:
   - Room creation and joining via code.
@@ -154,7 +155,7 @@ gantt
 - Playlist editor implementation.
 - Player and queue simulation.
 
-### Intermediate
+### 🟡 Intermediate
 - Statistics logic and processing.
 - Responsive application design.
 - Light and dark mode.
@@ -162,19 +163,19 @@ gantt
 - Song playback implementation.
 - External authentication implementation.
 
-### Advanced
+### 🔴 Advanced
 - Artist similarity graph.
 - Advanced search functionality.
 - Automated retrieval and import of newly released albums from Metacritic.
 
 
-## Analysis
+## 📊 Analysis
 This section describes the main elements that will be analysed before the development of the application. It covers the interface, data model, user roles, multimedia content, data visualisation, supporting technologies, and advanced functionality.
 
-### Screens & Navigation
+### 🖥️ Screens & Navigation
 The following [document](/docs/pages_and_navigation.md) contains all the mockups designed for the application and shows the navigation flow between them.
 
-### Entities
+### 🗃️ Entities
 This section introduces the main entities of the application, which were previously identified in the prototypes. In this context, an __entity__ is an object whose data is stored in the database.
 
 The following list describes the main entities of Music Fever:
@@ -339,7 +340,7 @@ erDiagram
     }
 ```
 
-### User Permissions
+### 🔐 User Permissions
 #### Resource Ownership
 The website must be designed so that registered users own specific data or resources. In this way, the owner of a given resource is the only user allowed to modify or delete it.
 
@@ -388,7 +389,7 @@ The following sections list the actions allowed for each type of user within the
 | Close the room                           |      —      |   ✓  |
 
 
-### Images
+### 📸 Images
 One of the requirements of the web application is to support image uploads directly from the web browser. To meet this requirement, users will be able to have a profile picture, which they can upload themselves from their profile page.
 
 Users will also be able to upload cover images for the playlists they create. Both types of images are optional, meaning that choosing not to upload them will not affect the user's experience within the application.
@@ -396,7 +397,7 @@ Users will also be able to upload cover images for the playlists they create. Bo
 > [!IMPORTANT]
 > Artist and album entities have associated images that are retrieved directly from the Spotify API or Apple Music API. These images cannot be replaced by administrator users.
 
-### Charts
+### 📈 Charts
 As with images, the application is required to include charts displaying relevant information to users. In this case, general statistics about the application, individual users, and different rooms will be displayed, primarily on the Analytics page.
 
 The amount of information available will depend on the user type. The following sections describe each statistic and the type of chart that will be used to represent it.
@@ -439,7 +440,7 @@ Administrator users will be able to view both the general statistics available t
 
 Administrator users will also be able to view application performance statistics using Grafana. This functionality will be described in greater detail in later development stages.
 
-### Complementary Technologies
+### 🔧 Complementary Technologies
 #### Use of WebSockets
 WebSocket technology will be used to update queue status and playback information in real time while users are connected to the same playback queue.
 
@@ -450,7 +451,7 @@ The public developer APIs provided by Spotify and Apple Music will be used prima
 
 Additionally, the Spotify API will be used for song playback, with the possibility of extending this functionality to support playback through Apple Music.
 
-### Algorithm or Advanced Query
+### 🧠 Algorithm or Advanced Query
 #### Fair Priority Queue
 The main innovation of the web application revolves around a new collaborative and fair approach to music playback.
 
@@ -465,12 +466,12 @@ An advanced full-text search system will be implemented according to the guideli
 
 This functionality will be used to search for artists, albums, and songs from the Search page.
 
-## Project Tracking
+## 📅 Project Tracking
 
-### Blog
+### ✍️ Blog
 To follow the development of this project, an account on the _Medium_ website will be created to write blog entries on each phase or when the application is updated. To access the blog you can click on the following [link](https://medium.com/@armingarc).
 
-### GitHub Project
+### 🐙 GitHub Project
 The tasks management and planning will be performed through GitHub Projects. A board, similar to the ones used in Kanban projects, has been created with the following columns:
 - __Backlog__: items in backlog are ideas for the project that are not ready to be picked up in the moment
 
@@ -503,7 +504,7 @@ Using the GitHub API GraphQL (GitHub API v4) the movement of the issues through 
 
 The board can be viewed via the following [link](https://github.com/orgs/codeurjc-students/projects/50).
 
-## Author
+## ✒️ Author
 
 This application is being developed as part of the Bachelor's Degree Final Project for the **Computer Science** programme at the Escuela Técnica Superior de Ingeniería Informática (ETSII) of Universidad Rey Juan Carlos (URJC).
 
