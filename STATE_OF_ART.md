@@ -29,5 +29,21 @@ Spotify also offers several additional features, including DJ, playlist blending
 | Real-time collaborative sessions |    ✓    |      —      |
 | Social interaction               |    ✓    |      —      |
 
-
 ## User Interface
+### Spotify
+![Spotify IU](/src/spotify_iu.png)
+
+Spotify uses a denser and more information-heavy interface, with several navigation areas visible at the same time. A horizontal header at the top contains the search bar, account-related options, and other global controls. On the left side, a vertical navigation panel provides quick access to the user’s library, playlists, and frequently used sections.
+
+The central area is reserved for the current page content. In the home view, this space is mainly used for recommendations, but it changes dynamically depending on the section being accessed.
+
+The music player remains fixed at the bottom of the interface, making playback controls continuously available regardless of the current page. Overall, Spotify presents a higher visual density, with many options, shortcuts, and content elements displayed simultaneously.
+
+### Apple Music
+![Apple Music IU](/src/apple_music_iu.png)
+
+Apple Music uses a cleaner and more spacious interface, with fewer elements competing for attention at the same time. A vertical navigation panel on the left provides quick access to the main sections of the application, such as Search, Home, New, and Radio.
+
+The central area is dedicated to the content of the currently selected page and can be vertically scrolled. Compared with Spotify, the layout makes greater use of empty space and presents fewer controls and shortcuts simultaneously, resulting in a lower visual density.
+
+The music player is positioned at the bottom of the interface, remaining accessible while the user navigates through the different sections.
