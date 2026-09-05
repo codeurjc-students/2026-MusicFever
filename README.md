@@ -44,7 +44,7 @@ The main technical objectives are:
 * **Integration with external APIs:** integration with external APIs, especially Spotify.
 * **Authentication and authorization:** implementation of authentication and authorization mechanisms for role management, together with OAuth authentication for connecting Spotify accounts.
 * **Data persistence and integrity:** guarantee data persistence and integrity through an application-specific database.
-* **Code quality and maintainability:** implementation of unit and E2E tests to verify the correct behavior of the application, together with SonarCloud to continuously monitor code quality.
+* **Code quality and maintainability:** implementation of unit, integration and E2E tests to verify the correct behavior of the application, together with SonarCloud to continuously monitor code quality.
 * **Responsive design:** development of a responsive interface to ensure comfortable use across different devices.
 * **Development workflow**: use of GitHub Flow as the development methodology, organizing work through feature branches and pull requests before integrating changes into the main branch.
 * **Continuous Integration and Continuous Deployment:** automation of integration and deployment processes through GitHub Actions, with deployment on Railway.
@@ -63,7 +63,7 @@ _Finish Date_: 05/09/2026
 #### __Phase 2__: project configuration
 The second phase will include the configuration of technologies and development tools with quality control that will be exectuded preiodically.
 
-_Start Date_: 01/09/2026<br>
+_Start Date_: 06/09/2026<br>
 _Finish Date_: 15/10/2026
 
 
@@ -377,6 +377,10 @@ The following sections list the actions allowed for each type of user within the
 | Login/ Sign in   |     ✓     |      —     |     —      |   —   |
 | Logout   |     —    |     ✓     |     ✓      |   ✓  |
 
+The permitted actions can also be viewed in the following Use Case Diagram (UCD):
+
+![UCD App Context](/src/diagrams/user_ucd.png)
+
 ##### Room Context
 | Action                                   | Participant | Host |
 | ---------------------------------------- | :---------: | :--: |
@@ -388,6 +392,9 @@ The following sections list the actions allowed for each type of user within the
 | Add songs in host mode (higher priority) |      —      |   ✓  |
 | Close the room                           |      —      |   ✓  |
 
+The permitted actions can also be viewed in the following Use Case Diagram (UCD):
+
+![UCD Room Context](/src/diagrams/room_ucd.png)
 
 ### 📸 Images
 One of the requirements of the web application is to support image uploads directly from the web browser. To meet this requirement, users will be able to have a profile picture, which they can upload themselves from their profile page.

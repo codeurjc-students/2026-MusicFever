@@ -16,9 +16,10 @@ Examples for the _How it has been used_ part:
 - When an error ocurred, the PROMPT will be copied and asked the AI to indicate the posible motives for the error to happen
 - The AI will be given a general description of the problem, then generate the mayority of the code.
 
-## GitHub Project Configuration
+## 1. GitHub Project Configuration
 
-### Entry details
+### 1.1 Workflow Generation
+#### Entry details
 | Entry details | Value |
 |---|---|
 | **Date** | 12-07-2026|
@@ -27,7 +28,7 @@ Examples for the _How it has been used_ part:
 | **AI Tool** | ChatGPT |
 | **Tool version** | GPT-5.6 Sol |
 
-### Tool Configuration
+#### Tool Configuration
 
 | Setting | Value |
 |---|---|
@@ -39,14 +40,15 @@ Examples for the _How it has been used_ part:
 | **Web search** | As needed |
 | **Connected tools** | None used |
 
-### Usage
+#### Usage
 After consulting the GitHub documentation on issues and how they can be closed automatically through commits or pull requests, the relevant information was provided to the AI. The AI was then asked whether it was also possible to reflect these changes in a GitHub Project.
 
 Once this possibility was confirmed, the three required workflows were described, and the AI was asked to generate them. The resulting workflows had to be reviewed and adapted manually, particularly to replace project-specific and personal configuration details.
 
-## UI Design in Figma
+## 2. UI Design in Figma
 
-### Entry details
+### 2.1 Modifying the given mockup
+#### Entry details
 | Entry details | Value |
 |---|---|
 | **Date** | 27-07-2026|
@@ -55,7 +57,7 @@ Once this possibility was confirmed, the three required workflows were described
 | **AI Tool** | ChatGPT |
 | **Tool version** | GPT-5.6 Sol |
 
-### Tool Configuration
+#### Tool Configuration
 
 | Setting | Value |
 |---|---|
@@ -67,12 +69,13 @@ Once this possibility was confirmed, the three required workflows were described
 | **Web search** | As needed |
 | **Connected tools** | None used |
 
-### Usage
+#### Usage
 A screenshot of the UI made using Figma was given to the AI and asked what elements should be changed to make the interface more visually appealing to users. Then, it was asked to the AI to detail some of the properties of these elements (color, shadow and border) to be able to change them in the Figma prototype.
 
 > This entry has also been used for the profile and home pages
 
-### Entry details
+### 2.2 Chart distribution
+#### Entry details
 
 | Entry details    | Value                                                                             |
 | ---------------- | --------------------------------------------------------------------------------- |
@@ -82,7 +85,7 @@ A screenshot of the UI made using Figma was given to the AI and asked what eleme
 | **AI Tool**      | ChatGPT                                                                           |
 | **Tool version** | GPT-5.5 (Anonymous version)                                                       |
 
-### Tool Configuration
+#### Tool Configuration
 
 | Setting              | Value         |
 | -------------------- | ------------- |
@@ -94,7 +97,7 @@ A screenshot of the UI made using Figma was given to the AI and asked what eleme
 | **Web search**       | Not used      |
 | **Connected tools**  | None used     |
 
-### Usage
+#### Usage
 
 The AI was asked how the application's statistical charts should be distributed across its different pages. Since several entities have associated statistics, the initial idea was to display all of them in the Analytics section. However, the AI was also asked whether it would make sense to repeat the user-related charts on the user's profile page.
 
@@ -102,39 +105,17 @@ The AI advised against duplicating the same charts in both sections, as this cou
 
 This proposal was adopted and the statistics summary card was added to the user profile UI prototype.
 
-### Entry details
+### 2.3 Icons generation
+#### Entry details
 | Entry details | Value |
-|---|---|
-| **Date** | 07-08-2026|
-| **Phase** | 1 (Documentation) |
-| **Objective** | Modify the UI previously done to make it more appealing |
-| **AI Tool** | ChatGPT |
-| **Tool version** | GPT-5.6 Sol |
+| --- | --- |
+| __Date__ | 08-2026 |
+| __Phase__ | 1 (Documentation) |
+| __Objective__ | Generate a consistent set of icons for the different actions and elements used throughout the Music Fever interface |
+| __AI Tool__ | ChatGPT |
+| __Tool Version__ | GPT-5.6 Sol |
 
-### Tool Configuration
-
-| Setting | Value |
-|---|---|
-| **Model** | GPT-5.6 Thinking |
-| **Reasoning level** | High |
-| **Interaction mode** | Chat |
-| **Agent mode** | Disabled |
-| **Plan mode** | Disabled |
-| **Web search** | As needed |
-| **Connected tools** | None used |
-
-### Usage
-The AI was asked to generate 5 images for each card on the home page. It also was asked to give ideas for the texts after giving it a small description of the feature.
-
-### Entry details
-| Entry details    |Value                                                                                                               |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Date**         | 08-2026                                                                                                       |
-| **Phase**        | 1 (Documentation)                                                                                       |
-| **Objective**    | Generate a consistent set of icons for the different actions and elements used throughout the Music Fever interface |
-| **AI Tool**      | ChatGPT                                                                                                             |
-| **Tool version** | GPT-5.6 Sol                                                                                                         |
-### Tool Configuration
+#### Tool Configuration
 | Setting              | Value            |
 | -------------------- | ---------------- |
 | **Model**            | GPT-5.6 Thinking |
@@ -145,14 +126,15 @@ The AI was asked to generate 5 images for each card on the home page. It also wa
 | **Web search**       | Not required     |
 | **Connected tools**  | Image generation |
 
-### Usage
+#### Usage
 The AI was used to generate several icons required throughout the Music Fever interface. The desired action or functionality of each icon was described to the AI, together with the visual style and colour palette of the application.
 
 The generated icons included, among others, actions such as play, add to queue, play next, add to playlist, edit, search, and icons representing different statistics and administrative information.
 
 Several iterations were performed when necessary to improve the semantic clarity of the icons and ensure that similar actions could be easily distinguished. The AI was also instructed to maintain a consistent visual language based on Music Fever's lilac and purple colour palette and to generate the icons with transparent backgrounds so they could be directly incorporated into the interface mock-ups.
 
-### Entry Details
+### 2.4 Privacy and Terms Pages
+#### Entry Details
 | Entry details    | Value                                                                                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Date**         | 29-08-2026                                                                                                                                                    |
@@ -160,7 +142,7 @@ Several iterations were performed when necessary to improve the semantic clarity
 | **Objective**    | Generate the initial content for the Privacy Policy and Terms of Service pages according to the functionality and data management requirements of Music Fever |
 | **AI Tool**      | ChatGPT                                                                                                                                                       |
 | **Tool version** | GPT-5.6 Sol                                                                                                                                                   |
-### Tool Configuration
+#### Tool Configuration
 | Setting              | Value                                                                   |
 | -------------------- | ----------------------------------------------------------------------- |
 | **Model**            | GPT-5.6 Thinking                                                        |
@@ -171,7 +153,7 @@ Several iterations were performed when necessary to improve the semantic clarity
 | **Web search**       | Used when necessary to verify legal and third-party service information |
 | **Connected tools**  | None used                                                               |
 
-### Usage
+#### Usage
 The AI was asked to generate the initial content for the Privacy Policy and Terms of Service pages of Music Fever.
 
 Before generating the documents, the AI was explicitly instructed to ask all the questions required to understand how the application works and what information it processes. The questions covered aspects such as:

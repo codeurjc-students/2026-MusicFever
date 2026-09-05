@@ -32,3 +32,4 @@ This document compiles the main resources consulted during the development of th
 - _Tailwind_: getting ideas for the structure of the web
 - _Muzli_: getting inspiration for the profile page
 - _Procreate_: adding navigations notes to the Figma mockups
+- _Canva_: creating some of the illustrations on the app

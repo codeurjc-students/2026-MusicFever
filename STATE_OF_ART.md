@@ -1,4 +1,4 @@
-# State of the Art
+# 📚 State of the Art
 
 Digital music listening began with the creation of the .mp3 format and P2P software for transferring files between users. Due to the major issues associated with sharing files without permission, and taking advantage of the growth of Internet connections, the first legal music download application was created: the iTunes Music Store (2003). It reached agreements with several record labels and eventually offered songs from around 200,000 different artists.
 
@@ -6,7 +6,7 @@ Following its success, it became clear that downloading files was not necessary,
 
 Over time, other platforms have emerged, such as YouTube Music, Google Play Music and Amazon Prime Music, among others. However, this project will focus on analysing the features and design of the two main platforms, Spotify and Apple Music, using them as references for the development of Music Fever.
 
-## Features
+## 🧩 Features
 
 The core functionality of both Spotify and Apple Music is the ability to search for artists, albums and songs in order to listen to them, save them as favourites or add them to the user’s library. Both platforms also allow users to create playlists, enabling them to organise a selection of songs into personal collections.
 
@@ -29,8 +29,8 @@ Spotify also offers several additional features, including DJ, playlist blending
 | Real-time collaborative sessions |    ✓    |      —      |
 | Social interaction               |    ✓    |      —      |
 
-## User Interface
-### Spotify
+## 🎨 User Interface
+### 🟢 Spotify
 ![Spotify IU](/src/spotify_iu.png)
 
 Spotify uses a denser and more information-heavy interface, with several navigation areas visible at the same time. A horizontal header at the top contains the search bar, account-related options, and other global controls. On the left side, a vertical navigation panel provides quick access to the user’s library, playlists, and frequently used sections.
@@ -39,7 +39,7 @@ The central area is reserved for the current page content. In the home view, thi
 
 The music player remains fixed at the bottom of the interface, making playback controls continuously available regardless of the current page. Overall, Spotify presents a higher visual density, with many options, shortcuts, and content elements displayed simultaneously.
 
-### Apple Music
+### 🍎 Apple Music
 ![Apple Music IU](/src/apple_music_iu.png)
 
 Apple Music uses a cleaner and more spacious interface, with fewer elements competing for attention at the same time. A vertical navigation panel on the left provides quick access to the main sections of the application, such as Search, Home, New, and Radio.
