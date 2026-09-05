@@ -1,4 +1,4 @@
-# Screens And Navigation
+# 🖥️ Screens And Navigation
 This document presents the prototype designed for the Music Fever application. In particular, it shows the different screens created in Figma and indicates the possible transitions between them using a numerical code associated with each page. The document follows the same numbering system to describe each screen.
 
 As previously mentioned, the application interface prototype was created using Figma. To add the navigation indications, Procreate was used on an iPad, with the arrows drawn manually.
