@@ -214,13 +214,12 @@ jobs:
           GRAPHQL
           )
 
-          # Cada elemento contiene:
-          # propietario|repositorio|numero|url
+          # Each element contains: owner | repository | number | url
           declare -a QUEUE=(
             "${REPOSITORY_OWNER}|${REPOSITORY_NAME}|${ISSUE_NUMBER}|${ISSUE_URL}"
           )
 
-          # Evita procesar dos veces la misma issue.
+          # Avoid processing the same issue twice.
           declare -A SEEN=()
 
           while (( ${#QUEUE[@]} > 0 )); do
@@ -259,7 +258,7 @@ jobs:
               continue
             fi
 
-            # Añadir sus subissues a la cola.
+            # Adds subissues to queue
             while IFS=$'\t' read -r CHILD_REPOSITORY CHILD_NUMBER CHILD_URL; do
               [[ -z "$CHILD_REPOSITORY" ]] && continue
 
@@ -285,7 +284,7 @@ jobs:
               jq -r '.data.repository.issue.state' <<< "$ISSUE_JSON"
             )"
 
-            # Las subissues cerradas deben conservar su estado Done.
+            # Closed subissues keep the Done status
             if [[ "$ISSUE_STATE" == "CLOSED" ]]; then
               echo "${ISSUE_KEY} is closed; keeping its current project status."
               continue
@@ -304,7 +303,7 @@ jobs:
                 <<< "$ISSUE_JSON"
             )"
 
-            # Si la issue no está en el proyecto, añadirla.
+            # If issue not in project -> add it
             if [[ -z "$PROJECT_ITEM_ID" ]]; then
               echo "${ISSUE_KEY} is not in the project. Adding it..."
 
@@ -446,7 +445,7 @@ jobs:
                 <<< "$ISSUE_JSON"
             )"
 
-            # Si la issue no está en el proyecto, añadirla.
+            # If issue not in project -> add it
             if [[ -z "$PROJECT_ITEM_ID" ]]; then
               echo "${ISSUE_KEY} is not in the project. Adding it..."
 

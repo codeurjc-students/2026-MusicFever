@@ -14,7 +14,7 @@ env:
   PROJECT_NUMBER: "50"
 
   STATUS_FIELD_NAME: "Status"
-  IN_REVIEW_OPTION_NAME: "Pending Merge"
+  IN_REVIEW_OPTION_NAME: "Pending merge"
 
 jobs:
   move-subissues-to-in-review:
