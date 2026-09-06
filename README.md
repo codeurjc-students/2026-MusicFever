@@ -511,6 +511,12 @@ Using the GitHub API GraphQL (GitHub API v4) the movement of the issues through 
 
 The board can be viewed via the following [link](https://github.com/orgs/codeurjc-students/projects/50).
 
+### ✍️ Instagram
+In addition to the blog mentioned above, an Instagram account has also been created to follow the project’s development from a different perspective. It will be used to share explanatory posts, provide updates and news, and offer a more behind-the-scenes look at the development process. The account can be found at the following [link](https://www.instagram.com/musicfever_2026/).
+
+> [!IMPORTANT]
+> The account is currently private in order to protect the project’s privacy, as it forms part of a Final Degree Project, and to preserve the integrity of the Spotify and Apple Music brands, even though their respective design and branding guidelines are being followed. Access therefore requires sending a follow request. However, there are currently no strict restrictions on accepting requests, and most will generally be approved. The account may be made public in the future.
+
 ## ✒️ Author
 
 This application is being developed as part of the Bachelor's Degree Final Project for the **Computer Science** programme at the Escuela Técnica Superior de Ingeniería Informática (ETSII) of Universidad Rey Juan Carlos (URJC).

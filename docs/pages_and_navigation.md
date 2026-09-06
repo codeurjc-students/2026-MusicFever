@@ -161,4 +161,4 @@ _Contact Us_ is a pop-up container that appears on the middle of the screen inde
 ## External Links
 - __E1__: link to the _Medium_ blog.
 - __E2__: link to the _GitHub_ repository.
-- __E3__: link to the _Instragram_ account.
+- __E3__: link to the _Instagram_ account.
