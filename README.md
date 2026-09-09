@@ -13,7 +13,7 @@
 ## 👋 Presentation
 Music Fever is a music-streaming web application that includes the main features offered by platforms such as Spotify or Apple Music: searching for and listening to your favourite artists, albums, and songs, as well as creating playlists to enjoy them all together. The app’s main new feature is the ability to create rooms where users can listen to music with their friends through a shared and equitable listening queue. The app will also have administrator accounts whose main responsibilities will include answering users’ questions and adding new music to the app’s database. 
 
-![Home Page](/src/home_page.jpg)
+![Home Page](/src/main_layout.png)
 
 At this point, only the functional and technical objectives of the application have been defined. The implementation of the web application has not been initialized yet.
 
