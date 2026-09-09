@@ -146,27 +146,25 @@ gantt
 ### 🟢 Basic
 - Basic search functionality.
 - Room implementation:
-  - Room creation and joining via code.
+  - Room creation and joining via code or link.
   - Song ordering data structure.
   - Song addition and queue management.
-- Request system implementation.
 - Music download functionality.
 - Login and registration system, including user role differentiation.
 - Playlist editor implementation.
-- Player and queue simulation.
+- Song playback implementation.
 
 ### 🟡 Intermediate
 - Statistics logic and processing.
 - Responsive application design.
 - Light and dark mode.
-- WebSocket implementation for real-time room updates across participants.
-- Song playback implementation.
+- Real-time room updates across participants.
 - External authentication implementation.
 
 ### 🔴 Advanced
 - Artist similarity graph.
 - Advanced search functionality.
-- Automated retrieval and import of newly released albums from Metacritic.
+- Automated retrieval and import of newly released albums.
 
 
 ## 📊 Analysis
@@ -511,7 +509,7 @@ Using the GitHub API GraphQL (GitHub API v4) the movement of the issues through 
 
 The board can be viewed via the following [link](https://github.com/orgs/codeurjc-students/projects/50).
 
-### ✍️ Instagram
+### 📱 Instagram
 In addition to the blog mentioned above, an Instagram account has also been created to follow the project’s development from a different perspective. It will be used to share explanatory posts, provide updates and news, and offer a more behind-the-scenes look at the development process. The account can be found at the following [link](https://www.instagram.com/musicfever_2026/).
 
 > [!IMPORTANT]
