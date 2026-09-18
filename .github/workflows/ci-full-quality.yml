@@ -50,7 +50,7 @@ jobs:
 
             - name: Run unit tests (Client-Side)
               working-directory: frontend
-              run: npx ng test --include="src/tests/unit/**/*.spec.ts"
+              run: npx ng test --include="src/tests/unit/**/*.spec.ts" --watch=false
             
             - name: Start backend
               working-directory: backend/music-fever
@@ -61,8 +61,8 @@ jobs:
 
             - name: Run integration tests (Client-Side)
               working-directory: frontend
-              run: npx ng test --include="src/tests/integration/**/*.spec.ts"
+              run: npx ng test --include="src/tests/integration/**/*.spec.ts" --watch=false
 
             - name: Run system tests (Client-Side)
               working-directory: frontend
-              run: npx ng e2e
+              run: npx cypress run --e2e
