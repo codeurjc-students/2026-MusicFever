@@ -1,0 +1,78 @@
+name: Full Quality Check
+
+on:
+    # pull_request:
+        # branches:
+          #   - main
+        # paths-ignore:
+          #   - 'README.md'
+          #   - 'github/workflows/**'
+          #   - 'pom.xml'
+
+    push:
+
+jobs:
+    test:
+        name: Unit, Integration & System Tests
+        runs-on: ubuntu-latest
+        steps:
+
+            # Backend
+            - uses: actions/checkout@v4
+            - uses: actions/setup-java@v4
+              with:
+                distribution: 'temurin'
+                java-version: '21'
+                cache: 'maven'
+
+            - name: Run unit tests (Server-Side)
+              working-directory: backend/music-fever
+              run: mvn test -Dtest="**/unit/**/*Test"
+            
+            - name: Run integration tests (Server-Side)
+              working-directory: backend/music-fever
+              run: mvn test -Dtest="**/integration/**/*Test"
+
+            - name: Run system tests (Server-Side)
+              working-directory: backend/music-fever
+              run: mvn test -Dtest="**/e2e/**/*Test"
+
+            # Frontend
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+                  cache: 'npm'
+                  cache-dependency-path: frontend/package-lock.json
+
+            - name: Install frontend dependencies
+              working-directory: frontend
+              run: npm ci
+
+            - name: Run unit tests (Client-Side)
+              working-directory: frontend
+              run: npx ng test --include="src/tests/unit/**/*.spec.ts" --watch=false
+            
+            - name: Start backend
+              working-directory: backend/music-fever
+              run: mvn spring-boot:run > backend.log 2>&1 &
+
+            - name: Wait for backend
+              run: |
+                for i in {1..30}; do
+                      if nc -z localhost 8080; then
+                        echo "Backend is ready"
+                        exit 0
+                      fi
+                      sleep 2
+                    done
+
+                    echo "Backend failed to start"
+                    exit 1
+
+            - name: Run integration tests (Client-Side)
+              working-directory: frontend
+              run: npx ng test --include="src/tests/integration/**/*.spec.ts" --watch=false
+
+            - name: Run system tests (Client-Side)
+              working-directory: frontend
+              run: npx cypress run --e2e
