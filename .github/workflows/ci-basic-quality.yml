@@ -21,7 +21,7 @@ jobs:
                 cache: 'maven'
 
             - name: Run unit test (Server-Side)
-              working-directory: backend
+              working-directory: backend/music-fever
               run: mvn test -Dtest="**/unit/**/*Test" 
 
             
