@@ -57,7 +57,8 @@ jobs:
               run: mvn spring-boot:run > backend.log 2>&1 &
 
             - name: Wait for backend
-              run: for i in {1..30}; do
+              run: |
+                for i in {1..30}; do
                       if nc -z localhost 8080; then
                         echo "Backend is ready"
                         exit 0
