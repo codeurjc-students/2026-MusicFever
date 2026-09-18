@@ -57,7 +57,16 @@ jobs:
               run: mvn spring-boot:run > backend.log 2>&1 &
 
             - name: Wait for backend
-              run: until nc -z localhost 8080; do sleep 2 done
+              run: for i in {1..30}; do
+                      if nc -z localhost 8080; then
+                        echo "Backend is ready"
+                        exit 0
+                      fi
+                      sleep 2
+                    done
+
+                    echo "Backend failed to start"
+                    exit 1
 
             - name: Run integration tests (Client-Side)
               working-directory: frontend
