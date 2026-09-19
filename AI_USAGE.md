@@ -177,3 +177,30 @@ Before generating the documents, the AI was explicitly instructed to ask all the
 After receiving this information, the AI generated structured drafts for both pages, including sections related to personal data collection, external services, Rooms, guest users, music requests, playlists, statistics, data retention, GDPR rights, security, acceptable use, third-party services, intellectual property, service availability, account termination, liability and governing law.
 
 The generated text was subsequently incorporated into the corresponding Music Fever interface mock-ups and may be reviewed or adapted before any real-world deployment of the application.
+
+
+## 3. Workflow Design
+#### Entry details
+
+| Entry details    | Value   |
+| ---------------- | --------------------- |
+| **Date**         | 18-09-2026  |
+| **Phase**        | 2 (Prepare the repository) |
+| **Objective**    | Define the organization of backend and frontend tests (unit, integration and E2E) and the corresponding GitHub Actions workflow commands to run frontend and backend unit tests independently |
+| **AI Tool**      | ChatGPT     |
+| **Tool version** | GPT-5.6 Sol  |
+
+#### Tool Configuration
+
+| Setting              | Value                    |
+| -------------------- | ------------------------ |
+| **Model**            | GPT-5.6 Sol              |
+| **Reasoning level**  | Not explicitly specified |
+| **Interaction mode** | Chat                     |
+| **Agent mode**       | Disabled                 |
+| **Plan mode**        | Disabled                 |
+| **Web search**       | Not used                 |
+| **Connected tools**  | None used                |
+
+#### Usage
+The AI was used to clarify where to locate the frontend test folders and which relative paths and commands should be used in GitHub Actions so that the corresponding test jobs run correctly.
