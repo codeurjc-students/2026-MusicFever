@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:unit": "ng test --watch=false --include=\"src/tests/unit\"",
+    "test:integration": "ng test --watch=false --include=\"src/tests/integration\"",
+    "test:unit:coverage": "ng test --coverage --watch=false --include=\"src/tests/unit\" --coverage-reporters=html --coverage-reporters=lcov --coverage-reporters=text-summary"
   },
   "private": true,
   "packageManager": "npm@12.0.1",
@@ -24,9 +27,14 @@
     "@angular/build": "^22.0.8",
     "@angular/cli": "^22.0.8",
     "@angular/compiler-cli": "^22.0.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "cypress": "^16.1.0",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
     "vitest": "^4.0.8"
+  },
+  "allowScripts": {
+    "cypress@16.1.0": true
   }
 }
