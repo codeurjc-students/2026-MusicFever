@@ -180,6 +180,7 @@ The generated text was subsequently incorporated into the corresponding Music Fe
 
 
 ## 3. Workflow Design
+### 3.1 Help implementing the workflows
 #### Entry details
 
 | Entry details    | Value   |
@@ -204,3 +205,29 @@ The generated text was subsequently incorporated into the corresponding Music Fe
 
 #### Usage
 The AI was used to clarify where to locate the frontend test folders and which relative paths and commands should be used in GitHub Actions so that the corresponding test jobs run correctly.
+
+### 3.2 Configurate coverage analysis
+#### Entry Details
+| Entry details    | Value  |
+| ---------------- | -------------- |
+| **Date**         | 21-09-2026   |
+| **Phase**        | 2 (Prepare the repository) |
+| **Objective**    | Configure unit-test coverage for backend and frontend, organize unit/integration/E2E tests, and adapt the Basic Quality Check workflow so that only unit tests are executed while Sonar analyzes both backend and frontend coverage |
+| **AI Tool**      | ChatGPT  |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting              | Value                                                         |
+| -------------------- | ------------------------------------------------------------- |
+| **Model**            | GPT-5.6 Sol                                                   |
+| **Reasoning level**  | Not explicitly specified                                      |
+| **Interaction mode** | Chat                                                          |
+| **Agent mode**       | Disabled                                                      |
+| **Plan mode**        | Disabled                                                      |
+| **Web search**       | Used                                                          |
+| **Connected tools**  | None connected; GitHub plugin was suggested but not connected |
+
+#### Usage
+The AI was used to configure code coverage and test execution for the repository's backend and frontend. For the Maven/Spring Boot backend, JaCoCo was configured to generate coverage reports and Maven Surefire was restricted to tests located under the unit package so that the Basic Quality Check does not execute integration or E2E tests. Meanwhile, for the Angular frontend, the existing Vitest setup was extended with @vitest/coverage-v8.
+
+It also suggested to create a root-level sonar-project.properties configuration was introduced so that a single Sonar analysis can process both parts of the application. The backend contributes the JaCoCo XML report and the frontend contributes the LCOV report, allowing backend and frontend coverage to be represented within the same Sonar project.
