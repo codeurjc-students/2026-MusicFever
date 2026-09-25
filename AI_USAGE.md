@@ -231,3 +231,28 @@ The AI was used to clarify where to locate the frontend test folders and which r
 The AI was used to configure code coverage and test execution for the repository's backend and frontend. For the Maven/Spring Boot backend, JaCoCo was configured to generate coverage reports and Maven Surefire was restricted to tests located under the unit package so that the Basic Quality Check does not execute integration or E2E tests. Meanwhile, for the Angular frontend, the existing Vitest setup was extended with @vitest/coverage-v8.
 
 It also suggested to create a root-level sonar-project.properties configuration was introduced so that a single Sonar analysis can process both parts of the application. The backend contributes the JaCoCo XML report and the frontend contributes the LCOV report, allowing backend and frontend coverage to be represented within the same Sonar project.
+
+## 4. Minimal Functionality
+### 4.1 Connect H2-Database 
+#### Entry Details
+| Entry details    | Value  |
+| ---------------- | -------------- |
+| **Date**         | 25-09-2026   |
+| **Phase**        | 2 (Prepare the repository) |
+| **Objective**    | Configure access to the H2 database during development and adapt Spring Security so that the H2 console can be used correctly |
+| **AI Tool**      | ChatGPT  |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting              | Value                                                          |
+| -------------------- | -------------------------------------------------------------- |
+| **Model**            | GPT-5.6 Sol                                                    |
+| **Reasoning level**  | Not explicitly specified                                       |
+| **Interaction mode** | Chat                                                           |
+| **Agent mode**       | Disabled                                                       |
+| **Plan mode**        | Disabled                                                       |
+| **Web search**       | Used                                                           |
+| **Connected tools**  | None connected                                                 |
+
+#### Usage
+The AI was used to help configure and access the H2 development database in Spring Boot, mainly resolving issues related to the H2 console and Spring Security permissions.
