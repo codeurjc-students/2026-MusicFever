@@ -20,6 +20,8 @@ public class Track {
     private int number;
     private boolean explicit;
 
+    public Track(){}
+    
     public Track(String artistName, String name, int number, boolean explicit) {
         this.artistName = artistName;
         this.name = name;

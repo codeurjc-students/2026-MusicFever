@@ -256,3 +256,27 @@ It also suggested to create a root-level sonar-project.properties configuration 
 
 #### Usage
 The AI was used to help configure and access the H2 development database in Spring Boot, mainly resolving issues related to the H2 console and Spring Security permissions.
+
+### 4.2 Configurate CORS
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 27-09-2026 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Configure CORS and Spring Security so the Angular frontend can access the REST API while keeping selected endpoints protected by authentication |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Not explicitly specified |
+| **Interaction mode** | Chat |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | Not used |
+| **Connected tools** | None connected |
+
+#### Usage
+The AI was asked for help configuring the application's Spring Security setup so that requests from the frontend could be received correctly.
