@@ -280,3 +280,27 @@ The AI was used to help configure and access the H2 development database in Spri
 
 #### Usage
 The AI was asked for help configuring the application's Spring Security setup so that requests from the frontend could be received correctly.
+
+### 4.3 Help with Angular
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 27-09-2026 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Implement the Angular frontend logic required to retrieve a list of tracks from the backend REST API and display them using reusable components |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Not explicitly specified |
+| **Interaction mode** | Chat |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | Not used |
+| **Connected tools** | None connected |
+
+#### Usage
+The AI was asked for help understanding how to organize and structure the Angular frontend, as well as for assistance implementing some basic frontend tasks due to limited prior experience with Angular.
