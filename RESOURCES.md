@@ -19,6 +19,10 @@ This document compiles the main resources consulted during the development of th
 - [Sub-issues on GitHub](https://docs.github.com/en/enterprise-cloud@latest/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues)
 - [View Management](https://docs.github.com/en/enterprise-cloud@latest/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/managing-your-views)
 
+### 📦Others
+- [REST Assure](https://github.com/rest-assured/rest-assured/wiki/Usage)
+- [Test Containers](https://testcontainers.com/guides/getting-started-with-testcontainers-for-java/)
+
 ## 🔎 Supporting Information
 - [Class Diagram vs. Entity Relationship](https://guides.visual-paradigm.com/class-diagram-vs-entity-relationship-diagram-erd-a-comparative-guide/)
 - [ER Model](https://www.geeksforgeeks.org/dbms/introduction-of-er-model/)

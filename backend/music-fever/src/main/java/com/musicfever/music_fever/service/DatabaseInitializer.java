@@ -17,7 +17,7 @@ public class DatabaseInitializer {
 
     @PostConstruct 
     public void initDatabase(){
-        this.trackService.saveTrack(new Track("Taylor Swift", "Pacient Zero", 1, false));
+        this.trackService.saveTrack(new Track("Taylor Swift", "Patient Zero", 1, false));
         this.trackService.saveTrack(new Track("Tate McRae", "NOBODY'S GIRL", 3, false));
         this.trackService.saveTrack(new Track("Ariana Grande", "petal", 3, false));
     }
