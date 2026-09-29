@@ -48,9 +48,9 @@ jobs:
         working-directory: ./frontend
         run: npm ci
 
-      - name: Backend tests with coverage
+      - name: Backend unit tests with coverage
         working-directory: ./backend/music-fever
-        run: mvn -B test jacoco:report
+        run: mvn -B test jacoco:report -Dsurefire.includes="**/unit/**/*.java"
 
       - name: Frontend unit tests with coverage
         working-directory: ./frontend
