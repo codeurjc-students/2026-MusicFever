@@ -48,7 +48,7 @@ jobs:
       # Backend
       - name: Run backend tests + JaCoCo report
         working-directory: backend/music-fever
-        run: mvn -B test jacoco:report
+        run: mvn -B test jacoco:report -DexcludedGroups=system
 
       # Frontend
       - name: Install frontend dependencies
@@ -99,9 +99,9 @@ jobs:
           cat frontend/frontend.log
           exit 1
 
-      - name: Run E2E tests (Client-Side)
-        working-directory: frontend
-        run: npx cypress run --e2e
+      - name: Run system tests with Selenium
+        working-directory: backend/music-fever
+        run: mvn -B test -Dgroups=system
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
