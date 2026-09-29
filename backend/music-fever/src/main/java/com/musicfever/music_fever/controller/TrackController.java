@@ -23,10 +23,6 @@ public class TrackController {
     @GetMapping("/")
     public ResponseEntity<List<Track>> getTracks() {
         List<Track> listTrack = service.findAll();
-        if (listTrack == null){
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(listTrack);
-        }
+        return ResponseEntity.ok(listTrack);
     }
 }
