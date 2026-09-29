@@ -363,3 +363,27 @@ I asked for help understanding the basic REST Assured syntax and how to use it w
 The AI was used to clarify the integration testing strategy for the backend and to configure Testcontainers with PostgreSQL. It also assisted in reviewing Maven dependencies, configuring the integration test class to provide a PostgreSQL database through Testcontainers, handling dependency injection, preparing test data with `@BeforeEach`, and diagnosing errors found during test execution.
 
 The test itself was initially implemented without AI assistance. Afterwards, the AI was asked to review the implementation and suggest possible improvements, which resulted in a cleaner and more robust version of the test.
+
+### 5.3 Help implementing testing with Vitest
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 29/09/2026 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Configure and understand client-side testing for the Angular frontend, including unit and client-server integration tests. |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Default |
+| **Interaction mode** | Conversational guidance |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used |
+| **Connected tools** | None |
+
+#### Usage
+The AI was used to understand and configure the Angular client testing workflow. The assistance focused on clarifying the role of components, services, inputs, TestBed and fixtures, how to replace services with mocks using Vitest, how to inspect the rendered DOM, and how to implement both a unit test for the track list and an integration test against the real REST API.
