@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestConstructor;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -19,6 +21,7 @@ import com.musicfever.music_fever.service.TrackService;
 
 @Testcontainers
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 public class TrackIntegrationTest {
     @Container
@@ -40,6 +43,11 @@ public class TrackIntegrationTest {
         repository.save(new Track("Test", "Test 1", 1, true));
         repository.save(new Track("Test", "Test 2", 2, false));
         repository.save(new Track("Test", "Test 3", 3, true));
+    }
+
+    @AfterAll
+    static void tearDown() {
+        postgres.stop();
     }
 
     @Test 

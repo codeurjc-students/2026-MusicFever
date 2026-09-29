@@ -387,3 +387,31 @@ The test itself was initially implemented without AI assistance. Afterwards, the
 
 #### Usage
 The AI was used to understand and configure the Angular client testing workflow. The assistance focused on clarifying the role of components, services, inputs, TestBed and fixtures, how to replace services with mocks using Vitest, how to inspect the rendered DOM, and how to implement both a unit test for the track list and an integration test against the real REST API.
+
+### 5.4 Describing an error
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 29/09/2026 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Solve an error when executing backend tests|
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Default |
+| **Interaction mode** | Conversational guidance |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used |
+| **Connected tools** | None |
+
+#### Usage
+The following error encountered during test execution was provided to ChatGPT for troubleshooting:
+```terminal
+[ERROR] Surefire is going to kill self fork JVM. The exit has elapsed 30 seconds after System.exit(0).
+```
+The AI helped identify the integration test as the source of the issue and suggested closing the Spring test context after the test class using @DirtiesContext.
