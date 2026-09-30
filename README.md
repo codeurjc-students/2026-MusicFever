@@ -14,6 +14,7 @@ At this point, only the functional and technical objectives of the application h
 - [Web Analysis](/docs/analysis.md)
 - [Detailed Functionality](/docs/detailed_functionality.md)
 - [Development Methodology](/docs/methodology.md)
+- [Development Guide](/docs/development_guide.md)
 - [Project Tracking](/docs/tracking.md)
 - [Authors](/docs/authors.md)
 - [License](/LICENSE)

@@ -21,21 +21,10 @@ The issues (tasks in GitHub) will be sorted onto these columns depending on the 
 > [!NOTE]
 > The issues on _Pending Merge_ actually are the completed sub-issues of the issue (parent) associated with the open pull request.
 
-### Issue Automatic Status Updates
-Issues in GitHub have a number associated with which they can be referenced in commits or pull requests to indicate when should they be closed. This allows issues to be closed automatically without having to use the GitHub interface; however, the changes will not be reflected on the GitHub Projects board.
-
-Using the GitHub API GraphQL (GitHub API v4) the movement of the issues through the board can be automated when an issue is closed. By combining this with GitHub Actions, updates can be triggered when pushing a commit, opening a PR, etc. In this project, three workflows have been created to automate the main issue status transitions.
-
-| Workflow          | Move                  | Description   |
-| ----------------- | -----------------     | ------------- |
-| issue-to-done     | Close issue to _Done_ | When an issue is closed, it is moved to the Done column. |
-| issue-to-pending  | Close sub-issue to _Pending Merge_ | When a commit on a non-default branch references a sub-issue as completed, the sub-issue is moved to Pending Merge.|
-| open-issues-status| Open issues to _Ready_/ _In Progress_| When an issue is reopened, it is moved to Ready. When a pull request associated with an issue is opened, the parent issue is moved to In Progress and its open sub-issues are moved to Ready.|
+The board can be viewed via the following [link](https://github.com/orgs/codeurjc-students/projects/50).
 
 > [!NOTE]
-> Some of the movements, as the Ready to In Progress move on sub-issues, have to be done manually because these are movements decided by the developer that do not depend on code or a file from the repository
-
-The board can be viewed via the following [link](https://github.com/orgs/codeurjc-students/projects/50).
+> You can find more information about how all the board views and issues are organized at the following [link](/docs/development_guide.md/#-issue-managment)
 
 ## 📱 Instagram
 In addition to the blog mentioned above, an Instagram account has also been created to follow the project’s development from a different perspective. It will be used to share explanatory posts, provide updates and news, and offer a more behind-the-scenes look at the development process. The account can be found at the following [link](https://www.instagram.com/musicfever_2026/).
