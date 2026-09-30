@@ -276,7 +276,7 @@ To be able to generate the JaCoCo report, its plugin should be on the `pom.xml` 
 
 `Vitest` has been used to analyze the code coverage achieved by the implemented tests:
 
-![Frontend Coverage](./src/frontend)
+![Frontend Coverage](./src/frontend_coverage.png)
 
 > [!NOTE]
 > The generation of the `Vitest` report is explained in the [local executions](#test-execution) section.
