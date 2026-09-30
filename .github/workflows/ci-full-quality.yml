@@ -12,8 +12,23 @@ on:
 
 jobs:
   test:
-    name: Unit, Integration & E2E Tests
+    name: Full test suite
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: musicfever_system
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: MusicFever
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       # Checkout
@@ -50,7 +65,7 @@ jobs:
       # Backend
       - name: Run backend tests + JaCoCo report
         working-directory: backend/music-fever
-        run: mvn -B test jacoco:report -DexcludedGroups=system
+        run: mvn -B test jacoco:report
 
       # Frontend
       - name: Install frontend dependencies
@@ -59,7 +74,7 @@ jobs:
 
       - name: Start backend
         working-directory: backend/music-fever
-        run: nohup mvn spring-boot:run > backend.log 2>&1 &
+        run: nohup mvn spring-boot:run -Dspring-boot.run.profiles=system > backend.log 2>&1 &
 
       - name: Wait for backend
         run: |
@@ -79,6 +94,7 @@ jobs:
         working-directory: ./frontend
         run: npm run test:coverage
 
+      # System
       - name: Start frontend
         working-directory: frontend
         run: nohup npm start -- --host 0.0.0.0 > frontend.log 2>&1 &
@@ -99,7 +115,7 @@ jobs:
 
       - name: Run system tests with Selenium
         working-directory: backend/music-fever
-        run: mvn -B test -Dgroups=system
+        run: mvn -B test -Dgroups=system -DexcludedGroups=
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
