@@ -4,9 +4,11 @@ on:
   pull_request:
     branches:
       - main
+    types: [opened, synchronize, reopened, closed]
     paths-ignore:
       - 'README.md'
       - 'docs/**'
+      - 'CHANGELOG.md'
 
 jobs:
   test:
@@ -55,10 +57,6 @@ jobs:
         working-directory: ./frontend
         run: npm ci
 
-      - name: Run unit tests (Client-Side)
-        working-directory: frontend
-        run: npm run test:unit
-
       - name: Start backend
         working-directory: backend/music-fever
         run: nohup mvn spring-boot:run > backend.log 2>&1 &
@@ -77,9 +75,9 @@ jobs:
           cat backend/music-fever/backend.log
           exit 1
 
-      - name: Run integration tests (Client-Side)
-        working-directory: frontend
-        run: npm run test:integration
+      - name: Run frontend tests + generate coverage
+        working-directory: ./frontend
+        run: npm run test:coverage
 
       - name: Start frontend
         working-directory: frontend
