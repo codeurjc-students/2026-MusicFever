@@ -1,20 +1,28 @@
 # AI Usage in Music Fever Development
 
 ## Entry Structure
-- Date
-- Phase
-- Objective
-- AI Tool
-- Version of the tool
-- Tool Configuration (model, level of reasoning, agent mode, chat, plan, ...)
-- How it has been used
-- Tool's Complementation: plugins, skills, MCP servers, tools, ...
-- Context files about AI usage on the proyect (CLAUDE.md or similar)
-- If there has been usage of tools that relay on files for the development based on AI (for example, Spec Driven Development tools) it should be indicated where on the repository these files are and how had been used.
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | ... |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | ... |
+| **AI Tool** | ChatGPT |
+| **Tool version** |... |
 
-Examples for the _How it has been used_ part:
-- When an error ocurred, the PROMPT will be copied and asked the AI to indicate the posible motives for the error to happen
-- The AI will be given a general description of the problem, then generate the mayority of the code.
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | ... |
+| **Reasoning level** | ... |
+| **Interaction mode** | ... |
+| **Agent mode** | ... |
+| **Plan mode** | ... |
+| **Web search** | ... |
+| **Connected tools** | ... |
+
+#### Usage
+[Resumen del por qué te he pedido ayuda o en que te he pedido ayuda. Corto pero descriptivo. No tiene que ser técnico, es una documentación de por qué se utiliza la IA]
 
 ## 1. GitHub Project Configuration
 
@@ -231,3 +239,179 @@ The AI was used to clarify where to locate the frontend test folders and which r
 The AI was used to configure code coverage and test execution for the repository's backend and frontend. For the Maven/Spring Boot backend, JaCoCo was configured to generate coverage reports and Maven Surefire was restricted to tests located under the unit package so that the Basic Quality Check does not execute integration or E2E tests. Meanwhile, for the Angular frontend, the existing Vitest setup was extended with @vitest/coverage-v8.
 
 It also suggested to create a root-level sonar-project.properties configuration was introduced so that a single Sonar analysis can process both parts of the application. The backend contributes the JaCoCo XML report and the frontend contributes the LCOV report, allowing backend and frontend coverage to be represented within the same Sonar project.
+
+## 4. Minimal Functionality (Implementation)
+### 4.1 Connect H2-Database 
+#### Entry Details
+| Entry details    | Value  |
+| ---------------- | -------------- |
+| **Date**         | 25-09-2026   |
+| **Phase**        | 2 (Prepare the repository) |
+| **Objective**    | Configure access to the H2 database during development and adapt Spring Security so that the H2 console can be used correctly |
+| **AI Tool**      | ChatGPT  |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting              | Value                                                          |
+| -------------------- | -------------------------------------------------------------- |
+| **Model**            | GPT-5.6 Sol                                                    |
+| **Reasoning level**  | Not explicitly specified                                       |
+| **Interaction mode** | Chat                                                           |
+| **Agent mode**       | Disabled                                                       |
+| **Plan mode**        | Disabled                                                       |
+| **Web search**       | Used                                                           |
+| **Connected tools**  | None connected                                                 |
+
+#### Usage
+The AI was used to help configure and access the H2 development database in Spring Boot, mainly resolving issues related to the H2 console and Spring Security permissions.
+
+### 4.2 Configurate CORS
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 27-09-2026 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Configure CORS and Spring Security so the Angular frontend can access the REST API while keeping selected endpoints protected by authentication |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Not explicitly specified |
+| **Interaction mode** | Chat |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | Not used |
+| **Connected tools** | None connected |
+
+#### Usage
+The AI was asked for help configuring the application's Spring Security setup so that requests from the frontend could be received correctly.
+
+### 4.3 Help with Angular
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 27-09-2026 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Implement the Angular frontend logic required to retrieve a list of tracks from the backend REST API and display them using reusable components |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Not explicitly specified |
+| **Interaction mode** | Chat |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | Not used |
+| **Connected tools** | None connected |
+
+#### Usage
+The AI was asked for help understanding how to organize and structure the Angular frontend, as well as for assistance implementing some basic frontend tasks due to limited prior experience with Angular.
+
+## 5. Minimal Functionality (Testing)
+### 5.1 Testing with Rest-Assure
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 28-09-2026 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Implement an E2E test for the REST API to verify that the example Track data can be retrieved correctly. |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Default |
+| **Interaction mode** | Chat |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | Not used |
+| **Connected tools** | None |
+
+#### Usage
+I asked for help understanding the basic REST Assured syntax and how to use it with Spring Boot for an E2E test. The conversation covered `when()`, `get()`, `then()`, `Response`, `Hamcrest` matchers such as `hasItem` and how to verify that predefined Track data stored in H2 is returned by the REST API. Then it was asked how to connect the database with the test and it explained how to use `@SpringBootTest` with a random port.
+
+### 5.2 Testing with TestContainers
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 2026-09-28 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Configure and understand the server-side integration testing setup using Testcontainers and PostgreSQL, while keeping H2 where appropriate. |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Default |
+| **Interaction mode** | Chat |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Used occasionally to verify current Spring Boot and Testcontainers configuration details |
+| **Connected tools** | None |
+
+#### Usage
+The AI was used to clarify the integration testing strategy for the backend and to configure Testcontainers with PostgreSQL. It also assisted in reviewing Maven dependencies, configuring the integration test class to provide a PostgreSQL database through Testcontainers, handling dependency injection, preparing test data with `@BeforeEach`, and diagnosing errors found during test execution.
+
+The test itself was initially implemented without AI assistance. Afterwards, the AI was asked to review the implementation and suggest possible improvements, which resulted in a cleaner and more robust version of the test.
+
+### 5.3 Help implementing testing with Vitest
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 29/09/2026 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Configure and understand client-side testing for the Angular frontend, including unit and client-server integration tests. |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Default |
+| **Interaction mode** | Conversational guidance |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used |
+| **Connected tools** | None |
+
+#### Usage
+The AI was used to understand and configure the Angular client testing workflow. The assistance focused on clarifying the role of components, services, inputs, TestBed and fixtures, how to replace services with mocks using Vitest, how to inspect the rendered DOM, and how to implement both a unit test for the track list and an integration test against the real REST API.
+
+### 5.4 Describing an error
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 29/09/2026 |
+| **Phase** | 2 (Prepare the repository) |
+| **Objective** | Solve an error when executing backend tests|
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Default |
+| **Interaction mode** | Conversational guidance |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used |
+| **Connected tools** | None |
+
+#### Usage
+The following error encountered during test execution was provided to ChatGPT for troubleshooting:
+```terminal
+[ERROR] Surefire is going to kill self fork JVM. The exit has elapsed 30 seconds after System.exit(0).
+```
+The AI helped identify the integration test as the source of the issue and suggested closing the Spring test context after the test class using @DirtiesContext.
