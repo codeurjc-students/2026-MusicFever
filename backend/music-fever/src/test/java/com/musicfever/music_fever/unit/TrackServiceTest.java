@@ -11,11 +11,13 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.musicfever.music_fever.model.Track;
 import com.musicfever.music_fever.repository.TrackRepository;
 import com.musicfever.music_fever.service.TrackService;
 
+@ActiveProfiles("unit")
 public class TrackServiceTest {
     TrackRepository repository;
     TrackService trackService;
