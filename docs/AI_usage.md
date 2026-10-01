@@ -24,8 +24,32 @@
 #### Usage
 [Resumen del por qué te he pedido ayuda o en que te he pedido ayuda. Corto pero descriptivo. No tiene que ser técnico, es una documentación de por qué se utiliza la IA]
 
-## 1. GitHub Project Configuration
+## 0. Through the Whole Project
+### 0.1 Translation
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | Throughout the entire project |
+| **Phase** | All phases |
+| **Objective** | Improve the clarity and quality of the project documentation written in English |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 |
 
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Default |
+| **Interaction mode** | Chat |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | Disabled |
+| **Connected tools** | None |
+
+#### Usage
+The AI has been used throughout the project to translate README documentation from Spanish into English and to review and correct English expressions, improving grammar, wording, and clarity while preserving the original technical meaning.
+
+## 1. GitHub Project Configuration
 ### 1.1 Workflow Generation
 #### Entry details
 | Entry details | Value |
@@ -37,7 +61,6 @@
 | **Tool version** | GPT-5.6 Sol |
 
 #### Tool Configuration
-
 | Setting | Value |
 |---|---|
 | **Model** | GPT-5.6 Thinking |
@@ -54,7 +77,6 @@ After consulting the GitHub documentation on issues and how they can be closed a
 Once this possibility was confirmed, the three required workflows were described, and the AI was asked to generate them. The resulting workflows had to be reviewed and adapted manually, particularly to replace project-specific and personal configuration details.
 
 ## 2. UI Design in Figma
-
 ### 2.1 Modifying the given mockup
 #### Entry details
 | Entry details | Value |
@@ -66,7 +88,6 @@ Once this possibility was confirmed, the three required workflows were described
 | **Tool version** | GPT-5.6 Sol |
 
 #### Tool Configuration
-
 | Setting | Value |
 |---|---|
 | **Model** | GPT-5.6 Thinking |
@@ -84,7 +105,6 @@ A screenshot of the UI made using Figma was given to the AI and asked what eleme
 
 ### 2.2 Chart distribution
 #### Entry details
-
 | Entry details    | Value                                                                             |
 | ---------------- | --------------------------------------------------------------------------------- |
 | **Date**         | 02-08-2026                                                                        |
@@ -94,7 +114,6 @@ A screenshot of the UI made using Figma was given to the AI and asked what eleme
 | **Tool version** | GPT-5.5 (Anonymous version)                                                       |
 
 #### Tool Configuration
-
 | Setting              | Value         |
 | -------------------- | ------------- |
 | **Model**            | GPT-5.5       |
@@ -106,7 +125,6 @@ A screenshot of the UI made using Figma was given to the AI and asked what eleme
 | **Connected tools**  | None used     |
 
 #### Usage
-
 The AI was asked how the application's statistical charts should be distributed across its different pages. Since several entities have associated statistics, the initial idea was to display all of them in the Analytics section. However, the AI was also asked whether it would make sense to repeat the user-related charts on the user's profile page.
 
 The AI advised against duplicating the same charts in both sections, as this could make the interface repetitive and create uncertainty about which page should be considered the main source of analytical information. Instead, it suggested adding a summary card to the user profile containing the most relevant general statistics and a direct link to the Analytics page, where users can access the complete set of charts and more detailed information.
@@ -143,13 +161,13 @@ Several iterations were performed when necessary to improve the semantic clarity
 
 ### 2.4 Privacy and Terms Pages
 #### Entry Details
-| Entry details    | Value                                                                                                                                                         |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Date**         | 29-08-2026                                                                                                                                                    |
-| **Phase**        | 1 (Documentation)                                                                                                                                 |
+| Entry details    | Value       |
+| ---------------- | -------- |
+| **Date**         | 29-08-2026    |
+| **Phase**        | 1 (Documentation)     |
 | **Objective**    | Generate the initial content for the Privacy Policy and Terms of Service pages according to the functionality and data management requirements of Music Fever |
-| **AI Tool**      | ChatGPT                                                                                                                                                       |
-| **Tool version** | GPT-5.6 Sol                                                                                                                                                   |
+| **AI Tool**      | ChatGPT   |
+| **Tool version** | GPT-5.6 Sol  |
 #### Tool Configuration
 | Setting              | Value                                                                   |
 | -------------------- | ----------------------------------------------------------------------- |
