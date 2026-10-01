@@ -1,0 +1,44 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+tags:
+  - name: Tracks
+    description: Endpoints for managing track resources
+paths:
+  /api/v1/tracks/:
+    get:
+      tags:
+        - Tracks
+      summary: Get all the existing tracks.
+      description: Returns all tracks on the database
+      operationId: getTracks
+      responses:
+        '200':
+          description: All tracks fetched successfully.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Track'
+components:
+  schemas:
+    Track:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        artistName:
+          type: string
+        number:
+          type: integer
+          format: int32
+        explicit:
+          type: boolean

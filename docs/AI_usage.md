@@ -433,3 +433,27 @@ The following error encountered during test execution was provided to ChatGPT fo
 [ERROR] Surefire is going to kill self fork JVM. The exit has elapsed 30 seconds after System.exit(0).
 ```
 The AI helped identify the integration test as the source of the issue and suggested closing the Spring test context after the test class using @DirtiesContext.
+
+### 5.5 Configurate Environments
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| __Date__ | 2026-10-01 |
+| __Phase__ | 2 (Prepare the repository) |
+| __Objective__ | Configure separate execution environments for development, unit testing, integration/E2E testing, and system testing, with the appropriate database setup for each environment. |
+| __AI Tool__ | ChatGPT |
+| __Tool version__ | GPT-5.6 Sol |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| __Model__ | GPT-5.6 Sol |
+| __Reasoning level__ | Default / adaptive |
+| __Interaction mode__ | Conversational assistance |
+| __Agent mode__ | Not used |
+| __Plan mode__ | Step-by-step guidance |
+| __Web search__ | Used occasionally to verify current Spring Boot/Testcontainers configuration details |
+| __Connected tools__ | None |
+
+#### Usage
+The AI was used to guide the configuration of the project execution environments and testing setup. The assistance focused on separating development, unit, integration/E2E, and system-test environments; configuring PostgreSQL, H2, and Testcontainers appropriately; adapting Spring profiles; and updating the CI workflow so each type of test runs against the correct database without interfering with the others.
