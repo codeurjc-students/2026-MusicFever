@@ -386,17 +386,44 @@ The workflows that govern the development and quality control processes of this 
 The following steps describe how to run the application locally from the source code available in the repository.
 
 ### 📦 Requirements
+
 Before running the application locally, make sure the following tools are installed:
 
 | Tool | Version | Purpose |
 |---|---:|---|
 | Java | 21 | Required to run the Spring Boot backend. |
-| Maven | 3.9+ | Used to manage backend dependencies and run the Spring Boot application. |
+| Maven | 3.9+ | Used to manage backend dependencies, run the application, and execute backend tests. |
 | Node.js | 22+ | Required to run the Angular frontend. |
 | npm | 12.0.1 | Used to install and manage frontend dependencies. |
 | Angular CLI | 22.0.8 | Used to run and manage the Angular application. |
-| PostgreSQL | 16+ | Main relational database used by the application. |
-| Docker Desktop | Latest stable | Required when running Docker-based services or integration tests locally. |
+| PostgreSQL | 16+ | Relational database used by the application during local development. |
+| Docker Desktop | Latest stable | Required to execute backend integration and E2E tests, since PostgreSQL test databases are created dynamically using Testcontainers. |
+
+### ⚙️ Execution Environments
+
+The backend uses different Spring profiles depending on the execution context. Each profile isolates the corresponding database configuration and prevents development and test data from interfering with each other.
+
+| Profile | Database | Purpose |
+|---|---|---|
+| `dev` | PostgreSQL | Local development and manual execution of the backend. |
+| `unit` | H2 in-memory database | Unit testing. |
+| `test` | PostgreSQL through Testcontainers | Backend integration and E2E tests. |
+| `system` | PostgreSQL | System tests executed with Selenium against a running backend and frontend. |
+
+The corresponding configuration files are located in:
+
+```text
+src/main/resources/
+├── application.properties
+├── application-dev.properties
+├── application-unit.properties
+├── application-test.properties
+└── application-system.properties
+```
+
+The default application.properties file contains only configuration shared between environments. The active profile must therefore be selected explicitly when the application is started.
+
+For local development, PostgreSQL must be running and the development database must exist before starting the backend: musicfever_dev
 
 ### 📥 Clone the Repository
 Clone the repository to your local machine:
@@ -410,15 +437,18 @@ cd 2026-MusicFever
 ```
 
 ### ⚡ Run the Application
-First, start the backend application. Navigate to the backend directory:
+First, make sure the local PostgreSQL server is running and the `musicfever_dev` database is available.
+
+Navigate to the backend directory:
 ```bash
 cd ./backend/music-fever
 ```
 
 Then, start the Spring Boot application using Maven:
 ```bash
-mvn spring-boot:run
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
+The `dev` profile connects the application to the local PostgreSQL development database.
 
 Once started, the backend will be available locally at: [http://localhost:8080](http://localhost:8080)
 
@@ -453,22 +483,79 @@ An example file containing sample requests for some of the available REST API op
 The project includes automated tests for both the backend and frontend applications.
 
 #### Backend Tests
-Backend tests are implemented using the Spring Boot testing framework, JUnit, Mockito, and REST Assured.
 
-To execute the backend tests, navigate to the backend directory:
+Backend tests are implemented using Spring Boot Test, JUnit, Mockito, REST Assured, H2, PostgreSQL, and Testcontainers.
+
+The backend test suite contains different types of tests:
+
+| Test type | Spring profile | Database |
+|---|---|---|
+| Unit | `unit` | H2 in-memory database |
+| Integration | `test` | PostgreSQL Testcontainer |
+| E2E | `test` | PostgreSQL Testcontainer |
+| System | `system` | PostgreSQL with externally running backend and frontend |
+
+To execute the standard backend test suite, navigate to the backend directory:
+
 ```bash
 cd ./backend/music-fever
 ```
+
+Before running the tests, make sure __Docker Desktop__ is running.
+
+Integration and E2E tests use __Testcontainers__, which automatically creates temporary PostgreSQL containers for the duration of the tests. These databases are isolated from the local development database and are automatically removed after the tests finish.
 
 Then, run:
 ```bash
 mvn test
 ```
+This command executes:
+- unit tests using H2;
+- integration tests using PostgreSQL through Testcontainers;
+- backend E2E tests using PostgreSQL through Testcontainers.
 
-This command compiles the project and executes all backend test cases.
+System tests are excluded from the standard mvn test execution because they require both the backend and frontend applications to be running.
+
+>[!IMPORTANT]
+> Docker must be available before executing `mvn test`. Otherwise, integration and E2E tests cannot create their PostgreSQL containers and will fail.
+
+If only unit tests need to be executed, Docker is not required. They can be run independently with:
+
+```bash
+mvn test -Dsurefire.includes="**/unit/**/*.java"
+```
+
+##### System Tests
+System tests use Selenium to interact with the complete application through the browser.
+
+Unlike integration and backend E2E tests, system tests do not start the application themselves. They require:
+1. a __PostgreSQL__ database configured for the system profile;
+2. the backend running on port `8080`;
+3. the frontend running on port `4200`.
+
+Start the backend using:
+```bash
+mvn spring-boot:run -Dspring-boot.run.profiles=system
+```
+
+Start the frontend in another terminal:
+```bash
+ng serve
+```
+
+Then execute the system tests with:
+```bash
+mvn test -Dgroups=system -DexcludedGroups=
+```
+
+The `system` tests are tagged separately so that they are not executed as part of the normal backend test suite.
 
 #### Backend Test Coverage
-Code coverage reports are generated using **JaCoCo**. To execute the tests and generate the coverage report, run:
+Code coverage reports are generated using **JaCoCo**. 
+
+Before running the complete backend verification process, make sure Docker Desktop is running because integration and E2E tests use PostgreSQL containers through Testcontainers.
+
+Run:
 ```bash
 mvn clean verify
 ```
