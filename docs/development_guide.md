@@ -136,7 +136,7 @@ flowchart LR
 | --- | --- |
 | Backend | 8080 |
 | Frontend | 4200 |
-| Database | ... |
+| Database | 5432 |
 
 ### 🔗 Communication Protocols
 The frontend and backend communicate through a __REST API__ over _HTTP_, exchanging data in _JSON_ format.
@@ -434,7 +434,8 @@ To use this tool, the extension must first be installed in the IDE. Once install
 
 An example file containing sample requests for some of the available REST API operations can be found in the following link: [REST API examples](../backend/music-fever/src/request/trackRequests.http)
 
-> _Note_: Other tools such as __Postman__ can also be used to interact with the REST API. In that case, the required configurations (base URL, headers, authentication, request body, etc.) must be adapted according to the selected tool.
+> [!Note]
+> Other tools such as __Postman__ can also be used to interact with the REST API. In that case, the required configurations (base URL, headers, authentication, request body, etc.) must be adapted according to the selected tool.
 
 ### 🧪 Test Execution
 
