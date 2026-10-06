@@ -7,8 +7,12 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.List;
+
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +25,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.net.ssl.SSLContext;
+import java.security.cert.X509Certificate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,6 +48,7 @@ public class TracklistSystemTest {
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--headless=new");
         chromeOptions.addArguments("--window-size=1920,1080");
+        chromeOptions.setAcceptInsecureCerts(true);
 
         driver = new ChromeDriver(chromeOptions);
         driver.get(BASE_URL);
@@ -54,11 +62,39 @@ public class TracklistSystemTest {
         }
     }
 
+    private HttpClient createInsecureHttpClient() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{
+                new X509TrustManager() {
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return new X509Certificate[0];
+                    }
+
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                    }
+
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                    }
+                }
+            };
+
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, trustAllCerts, new SecureRandom());
+
+            return HttpClient.newBuilder()
+                .sslContext(sslContext)
+                .build();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private List<Track> getTracklistFromAPI(){
-        HttpClient client = HttpClient.newHttpClient();
+        HttpClient client = createInsecureHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("http://localhost:8080/api/v1/tracks/"))
+            .uri(URI.create("https://localhost:443/api/v1/tracks/"))
             .GET()
             .build();
 

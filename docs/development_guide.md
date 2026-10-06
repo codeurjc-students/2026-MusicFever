@@ -504,7 +504,7 @@ ng serve
 
 Then execute the system tests with:
 ```bash
-mvn test -Dgroups=system -DexcludedGroups=
+mvn test -Dgroups=system -Dtest.excludedGroups=
 ```
 
 The `system` tests are tagged separately so that they are not executed as part of the normal backend test suite.

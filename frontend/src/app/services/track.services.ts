@@ -8,7 +8,7 @@ import { Track } from '../model/track.model';
 })
 export class TrackService {
 
-  private url = 'http://localhost:8080/api/v1/tracks/';
+  private url = 'https://localhost:443/api/v1/tracks/';
 
   constructor(private http: HttpClient) {}
 

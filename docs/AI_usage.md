@@ -5,7 +5,7 @@
 | Entry details | Value |
 | --- | --- |
 | **Date** | ... |
-| **Phase** | 2 (Prepare the repository) |
+| **Phase** | 3 (Basic functionality development) |
 | **Objective** | ... |
 | **AI Tool** | ChatGPT |
 | **Tool version** |... |
@@ -457,3 +457,30 @@ The AI helped identify the integration test as the source of the issue and sugge
 
 #### Usage
 The AI was used to guide the configuration of the project execution environments and testing setup. The assistance focused on separating development, unit, integration/E2E, and system-test environments; configuring PostgreSQL, H2, and Testcontainers appropriately; adapting Spring profiles; and updating the CI workflow so each type of test runs against the correct database without interfering with the others.
+
+## 6. Configure HTTPS
+### 6.1 Help connecting keystore to test environments and GitHub Secrets
+#### Entry Details
+
+| Entry details | Value |
+| --- | --- |
+| **Date** | 2026-10-06 |
+| **Phase** | 3 (Basic functionalities development) |
+| **Objective** | Configure HTTPS for the Spring Boot backend, adapt local and CI test execution to the new SSL setup, and manage sensitive configuration through environment variables and GitHub Actions secrets. |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-5.6 Sol |
+
+#### Tool Configuration
+
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-5.6 Sol |
+| **Reasoning level** | Default |
+| **Interaction mode** | Chat |
+| **Agent mode** | No |
+| **Plan mode** | No |
+| **Web search** | No |
+| **Connected tools** | None |
+
+#### Usage
+I used ChatGPT to help configure HTTPS in the backend, diagnose certificate and keystore errors, manage SSL passwords with environment variables, adapt integration and system tests to the HTTPS backend, and update the GitHub Actions workflow so the required keystore and secrets are available during CI execution.
