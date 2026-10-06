@@ -47,6 +47,24 @@ jobs:
           node-version: '24'
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
+      
+      - name: Generate test keystore
+        working-directory: backend/music-fever
+        env:
+          SSL_KEYSTORE_PASSWORD: ${{ secrets.SSL_KEYSTORE_PASSWORD }}
+          SSL_KEY_PASSWORD: ${{ secrets.SSL_KEY_PASSWORD }}
+        run: |
+          keytool -genkeypair \
+            -alias selfsigned \
+            -keyalg RSA \
+            -keysize 2048 \
+            -storetype JKS \
+            -keystore keystore.jks \
+            -storepass "$SSL_KEYSTORE_PASSWORD" \
+            -keypass "$SSL_KEY_PASSWORD" \
+            -validity 360 \
+            -dname "CN=localhost, OU=MusicFever, O=MusicFever, L=Madrid, ST=Madrid, C=ES" \
+            -ext "SAN=dns:localhost,ip:127.0.0.1"
 
       - name: Cache SonarQube packages
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
@@ -75,11 +93,14 @@ jobs:
       - name: Start backend
         working-directory: backend/music-fever
         run: nohup mvn spring-boot:run -Dspring-boot.run.profiles=system > backend.log 2>&1 &
+        env:
+          SSL_KEYSTORE_PASSWORD: ${{ secrets.SSL_KEYSTORE_PASSWORD }}
+          SSL_KEY_PASSWORD: ${{ secrets.SSL_KEY_PASSWORD }}
 
       - name: Wait for backend
         run: |
           for i in {1..30}; do
-            if nc -z localhost 8080; then
+            if nc -z localhost 8443; then
               echo "Backend is ready"
               exit 0
             fi
@@ -93,6 +114,8 @@ jobs:
       - name: Run frontend tests + generate coverage
         working-directory: ./frontend
         run: npm run test:coverage
+        env:
+          NODE_TLS_REJECT_UNAUTHORIZED: 0
 
       # System
       - name: Start frontend
@@ -115,7 +138,7 @@ jobs:
 
       - name: Run system tests with Selenium
         working-directory: backend/music-fever
-        run: mvn -B test -Dgroups=system -DexcludedGroups=
+        run: mvn test -Dgroups=system -Dtest.excludedGroups=
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
