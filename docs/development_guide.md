@@ -78,20 +78,11 @@ The application uses the following technologies for its execution:
 The application follows a __client-server architecture__, where the client (frontend) communicates with the server (backend) through a _REST API_.
 
 ```mermaid
-%%{init: {
-  "theme": "dark",
-  "flowchart": {
-    "curve": "linear",
-    "nodeSpacing": 40,
-    "rankSpacing": 50
-  }
-}}%%
-
 flowchart LR
     U[User]
     F[Client<br/>Frontend]
     B[Server<br/>Backend]
-    DB[(Database<br/>H2 / PostgreSQL)]
+    DB[(Database<br/>PostgreSQL)]
 
     U -->|localhost:4200| F
 
@@ -100,25 +91,11 @@ flowchart LR
 
     B -->|JDBC| DB
     DB -->|SQL Response| B
-
-    style U fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
-    style F fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
-    style B fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
-    style DB fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
 ```
 
 The backend is built using a __layered monolithic architecture__, following the communication flow shown below:
 
 ```mermaid
-%%{init: {
-  "theme": "dark",
-  "flowchart": {
-    "curve": "linear",
-    "nodeSpacing": 40,
-    "rankSpacing": 50
-  }
-}}%%
-
 flowchart LR
     C[REST Controller]
     S[Service Layer]
@@ -133,25 +110,11 @@ flowchart LR
 
     R -->|JPA / JDBC| DB
     DB -->|SQL Result| R
-
-    style C fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
-    style S fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
-    style R fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
-    style DB fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
 ```
 
 The frontend also follows a __monolithic architecture__, using services to communicate with the backend API.
 
 ```mermaid
-%%{init: {
-  "theme": "dark",
-  "flowchart": {
-    "curve": "linear",
-    "nodeSpacing": 40,
-    "rankSpacing": 50
-  }
-}}%%
-
 flowchart LR
     C[Components / Pages]
     S[Angular Services]
@@ -166,11 +129,6 @@ flowchart LR
 
     H -->|REST| API
     API -->|JSON Response| H
-
-    style C fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
-    style S fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
-    style H fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
-    style API fill:#1e1e1e,stroke:#bfbfbf,color:#ffffff
 ```
 
 ### 🚀 Deployment
