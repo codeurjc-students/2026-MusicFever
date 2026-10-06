@@ -401,14 +401,47 @@ Navigate to the backend directory:
 ```bash
 cd ./backend/music-fever
 ```
+The backend is served through HTTPS and requires a local Java keystore.
 
-Then, start the Spring Boot application using Maven:
+Generate the development keystore:
+```bash
+keytool -genkeypair \
+  -alias selfsigned \
+  -keyalg RSA \
+  -keysize 2048 \
+  -storetype JKS \
+  -keystore keystore.jks \
+  -storepass my_password \
+  -keypass my_password \
+  -validity 360 \
+  -dname "CN=localhost, OU=MusicFever, O=MusicFever, L=Madrid, ST=Madrid, C=ES" \
+  -ext "SAN=dns:localhost,ip:127.0.0.1"
+```
+The `keystore.jks` file contains private key material and must not be committed to the repository.
+
+Create a local `.env` file inside the backend directory containing the SSL passwords:
+```env
+SSL_KEYSTORE_PASSWORD=password
+SSL_KEY_PASSWORD=password
+```
+
+Both .env and keystore.jks must remain excluded from Git.
+Start the Spring Boot application using:
+
+```bash
+./run-dev.sh
+```
+
+The startup script loads the variables from `.env` and runs the application using the __dev__ profile:
 ```bash
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
+
 The `dev` profile connects the application to the local PostgreSQL development database.
 
-Once started, the backend will be available locally at: [http://localhost:8080](http://localhost:8080)
+Once started, the backend will be available locally at: [https://localhost:8443](https://localhost:8443)
+
+The development certificate is self-signed, so the browser may display a security warning the first time the backend is accessed. The certificate must be accepted locally before accessing the application through the browser.
 
 To run the frontend, open a new terminal and navigate to the frontend directory:
 ```bash
@@ -489,10 +522,17 @@ System tests use Selenium to interact with the complete application through the 
 
 Unlike integration and backend E2E tests, system tests do not start the application themselves. They require:
 1. a __PostgreSQL__ database configured for the system profile;
-2. the backend running on port `8080`;
+2. the backend running on port `8443`;
 3. the frontend running on port `4200`.
 
-Start the backend using:
+Make sure the local `keystore.jks` and the required _SSL_ environment variables are available.
+
+Start the backend using the system profile:
+```bash
+./run-system.sh
+```
+
+The startup script loads the variables from `.env` and runs the application using the __system__ profile:
 ```bash
 mvn spring-boot:run -Dspring-boot.run.profiles=system
 ```
@@ -541,12 +581,12 @@ npm install
 
 Run the frontend tests using:
 ```bash
-npm test
+NODE_TLS_REJECT_UNAUTHORIZED=0 npm test
 ```
 
 or alternatively:
 ```bash
-ng test
+NODE_TLS_REJECT_UNAUTHORIZED=0 ng test
 ```
 
 #### Frontend Test Coverage
@@ -554,6 +594,8 @@ To generate the frontend test coverage report, run:
 ```bash
 npm run test:coverage
 ```
+
+The `NODE_TLS_REJECT_UNAUTHORIZED=0` configuration is used only in the local testing environment to allow the integration tests to communicate with the self-signed HTTPS backend.
 
 The coverage report will be generated in the following directory:
 ```text
