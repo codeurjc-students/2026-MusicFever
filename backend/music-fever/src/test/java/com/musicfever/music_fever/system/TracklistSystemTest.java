@@ -94,7 +94,7 @@ public class TracklistSystemTest {
         HttpClient client = createInsecureHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("https://localhost:443/api/v1/tracks/"))
+            .uri(URI.create("https://localhost:8443/api/v1/tracks/"))
             .GET()
             .build();
 
