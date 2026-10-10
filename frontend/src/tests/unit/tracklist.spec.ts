@@ -2,13 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
 import { of } from 'rxjs';
 
-import { App } from '../../app/app';
+import { TrackList } from '../../app/track/track-list/track-list';
 import { TrackService } from '../../app/services/track.services';
 import { Track } from '../../app/model/track.model';
 
 describe('App', () => {
-  let fixture: ComponentFixture<App>;
-  let component: App;
+  let fixture: ComponentFixture<TrackList>;
+  let component: TrackList;
 
   // Test tracks to display
   const tracks: Track[] = [{
@@ -31,14 +31,14 @@ describe('App', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [TrackList],
       providers: [{
         provide: TrackService,
         useValue: trackServiceMock
       }]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(App);
+    fixture = TestBed.createComponent(TrackList);
     component = fixture.componentInstance;
 
     fixture.detectChanges();

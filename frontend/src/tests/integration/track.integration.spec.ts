@@ -1,27 +1,34 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 
-import { App } from '../../app/app';
+import { TrackList } from '../../app/track/track-list/track-list';
 import { Track } from '../../app/model/track.model';
 import { firstValueFrom } from 'rxjs';
 import { TrackService } from '../../app/services/track.services';
 
 describe('App integration test', () => {
 
-  let fixture: ComponentFixture<App>;
+  let fixture: ComponentFixture<TrackList>;
   let expectedTracks: Track[];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [TrackList],
       providers: [
         provideHttpClient()
       ]
     }).compileComponents();
 
     const trackService = TestBed.inject(TrackService);
-    expectedTracks = await firstValueFrom(trackService.getTracks());
-    fixture = TestBed.createComponent(App);
+    try {
+      expectedTracks = await firstValueFrom(trackService.getTracks());
+    } catch (error: any) {
+      console.error('HTTP STATUS:', error.status);
+      console.error('HTTP ERROR:', error.error);
+      console.error('FULL ERROR:', error);
+      throw error;
+    }
+    fixture = TestBed.createComponent(TrackList);
   });
 
   it('should display tracks obtained from the real API', async () => {
