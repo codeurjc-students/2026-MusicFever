@@ -1,1 +1,27 @@
-<p>login works!</p>
+<div id="login-page">
+    <div class="pop-up">
+        <img class="logo" src="/logo.png" alt="Music Fever logo">
+        <div id="login-form-div">
+            <div id="title-div">
+                <p id="title">Welcome back</p>
+                <p id="subtitle">Sign in to continue</p>
+            </div>
+
+            <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <email-input [emailFormControl]="loginForm.controls.email" />
+
+                <password-input [passwordFormControl]="loginForm.controls.password" />
+
+                <button mat-fab extended type="submit" [disabled]="loading()">
+                    <mat-icon>login</mat-icon>
+                    Sign in
+                </button>
+                @if (errorMessage()) {
+                    <p class="login-error">{{ errorMessage() }}</p>
+                }
+
+                <a routerLink="/register">Don't have an account? Sign up</a>
+            </form>
+        </div>
+    </div>
+</div>

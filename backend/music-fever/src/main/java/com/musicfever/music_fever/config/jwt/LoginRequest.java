@@ -2,23 +2,23 @@ package com.musicfever.music_fever.config.jwt;
 
 public class LoginRequest {
 
-	private String username;
+	private String email;
 	private String password;
 
 	public LoginRequest() {
 	}
 
 	public LoginRequest(String username, String password) {
-		this.username = username;
+		this.email = username;
 		this.password = password;
 	}
 
 	public String getUsername() {
-		return username;
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -31,6 +31,6 @@ public class LoginRequest {
 
 	@Override
 	public String toString() {
-		return "LoginRequest [username=" + username + ", password=" + password + "]";
+		return "LoginRequest [email=" + email + ", password=" + password + "]";
 	}
 }

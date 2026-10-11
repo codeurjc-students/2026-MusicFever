@@ -23,14 +23,14 @@ public class SecurityUserDetails implements UserDetailsService{
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        UserEntity user = userRepository.findByUsername(username).orElseThrow( () -> new UsernameNotFoundException("User not found"));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
+        UserEntity user = userRepository.findByEmail(email).orElseThrow( () -> new UsernameNotFoundException("User not found"));
 
         List<GrantedAuthority> roles = new ArrayList<>();
         for (String role: user.getRoles()){
             roles.add(new SimpleGrantedAuthority("ROLE_" + role));
         }
 
-        return new User(user.getUsername(), user.getPassword(), roles);
+        return new User(user.getEmail(), user.getPassword(), roles);
     }
 }

@@ -1,4 +1,10 @@
-<h1>TrackList</h1>
+@if (authService.currentUser(); as user) {
+  <h1>Welcome, {{ user.username }}!</h1>
+} @else {
+  <h1>Welcome to Music Fever!</h1>
+}
+
+<h2>TrackList</h2>
 
 <p>Total tracks: {{ tracks().length }}</p>
 

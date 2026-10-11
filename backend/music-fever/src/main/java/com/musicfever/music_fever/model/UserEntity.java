@@ -2,6 +2,7 @@ package com.musicfever.music_fever.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,8 +20,12 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(nullable = false, unique = true)
     private String username;
+    
     private String password;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     private String profilePicture;

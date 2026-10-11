@@ -3,6 +3,7 @@ package com.musicfever.music_fever.config.jwt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,9 +46,30 @@ public class UserLoginService {
 		var newAccessToken = jwtTokenProvider.generateAccessToken(user);
 		var newRefreshToken = jwtTokenProvider.generateRefreshToken(user);
 
-		response.addCookie(buildTokenCookie(TokenType.ACCESS, newAccessToken));
-		response.addCookie(buildTokenCookie(TokenType.REFRESH, newRefreshToken));
+		response.addHeader(
+			HttpHeaders.SET_COOKIE,
+			ResponseCookie.from("AuthToken", newAccessToken)
+				.httpOnly(true)
+				.secure(true)
+				.sameSite("None")
+				.path("/")
+				.maxAge(TokenType.ACCESS.duration)
+				.build()
+				.toString()
+		);
 
+		response.addHeader(
+			HttpHeaders.SET_COOKIE,
+			ResponseCookie.from("RefreshToken", newRefreshToken)
+				.httpOnly(true)
+				.secure(true)
+				.sameSite("None")
+				.path("/")
+				.maxAge(TokenType.REFRESH.duration)
+				.build()
+				.toString()
+		);
+		
 		AuthResponse loginResponse = new AuthResponse(AuthResponse.Status.SUCCESS,
 				"Auth successful. Tokens are created in cookie.");
 		return ResponseEntity.ok().headers(responseHeaders).body(loginResponse);
