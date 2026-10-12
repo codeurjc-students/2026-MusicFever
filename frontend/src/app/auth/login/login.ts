@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { AuthService } from '../../services/auth.services';
 import { EmailInput } from '../components/email-input/email-input';
 import { PasswordInput } from '../components/password-input/password-input';
+import { UsernameInput } from '../components/username-input/username-input';
 
 @Component({
   imports: [
@@ -17,6 +18,7 @@ import { PasswordInput } from '../components/password-input/password-input';
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    UsernameInput,
     EmailInput,
     PasswordInput,
     ReactiveFormsModule,
@@ -29,6 +31,9 @@ export class Login {
   private router = inject(Router);
 
   loginForm = new FormGroup({
+      username: new FormControl('', {
+      nonNullable: true
+    }),
     email: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.email]
@@ -38,6 +43,35 @@ export class Login {
       validators: [Validators.required]
     })
   });
+
+  loginWithUsername = signal(false);
+
+  toggleLoginMode() {
+    this.loginWithUsername.update(value => !value);
+
+    const usernameControl = this.loginForm.controls.username;
+    const emailControl = this.loginForm.controls.email;
+
+    if (this.loginWithUsername()) {
+      usernameControl.setValidators([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30)
+      ]);
+      emailControl.clearValidators();
+    } else {
+      emailControl.setValidators([
+        Validators.required,
+        Validators.email
+      ]);
+      usernameControl.clearValidators();
+    }
+
+    usernameControl.updateValueAndValidity();
+    emailControl.updateValueAndValidity();
+
+    this.errorMessage.set('');
+  }
 
   private authService = inject(AuthService);
 
@@ -53,9 +87,9 @@ export class Login {
     this.loading.set(true);
     this.errorMessage.set('');
 
-    const { email, password } = this.loginForm.getRawValue();
+    const { username, email, password } = this.loginForm.getRawValue();
 
-    this.authService.login(email, password).subscribe({
+    this.authService.login(this.loginWithUsername() ? username : null, this.loginWithUsername() ? null : email, password).subscribe({
       next: response => {
         this.loading.set(false);
 
@@ -65,9 +99,9 @@ export class Login {
           this.errorMessage.set('Invalid email or password');
         }
       },
-      error: () => {
+      error: err => {
         this.loading.set(false);
-        this.errorMessage.set('Invalid email or password');
+        this.errorMessage.set(err.error?.message ?? err.message);
       }
     });
   }

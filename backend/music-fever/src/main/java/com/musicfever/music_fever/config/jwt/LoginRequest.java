@@ -2,8 +2,8 @@ package com.musicfever.music_fever.config.jwt;
 
 public class LoginRequest {
 
-	private String email;
 	private String username;
+	private String email;
 	private String password;
 
 	public LoginRequest() {

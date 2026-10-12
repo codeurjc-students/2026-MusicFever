@@ -8,27 +8,7 @@
             </div>
 
             <form id="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                <mat-form-field>
-                    <mat-label>Username</mat-label>
-
-                    <input
-                        matInput
-                        formControlName="username"
-                        placeholder="Enter username"
-                        autocomplete="username"
-                    >
-
-                    @if (registerForm.controls.username.hasError('required')) {
-                        <mat-error>Username <strong>is required</strong></mat-error>
-                    }
-                    @if (registerForm.controls.username.hasError('minlength')) {
-                        <mat-error>Username must have at least 3 characters</mat-error>
-                    }
-                    @if (registerForm.controls.username.hasError('maxlength')) {
-                        <mat-error>Username cannot exceed 30 characters</mat-error>
-                    }
-                </mat-form-field>
-
+                <username-input [usernameFormControl]="registerForm.controls.username" />
                 <email-input [emailFormControl]="registerForm.controls.email" />
                 <password-input [passwordFormControl]="registerForm.controls.password" />
                 <password-input label="Confirm password" [passwordFormControl]="registerForm.controls.confirm_password" />

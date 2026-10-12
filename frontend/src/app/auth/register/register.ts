@@ -9,6 +9,7 @@ import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule } 
 import { AuthService } from '../../services/auth.services';
 import { EmailInput } from '../components/email-input/email-input';
 import { PasswordInput } from '../components/password-input/password-input';
+import { UsernameInput } from '../components/username-input/username-input';
 
 @Component({
   imports: [
@@ -20,6 +21,7 @@ import { PasswordInput } from '../components/password-input/password-input';
     RouterLink,
     EmailInput,
     PasswordInput,
+    UsernameInput,
     ReactiveFormsModule,
   ],
   selector: 'app-login',

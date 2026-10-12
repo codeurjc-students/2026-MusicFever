@@ -515,3 +515,29 @@ The AI was used to guide the implementation of Music Fever's authentication func
 It also helped configure email-based authentication with Spring Security and JWT, implement the Login and `/me` endpoints, troubleshoot CORS and cookie-related issues, integrate MapStruct for DTO mapping, and display the authenticated user's username on the Home page.
 
 The interaction followed a step-by-step, collaborative approach. In several stages, I chose to implement the code independently, using ChatGPT afterward to review my work, identify mistakes, and suggest corrections. This allowed me to maintain control over the implementation while using AI as a learning and debugging assistant rather than relying entirely on AI-generated code.
+
+### 7.2 Error Solventation
+#### Entry Details
+
+| Entry details | Value |
+| --- | --- |
+| **Date** | 12/10/2026 |
+| **Phase** | 3 (Basic functionality development) |
+| **Objective** | Handle backend authentication errors in the frontend |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-6 |
+
+#### Tool Configuration
+
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-6 |
+| **Reasoning level** | Not specified |
+| **Interaction mode** | Chat |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used |
+| **Connected tools** | Not used |
+
+#### Usage
+The AI was used to troubleshoot issues encountered when handling backend authentication errors in the Angular frontend. The assistance focused on identifying why HTTP error responses were not displaying the expected backend messages, checking the interaction between Spring Boot and Angular, and correctly retrieving and displaying error messages to users.

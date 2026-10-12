@@ -16,6 +16,7 @@ import com.musicfever.music_fever.config.jwt.UserLoginService;
 import com.musicfever.music_fever.dto.user.ActiveUserDTO;
 import com.musicfever.music_fever.dto.user.UserMapper;
 import com.musicfever.music_fever.exception.UserAlreadyExistsException;
+import com.musicfever.music_fever.exception.UserNotFoundException;
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.service.UserService;
 
@@ -39,7 +40,15 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request, HttpServletResponse response) {
-        return userLoginService.login(response, request);
+        System.out.println(request.getEmail());
+        System.out.println(request.getUsername());
+        try {
+            request = this.userService.login(request);
+            return userLoginService.login(response, request);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new AuthResponse(AuthResponse.Status.FAILURE, e.getMessage()));
+        }
     }
 
     @GetMapping("/me")

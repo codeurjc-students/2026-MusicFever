@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.musicfever.music_fever.config.jwt.LoginRequest;
 import com.musicfever.music_fever.exception.UserAlreadyExistsException;
+import com.musicfever.music_fever.exception.UserNotFoundException;
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.repository.UserRepository;
 
@@ -26,6 +27,22 @@ public class UserService {
 
     public Optional<UserEntity> findByEmail(String email) {
         return this.repository.findByEmail(email);
+    }
+
+    public LoginRequest login(LoginRequest request) throws UserNotFoundException{
+        Optional<UserEntity> userOptional;
+        if (request.getUsername() == null || request.getUsername().isEmpty()) {
+            userOptional = this.repository.findByEmail(request.getEmail());
+        } else {
+            userOptional = this.repository.findByUsername(request.getUsername());
+        }
+        if (userOptional.isEmpty()){
+            throw new UserNotFoundException("Invalid username or email");
+        } else {
+            request.setEmail(userOptional.get().getEmail());
+            request.setUsername(userOptional.get().getUsername());
+        }
+        return request;
     }
 
     public void register(LoginRequest request) throws UserAlreadyExistsException{

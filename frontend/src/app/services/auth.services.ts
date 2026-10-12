@@ -5,15 +5,10 @@ import { Router } from '@angular/router';
 import { ActiveUser } from '../model/activeuser.model'
 import { throwError } from 'rxjs';
 
-interface LoginRequest {
-  email: string;
+interface Request {
+  username: string | null;
+  email: string | null;
   password: string;
-}
-
-interface RegisterRequest{
-  username: string,
-  email: string,
-  password: string,
 }
 
 interface AuthResponse {
@@ -34,8 +29,8 @@ export class AuthService {
 
   router = inject(Router);
 
-  login(email: string, password: string) {
-    const credentials: LoginRequest = { email, password };
+  login(username: string | null, email: string | null, password: string) {
+    const credentials: Request = { username, email, password };
 
     return this.http.post<AuthResponse>(
       `${this.apiUrl}/login`,
@@ -60,7 +55,7 @@ export class AuthService {
       return throwError(() => new Error('Passwords do not match'));
     }
 
-    const credentials: RegisterRequest = { username, email, password };
+    const credentials: Request = { username, email, password };
     return this.http.post<AuthResponse>(
       `${this.apiUrl}/register`,
       credentials,

@@ -8,8 +8,18 @@
             </div>
 
             <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <email-input [emailFormControl]="loginForm.controls.email" />
+                <div id="login-toggle">
+                    @if (loginWithUsername()) {
+                        <username-input [usernameFormControl]="loginForm.controls.username" />
+                    } @else {
+                        <email-input [emailFormControl]="loginForm.controls.email" />
+                    }
 
+                    <a class="toggle" (click)="toggleLoginMode()">
+                        {{ loginWithUsername() ? 'Log in with email' : 'Log in with username' }}
+                    </a>
+                </div>
+                
                 <password-input [passwordFormControl]="loginForm.controls.password" />
 
                 <button mat-fab extended type="submit" [disabled]="loading()">
