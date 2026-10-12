@@ -80,7 +80,7 @@ export class Register {
       },
       error: err => {
         this.loading.set(false);
-        this.errorMessage.set(err.message);
+        this.errorMessage.set(err.error?.message ?? err.message);
       }
     });
   }

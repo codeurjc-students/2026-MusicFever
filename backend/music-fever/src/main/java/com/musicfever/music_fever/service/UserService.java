@@ -6,8 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.musicfever.music_fever.config.jwt.LoginRequest;
-import com.musicfever.music_fever.exception.EmailAlreadyExistsException;
-import com.musicfever.music_fever.exception.UsernameAlreadyExistsException;
+import com.musicfever.music_fever.exception.UserAlreadyExistsException;
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.repository.UserRepository;
 
@@ -29,15 +28,15 @@ public class UserService {
         return this.repository.findByEmail(email);
     }
 
-    public void register(LoginRequest request) throws UsernameAlreadyExistsException, EmailAlreadyExistsException{
+    public void register(LoginRequest request) throws UserAlreadyExistsException{
         // Search username unique
         if (this.repository.findByUsername(request.getUsername()).isPresent()){
-            throw new UsernameAlreadyExistsException();
+            throw new UserAlreadyExistsException("This username already exists");
         }
 
         // Search email unique
         if (this.repository.findByEmail(request.getEmail()).isPresent()){
-            throw new EmailAlreadyExistsException();
+            throw new UserAlreadyExistsException("This email already exists");
         }
 
         this.repository.save(new UserEntity(request.getUsername(), passwordEncoder.encode(request.getPassword()), request.getEmail()));

@@ -15,8 +15,7 @@ import com.musicfever.music_fever.config.jwt.LoginRequest;
 import com.musicfever.music_fever.config.jwt.UserLoginService;
 import com.musicfever.music_fever.dto.user.ActiveUserDTO;
 import com.musicfever.music_fever.dto.user.UserMapper;
-import com.musicfever.music_fever.exception.EmailAlreadyExistsException;
-import com.musicfever.music_fever.exception.UsernameAlreadyExistsException;
+import com.musicfever.music_fever.exception.UserAlreadyExistsException;
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.service.UserService;
 
@@ -61,12 +60,9 @@ public class AuthController {
         try {
             this.userService.register(request);
             return userLoginService.login(response, request);
-        } catch (UsernameAlreadyExistsException e) {
+        } catch (UserAlreadyExistsException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(new AuthResponse(AuthResponse.Status.FAILURE, "Username already exists"));
-        } catch (EmailAlreadyExistsException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(new AuthResponse(AuthResponse.Status.FAILURE, "Email already exists"));
+                .body(new AuthResponse(AuthResponse.Status.FAILURE, e.getMessage()));
         }
     }
 
