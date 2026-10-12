@@ -67,4 +67,17 @@ export class AuthService {
       { withCredentials: true }
     )
   }
+
+  logout(){
+    this.http.post<AuthResponse>(
+      `${this.apiUrl}/logout`,
+      {},
+      { withCredentials: true }
+    ).subscribe({
+    next: () => {
+      this._currentUser.set(null);
+      this.router.navigate(['/']);
+    }
+    })
+  }
 }

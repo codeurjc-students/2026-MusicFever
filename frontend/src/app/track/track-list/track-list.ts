@@ -32,4 +32,8 @@ export class TrackList implements OnInit {
       }
     });
   }
+
+  logout(){
+    this.authService.logout();
+  }
 }

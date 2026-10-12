@@ -69,4 +69,11 @@ public class AuthController {
                 .body(new AuthResponse(AuthResponse.Status.FAILURE, "Email already exists"));
         }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletResponse response) {
+        this.userLoginService.logout(response);
+        return ResponseEntity.noContent().build();
+    }
+    
 }

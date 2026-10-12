@@ -11,3 +11,7 @@
 @for (trackItem of tracks(); track $index) {
   <app-track [track]="trackItem"></app-track>
 }
+
+@if (authService.currentUser(); as user){
+  <a (click)="logout()">Logout</a>
+}
