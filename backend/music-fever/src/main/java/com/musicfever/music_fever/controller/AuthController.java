@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 
@@ -14,10 +15,13 @@ import com.musicfever.music_fever.config.jwt.LoginRequest;
 import com.musicfever.music_fever.config.jwt.UserLoginService;
 import com.musicfever.music_fever.dto.user.ActiveUserDTO;
 import com.musicfever.music_fever.dto.user.UserMapper;
+import com.musicfever.music_fever.exception.EmailAlreadyExistsException;
+import com.musicfever.music_fever.exception.UsernameAlreadyExistsException;
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.service.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 
 @RestController 
@@ -35,8 +39,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
-        return userLoginService.login(response, loginRequest);
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request, HttpServletResponse response) {
+        return userLoginService.login(response, request);
     }
 
     @GetMapping("/me")
@@ -50,5 +54,19 @@ public class AuthController {
 
         ActiveUserDTO dto = mapper.toPrincipalDTO(user.get());
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody LoginRequest request, HttpServletResponse response) {
+        try {
+            this.userService.register(request);
+            return userLoginService.login(response, request);
+        } catch (UsernameAlreadyExistsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new AuthResponse(AuthResponse.Status.FAILURE, "Username already exists"));
+        } catch (EmailAlreadyExistsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new AuthResponse(AuthResponse.Status.FAILURE, "Email already exists"));
+        }
     }
 }

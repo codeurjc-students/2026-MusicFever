@@ -18,6 +18,7 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './password-input.css'
 })
 export class PasswordInput {
+  label = input('Password')
   hidePassword = signal(true);
   passwordFormControl = input.required<FormControl<string>>();
 }

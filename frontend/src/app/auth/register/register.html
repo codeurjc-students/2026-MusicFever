@@ -1,1 +1,48 @@
-<p>register works!</p>
+<div id="register-page">
+    <div class="pop-up">
+        <img class="logo" src="/logo.png" alt="Music Fever logo">
+        <div id="register-form-div">
+            <div id="title-div">
+                <p id="title">Welcome to Music Fever</p>
+                <p id="subtitle">Register to continue</p>
+            </div>
+
+            <form id="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <mat-form-field>
+                    <mat-label>Username</mat-label>
+
+                    <input
+                        matInput
+                        formControlName="username"
+                        placeholder="Enter username"
+                        autocomplete="username"
+                    >
+
+                    @if (registerForm.controls.username.hasError('required')) {
+                        <mat-error>Username <strong>is required</strong></mat-error>
+                    }
+                    @if (registerForm.controls.username.hasError('minlength')) {
+                        <mat-error>Username must have at least 3 characters</mat-error>
+                    }
+                    @if (registerForm.controls.username.hasError('maxlength')) {
+                        <mat-error>Username cannot exceed 30 characters</mat-error>
+                    }
+                </mat-form-field>
+
+                <email-input [emailFormControl]="registerForm.controls.email" />
+                <password-input [passwordFormControl]="registerForm.controls.password" />
+                <password-input label="Confirm password" [passwordFormControl]="registerForm.controls.confirm_password" />
+
+                <button mat-fab extended type="submit" [disabled]="loading()">
+                    <mat-icon>person_add</mat-icon>
+                    Create Account
+                </button>
+                @if (errorMessage()) {
+                    <p class="login-error">{{ errorMessage() }}</p>
+                }
+
+                <a routerLink="/login">Do you have an account? Sign in</a>
+            </form>
+        </div>
+    </div>
+</div>
