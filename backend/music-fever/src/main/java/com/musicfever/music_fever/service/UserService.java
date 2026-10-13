@@ -25,8 +25,8 @@ public class UserService {
         this.repository.save(user);
     }
 
-    public Optional<UserEntity> findByEmail(String email) {
-        return this.repository.findByEmail(email);
+    public Optional<UserEntity> findByUsername(String username) {
+        return this.repository.findByUsername(username);
     }
 
     public LoginRequest login(LoginRequest request) throws UserNotFoundException{

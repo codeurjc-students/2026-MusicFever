@@ -40,8 +40,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request, HttpServletResponse response) {
-        System.out.println(request.getEmail());
-        System.out.println(request.getUsername());
         try {
             request = this.userService.login(request);
             return userLoginService.login(response, request);
@@ -53,8 +51,8 @@ public class AuthController {
 
     @GetMapping("/me")
     public ResponseEntity<ActiveUserDTO> getActiveUser(Authentication auth) {
-        String email = auth.getName();
-        Optional<UserEntity> user = userService.findByEmail(email);
+        String username = auth.getName();
+        Optional<UserEntity> user = userService.findByUsername(username);
 
         if (user.isEmpty()) {
             return ResponseEntity.notFound().build();

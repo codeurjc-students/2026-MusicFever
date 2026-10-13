@@ -35,7 +35,7 @@ public class JwtTokenProvider {
 	private String tokenStringFromCookies(HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies == null) {
-			throw new IllegalArgumentException("No cookies found in request");
+			return null;
 		}
 
 		for (Cookie cookie : cookies) {
@@ -48,13 +48,18 @@ public class JwtTokenProvider {
 				return accessToken;
 			}
 		}
-		throw new IllegalArgumentException("No access token cookie found in request");
+		return null;
 	}
 
-	public Claims validateToken(HttpServletRequest req, boolean fromCookie){
-		var token = fromCookie?
-				tokenStringFromCookies(req):
-				tokenStringFromHeaders(req);
+	public Claims validateToken(HttpServletRequest req, boolean fromCookie) {
+		var token = fromCookie
+				? tokenStringFromCookies(req)
+				: tokenStringFromHeaders(req);
+
+		if (token == null || token.isBlank()) {
+			return null;
+		}
+
 		return validateToken(token);
 	}
 
