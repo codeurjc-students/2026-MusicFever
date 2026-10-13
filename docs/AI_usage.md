@@ -541,3 +541,27 @@ The interaction followed a step-by-step, collaborative approach. In several stag
 
 #### Usage
 The AI was used to troubleshoot issues encountered when handling backend authentication errors in the Angular frontend. The assistance focused on identifying why HTTP error responses were not displaying the expected backend messages, checking the interaction between Spring Boot and Angular, and correctly retrieving and displaying error messages to users.
+
+### 7.3 Frontend Testing
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 2026-10-13 |
+| **Phase** | 3 (Basic functionality development) |
+| **Objective** | Frontend unit and integration testing |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-6 |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-6 |
+| **Reasoning level** | Not specified |
+| **Interaction mode** | Conversational |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | Not used |
+| **Connected tools** | None |
+
+#### Usage
+The AI was used to help generate unit and integration tests for Angular frontend components, following the project requirements and existing test examples. It also assisted in identifying and resolving errors during test execution, particularly those related to testing configuration, service mocking, and authentication with the real REST API.
