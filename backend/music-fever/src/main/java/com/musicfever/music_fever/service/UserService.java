@@ -29,7 +29,7 @@ public class UserService {
         return this.repository.findByUsername(username);
     }
 
-    public LoginRequest login(LoginRequest request) throws UserNotFoundException{
+    public LoginRequest resolveLoginIdentifier(LoginRequest request) throws UserNotFoundException{
         Optional<UserEntity> userOptional;
         if (request.getUsername() == null || request.getUsername().isEmpty()) {
             userOptional = this.repository.findByEmail(request.getEmail());
@@ -45,7 +45,7 @@ public class UserService {
         return request;
     }
 
-    public void register(LoginRequest request) throws UserAlreadyExistsException{
+    public void registerUser(LoginRequest request) throws UserAlreadyExistsException{
         // Search username unique
         if (this.repository.findByUsername(request.getUsername()).isPresent()){
             throw new UserAlreadyExistsException("This username already exists");

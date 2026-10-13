@@ -22,8 +22,6 @@ import com.musicfever.music_fever.service.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-
-
 @RestController 
 @Tag(name = "Tracks", description = "Endpoints for managing authorization")
 @RequestMapping("api/v1/auth")
@@ -41,7 +39,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request, HttpServletResponse response) {
         try {
-            request = this.userService.login(request);
+            request = this.userService.resolveLoginIdentifier(request);
             return userLoginService.login(response, request);
         } catch (UserNotFoundException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -65,7 +63,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody LoginRequest request, HttpServletResponse response) {
         try {
-            this.userService.register(request);
+            this.userService.registerUser(request);
             return userLoginService.login(response, request);
         } catch (UserAlreadyExistsException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
