@@ -45,14 +45,14 @@ public class UserService {
         return request;
     }
 
-    public void registerUser(LoginRequest request) throws UserAlreadyExistsException{
+    public void registerUser(LoginRequest request) throws UserAlreadyExistsException {
         // Search username unique
-        if (this.repository.findByUsername(request.getUsername()).isPresent()){
+        if (this.repository.findByUsername(request.getUsername()).isPresent()) {
             throw new UserAlreadyExistsException("This username already exists");
         }
 
         // Search email unique
-        if (this.repository.findByEmail(request.getEmail()).isPresent()){
+        if (this.repository.findByEmail(request.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException("This email already exists");
         }
 

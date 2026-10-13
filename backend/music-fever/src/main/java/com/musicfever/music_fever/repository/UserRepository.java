@@ -8,5 +8,5 @@ import com.musicfever.music_fever.model.UserEntity;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     public Optional<UserEntity> findByUsername(String username);
-    public Optional<UserEntity> findByEmail(String username);
+    public Optional<UserEntity> findByEmail(String email);
 }

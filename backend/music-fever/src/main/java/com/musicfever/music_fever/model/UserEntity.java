@@ -1,6 +1,7 @@
 package com.musicfever.music_fever.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -67,5 +68,16 @@ public class UserEntity {
             this.email = email;
         }
         this.profilePicture = picture;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof UserEntity that)) return false;
+        return id == that.id && Objects.equals(username, that.username) && Objects.equals(email, that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, email);
     }
 }
