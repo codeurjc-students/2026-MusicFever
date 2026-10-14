@@ -1,0 +1,37 @@
+<div id="login-page">
+    <div class="pop-up">
+        <img class="logo" src="/logo.png" alt="Music Fever logo">
+        <div id="login-form-div">
+            <div id="title-div">
+                <p id="title">Welcome back</p>
+                <p id="subtitle">Sign in to continue</p>
+            </div>
+
+            <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div id="login-toggle">
+                    @if (loginWithUsername()) {
+                        <username-input [usernameFormControl]="loginForm.controls.username" />
+                    } @else {
+                        <email-input [emailFormControl]="loginForm.controls.email" />
+                    }
+
+                    <a id="mode-link" class="toggle" (click)="toggleLoginMode()">
+                        {{ loginWithUsername() ? 'Log in with email' : 'Log in with username' }}
+                    </a>
+                </div>
+
+                <password-input [passwordFormControl]="loginForm.controls.password" />
+
+                <button id="login-button" mat-fab extended type="submit" [disabled]="loading()">
+                    <mat-icon>login</mat-icon>
+                    Sign in
+                </button>
+                @if (errorMessage()) {
+                    <p class="login-error">{{ errorMessage() }}</p>
+                }
+
+                <a id="toggle-link" routerLink="/register">Don't have an account? Sign up</a>
+            </form>
+        </div>
+    </div>
+</div>

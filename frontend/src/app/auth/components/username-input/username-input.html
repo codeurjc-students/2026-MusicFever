@@ -1,0 +1,20 @@
+<mat-form-field subscriptSizing="dynamic">
+  <mat-label>Username</mat-label>
+
+  <input id="username-input"
+    matInput
+    [formControl]="usernameFormControl()"
+    placeholder="Enter username"
+    autocomplete="username"
+  >
+
+  @if (usernameFormControl().hasError('required')) {
+    <mat-error>Username <strong>is required</strong></mat-error>
+  }
+  @if (usernameFormControl().hasError('minlength')) {
+    <mat-error>Username must have at least 3 characters</mat-error>
+  }
+  @if (usernameFormControl().hasError('maxlength')) {
+    <mat-error>Username cannot exceed 30 characters</mat-error>
+  }
+</mat-form-field>

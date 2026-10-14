@@ -1,0 +1,28 @@
+<div id="register-page">
+    <div class="pop-up">
+        <img class="logo" src="/logo.png" alt="Music Fever logo">
+        <div id="register-form-div">
+            <div id="title-div">
+                <p id="title">Welcome to Music Fever</p>
+                <p id="subtitle">Register to continue</p>
+            </div>
+
+            <form id="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <username-input [usernameFormControl]="registerForm.controls.username" />
+                <email-input [emailFormControl]="registerForm.controls.email" />
+                <password-input [passwordFormControl]="registerForm.controls.password" />
+                <password-input label="Confirm password" [passwordFormControl]="registerForm.controls.confirm_password" />
+
+                <button id="register-button" mat-fab extended type="submit" [disabled]="loading()">
+                    <mat-icon>person_add</mat-icon>
+                    Create Account
+                </button>
+                @if (errorMessage()) {
+                    <p class="login-error">{{ errorMessage() }}</p>
+                }
+
+                <a id="toggle-link" routerLink="/login">Do you have an account? Sign in</a>
+            </form>
+        </div>
+    </div>
+</div>

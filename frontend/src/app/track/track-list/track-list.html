@@ -1,0 +1,17 @@
+@if (authService.currentUser(); as user) {
+  <h1>Welcome, {{ user.username }}!</h1>
+} @else {
+  <h1>Welcome to Music Fever!</h1>
+}
+
+<h2>TrackList</h2>
+
+<p>Total tracks: {{ tracks().length }}</p>
+
+@for (trackItem of tracks(); track $index) {
+  <app-track [track]="trackItem"></app-track>
+}
+
+@if (authService.currentUser(); as user){
+  <a id="logout-link" (click)="logout()">Logout</a>
+}

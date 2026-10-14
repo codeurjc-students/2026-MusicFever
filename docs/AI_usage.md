@@ -484,3 +484,84 @@ The AI was used to guide the configuration of the project execution environments
 
 #### Usage
 I used ChatGPT to help configure HTTPS in the backend, diagnose certificate and keystore errors, manage SSL passwords with environment variables, adapt integration and system tests to the HTTPS backend, and update the GitHub Actions workflow so the required keystore and secrets are available during CI execution.
+
+## 7. Basic Implementation
+### 7.1 Login Implementation
+#### Entry Details
+
+| Entry details | Value |
+| --- | --- |
+| **Date** | 10–11 October 2026 |
+| **Phase** | 3 (Basic functionality development) |
+| **Objective** | Implementation of Login and Register structure, user authentication and frontend-backend integration |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-6 |
+
+#### Tool Configuration
+
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-6 |
+| **Reasoning level** | Not specified |
+| **Interaction mode** | Conversational, step-by-step assistance |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used |
+| **Connected tools** | None used |
+
+#### Usage
+The AI was used to guide the implementation of Music Fever's authentication functionality. Assistance focused on organizing Angular components, configuring navigation routes, adapting Angular Material inputs, implementing form validation, and connecting the frontend to the Spring Boot backend.
+
+It also helped configure email-based authentication with Spring Security and JWT, implement the Login and `/me` endpoints, troubleshoot CORS and cookie-related issues, integrate MapStruct for DTO mapping, and display the authenticated user's username on the Home page.
+
+The interaction followed a step-by-step, collaborative approach. In several stages, I chose to implement the code independently, using ChatGPT afterward to review my work, identify mistakes, and suggest corrections. This allowed me to maintain control over the implementation while using AI as a learning and debugging assistant rather than relying entirely on AI-generated code.
+
+### 7.2 Error Solventation
+#### Entry Details
+
+| Entry details | Value |
+| --- | --- |
+| **Date** | 12/10/2026 |
+| **Phase** | 3 (Basic functionality development) |
+| **Objective** | Handle backend authentication errors in the frontend |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-6 |
+
+#### Tool Configuration
+
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-6 |
+| **Reasoning level** | Not specified |
+| **Interaction mode** | Chat |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used |
+| **Connected tools** | Not used |
+
+#### Usage
+The AI was used to troubleshoot issues encountered when handling backend authentication errors in the Angular frontend. The assistance focused on identifying why HTTP error responses were not displaying the expected backend messages, checking the interaction between Spring Boot and Angular, and correctly retrieving and displaying error messages to users.
+
+### 7.3 Frontend Testing
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 2026-10-13 |
+| **Phase** | 3 (Basic functionality development) |
+| **Objective** | Frontend unit and integration testing |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-6 |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-6 |
+| **Reasoning level** | Not specified |
+| **Interaction mode** | Conversational |
+| **Agent mode** | Disabled |
+| **Plan mode** | Disabled |
+| **Web search** | Not used |
+| **Connected tools** | None |
+
+#### Usage
+The AI was used to help generate unit and integration tests for Angular frontend components, following the project requirements and existing test examples. It also assisted in identifying and resolving errors during test execution, particularly those related to testing configuration, service mocking, and authentication with the real REST API.
