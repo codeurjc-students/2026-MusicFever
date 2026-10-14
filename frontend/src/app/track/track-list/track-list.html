@@ -13,5 +13,5 @@
 }
 
 @if (authService.currentUser(); as user){
-  <a (click)="logout()">Logout</a>
+  <a id="logout-link" (click)="logout()">Logout</a>
 }

@@ -13,7 +13,7 @@
                 <password-input [passwordFormControl]="registerForm.controls.password" />
                 <password-input label="Confirm password" [passwordFormControl]="registerForm.controls.confirm_password" />
 
-                <button mat-fab extended type="submit" [disabled]="loading()">
+                <button id="register-button" mat-fab extended type="submit" [disabled]="loading()">
                     <mat-icon>person_add</mat-icon>
                     Create Account
                 </button>
@@ -21,7 +21,7 @@
                     <p class="login-error">{{ errorMessage() }}</p>
                 }
 
-                <a routerLink="/login">Do you have an account? Sign in</a>
+                <a id="toggle-link" routerLink="/login">Do you have an account? Sign in</a>
             </form>
         </div>
     </div>

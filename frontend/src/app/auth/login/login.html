@@ -15,14 +15,14 @@
                         <email-input [emailFormControl]="loginForm.controls.email" />
                     }
 
-                    <a class="toggle" (click)="toggleLoginMode()">
+                    <a id="mode-link" class="toggle" (click)="toggleLoginMode()">
                         {{ loginWithUsername() ? 'Log in with email' : 'Log in with username' }}
                     </a>
                 </div>
-                
+
                 <password-input [passwordFormControl]="loginForm.controls.password" />
 
-                <button mat-fab extended type="submit" [disabled]="loading()">
+                <button id="login-button" mat-fab extended type="submit" [disabled]="loading()">
                     <mat-icon>login</mat-icon>
                     Sign in
                 </button>
@@ -30,7 +30,7 @@
                     <p class="login-error">{{ errorMessage() }}</p>
                 }
 
-                <a routerLink="/register">Don't have an account? Sign up</a>
+                <a id="toggle-link" routerLink="/register">Don't have an account? Sign up</a>
             </form>
         </div>
     </div>
