@@ -29,7 +29,7 @@ import { UsernameInput } from '../components/username-input/username-input';
   templateUrl: './register.html',
 })
 export class Register {
-  private router = inject(Router);
+  private readonly router = inject(Router);
 
   registerForm = new FormGroup({
     username: new FormControl('', {
@@ -54,7 +54,7 @@ export class Register {
     })
   });
 
-  private authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
 
   loading = signal(false);
   errorMessage = signal('');
@@ -75,7 +75,7 @@ export class Register {
         this.loading.set(false);
 
         if (response.status === 'SUCCESS') {
-          this.router.navigate(['/']);
+          void this.router.navigate(['/']);
         } else {
           this.errorMessage.set('Invalid username, email or password');
         }

@@ -106,4 +106,17 @@ describe('Register integration test', () => {
 
     expect(response.status).toBe('SUCCESS');
   });
+
+  it('should reject registration when passwords do not match', async () => {
+  await expect(
+    firstValueFrom(
+      authService.register(
+        'TestUser',
+        'test@example.com',
+        'TestPassword123!',
+        'DifferentPassword123!'
+      )
+    )
+  ).rejects.toThrow('Passwords do not match');
+});
 });

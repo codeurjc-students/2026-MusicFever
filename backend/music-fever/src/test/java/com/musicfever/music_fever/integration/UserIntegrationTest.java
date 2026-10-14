@@ -1,6 +1,5 @@
 package com.musicfever.music_fever.integration;
 
-import com.musicfever.music_fever.model.Track;
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.repository.UserRepository;
 import com.musicfever.music_fever.service.UserService;
@@ -12,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,16 +50,20 @@ public class UserIntegrationTest {
     @Test
     void shouldReturnUsers_orEmptyOptional(){
         // When
-        Optional<UserEntity>[] obtainedUsers = new Optional[3];
-        for(int i = 0; i < obtainedUsers.length; i++){
-            obtainedUsers[i] = this.service.findByUsername(this.usersTest[i].getUsername());
+        List<Optional<UserEntity>> obtainedUsers = new ArrayList<>();
+
+        for (int i = 0; i < usersTest.length; i++) {
+            obtainedUsers.add(this.service.findByUsername(usersTest[i].getUsername()));
+        }
+        for(int i = 0; i < obtainedUsers.size(); i++){
+            obtainedUsers.set(i, this.service.findByUsername(this.usersTest[i].getUsername()));
         }
         Optional<UserEntity> obtainedUserEmpty = this.service.findByUsername("Test5");
 
         // Then
         for(int i = 0; i < usersTest.length; i++){
-            assertTrue(obtainedUsers[i].isPresent());
-            assertEquals(this.usersTest[i], obtainedUsers[i].get());
+            assertTrue(obtainedUsers.get(i).isPresent());
+            assertEquals(this.usersTest[i], obtainedUsers.get(i).get());
         }
         assertTrue(obtainedUserEmpty.isEmpty());
     }

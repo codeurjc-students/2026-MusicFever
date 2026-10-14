@@ -28,7 +28,7 @@ import { UsernameInput } from '../components/username-input/username-input';
   templateUrl: './login.html',
 })
 export class Login {
-  private router = inject(Router);
+  private readonly router = inject(Router);
 
   loginForm = new FormGroup({
       username: new FormControl('', {
@@ -73,7 +73,7 @@ export class Login {
     this.errorMessage.set('');
   }
 
-  private authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
 
   loading = signal(false);
   errorMessage = signal('');
@@ -94,7 +94,7 @@ export class Login {
         this.loading.set(false);
 
         if (response.status === 'SUCCESS') {
-          this.router.navigate(['/']);
+          void this.router.navigate(['/']);
         } else {
           this.errorMessage.set('Invalid email or password');
         }

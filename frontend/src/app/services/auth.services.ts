@@ -21,8 +21,8 @@ interface AuthResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  private http = inject(HttpClient);
-  private apiUrl = 'https://localhost:8443/api/v1/auth';
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = 'https://localhost:8443/api/v1/auth';
 
   private _currentUser = signal<ActiveUser | null>(null);
   currentUser = this._currentUser.asReadonly();
@@ -71,7 +71,7 @@ export class AuthService {
     ).subscribe({
     next: () => {
       this._currentUser.set(null);
-      this.router.navigate(['/']);
+      void this.router.navigate(['/']);
     }
     })
   }

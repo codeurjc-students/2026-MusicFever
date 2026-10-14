@@ -50,26 +50,6 @@ public class UserEntity {
         }
     }
 
-    /* Constructor without the profile picture of the user and letting enter the roles*/
-    public UserEntity(String username, String password, String email, String... roles) {
-        if ((!username.isBlank()) && (!password.isBlank()) && (!email.isBlank())) {
-            this.username = username;
-            this.password = password;
-            this.email = email;
-            this.roles = List.of(roles);
-        }
-    }
-
-    /* Constructor with the profile picture of the user. */
-    public UserEntity(String username, String password, String email, String country, String picture) {
-        if ((!username.isBlank()) && (!password.isBlank()) && (!email.isBlank())) {
-            this.username = username;
-            this.password = password;
-            this.email = email;
-        }
-        this.profilePicture = picture;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof UserEntity that)) return false;

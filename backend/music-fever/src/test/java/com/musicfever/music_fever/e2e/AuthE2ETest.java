@@ -53,6 +53,21 @@ public class AuthE2ETest {
         response.then().statusCode(200);
     }
 
+    @Test 
+    void loginUser_returns409(){
+        Map<String, String> body = Map.of(
+                "username", "doesNotExist",
+                "password", "eras1325"
+        );
+
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .body(body)
+                .when()
+                .post("/api/v1/auth/login");
+        response.then().statusCode(409);
+    }
+
     @Test
     public void registerUser_returns200() {
         Response response = given()
@@ -68,6 +83,23 @@ public class AuthE2ETest {
                 .post("/api/v1/auth/register");
 
         response.then().statusCode(200);
+    }
+
+    @Test 
+    public void registerUser_returns409(){
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .body("""
+                {
+                    "username": "armiiin",
+                    "email": "armiiin@gmail.com",
+                    "password": "test1234"
+                }
+                """)
+                .when()
+                .post("/api/v1/auth/register");
+
+        response.then().statusCode(409);
     }
 
     @Test
