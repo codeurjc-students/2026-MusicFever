@@ -117,7 +117,7 @@ public class TracklistSystemTest {
     @Test
     @Tag("system")
     void checkTracklistOnMainPage() {
-        WebElement title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
+        WebElement title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h2")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("app-track")));
         List<WebElement> tracks = driver.findElements(By.tagName("app-track"));
         List<Track> expectedTracks = this.getTracklistFromAPI();
