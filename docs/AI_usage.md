@@ -565,3 +565,27 @@ The AI was used to troubleshoot issues encountered when handling backend authent
 
 #### Usage
 The AI was used to help generate unit and integration tests for Angular frontend components, following the project requirements and existing test examples. It also assisted in identifying and resolving errors during test execution, particularly those related to testing configuration, service mocking, and authentication with the real REST API.
+
+### 7.4 Layout Style
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | 16/10/2026 |
+| **Phase** | 3 (Basic functionality development) |
+| **Objective** | Implement the main application layout based on the Figma prototype |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-6 |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-6 |
+| **Reasoning level** | Not specified |
+| **Interaction mode** | Conversational |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used |
+| **Connected tools** | None |
+
+#### Usage
+The AI was used to guide the implementation of the app's main layout in Angular, ensuring that the interface followed the original Figma design. The assistance focused on organizing the fixed navigation headers, displaying different pages within the main content area, implementing reusable navigation items with active states, and keeping the login and registration pages separate from the main layout. It also helped adapt Figma's visual styles to CSS and resolve layout and styling issues.

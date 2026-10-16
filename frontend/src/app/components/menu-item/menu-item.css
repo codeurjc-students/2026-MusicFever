@@ -1,0 +1,39 @@
+a {
+  display: flex;
+  padding: 3%;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 16px;
+  background: transparent;
+  text-decoration: none;
+  width: 90%;
+  padding: 5%;
+}
+
+span {
+  color: #707070;
+  font-family: Inter, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+}
+
+mat-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  color: #707070;
+}
+
+a.active {
+  border-radius: 8px;
+  background: rgba(232, 217, 250, 0.50);
+  backdrop-filter: blur(5%);
+  font-style: bold;
+}
+
+a.active span, a.active mat-icon {
+  color: #7C3AED;
+}
