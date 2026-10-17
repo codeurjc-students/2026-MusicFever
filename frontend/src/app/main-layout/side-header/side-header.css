@@ -24,7 +24,7 @@
 
 #profile-picture {
     /* Layout */
-    width: 35%;
+    width: 30%;
     height: fit-content;
 
     /* Styles */
@@ -37,7 +37,7 @@
 #text-layout {
     /* Layout */
     display: flex;
-    height: 100px;
+    height: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: left;
@@ -147,6 +147,13 @@ app-menu-item {
     /* Style */
     width: 20px;
     height: 20px;
+}
+
+#links-layout {
+    display: flex;
+    margin-bottom: 5%;
+    flex-direction: column;
+    gap: 70%;
 }
 
 .link {
