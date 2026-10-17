@@ -1,0 +1,7 @@
+<form class="search-bar" (ngSubmit)="search()">
+    <input type="search" name="search" [(ngModel)]="searchText" placeholder="Search artists, albums, songs...">
+
+    <button type="submit" aria-label="Search">
+        <mat-icon>search</mat-icon>
+    </button>
+</form>

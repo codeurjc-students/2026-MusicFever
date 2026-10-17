@@ -26,6 +26,9 @@
 
     <div id="header-elements">
         <app-menu-item label="Home" icon="home" route="/home"/>
+        @if (isSearchPage()) {
+            <app-menu-item label="Search" icon="search" route="/search" />
+        }
         <app-menu-item label="Player" icon="play_circle" route="/player" />
         <app-menu-item label="Rooms" icon="groups" route="/rooms"/>
         <app-menu-item label="Stats" icon="bar_chart" route="/stats"/>

@@ -1,0 +1,21 @@
+.container {
+    /* Layout */
+    display: flex;
+    width: 100%;
+    padding: 0.75%;
+    align-items: left;
+    gap: clamp(10px, 3vh, 30px);
+    box-sizing: border-box;
+
+    /* Style */
+    border: 1px solid #F3E8FF;
+    background: #FCFAFF;
+}
+
+app-mini-player {
+    flex-shrink: 0;
+}
+
+app-search-bar {
+    width: 100%;
+}

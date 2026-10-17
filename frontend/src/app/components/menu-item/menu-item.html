@@ -1,4 +1,4 @@
-<a [routerLink]="route()" routerLinkActive="active">
+<a [routerLink]="route()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
   <mat-icon>{{ icon() }}</mat-icon>
   <span>{{ label() }}</span>
 </a>

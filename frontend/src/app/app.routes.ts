@@ -8,6 +8,7 @@ import { Home } from './pages/home/home';
 import { Player } from './pages/player/player';
 import { Rooms } from './pages/rooms/rooms';
 import { Stats } from './pages/stats/stats';
+import { Search } from './pages/search/search';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },
+      { path: 'search', component: Search },
       { path: 'player', component: Player },
       { path: 'rooms', component: Rooms },
       { path: 'stats', component: Stats }
