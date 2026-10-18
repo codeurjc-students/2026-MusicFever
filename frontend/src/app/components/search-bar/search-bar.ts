@@ -25,8 +25,6 @@ export class SearchBar {
 
     this.searchService.searchQuery.set(query);
 
-    console.log('Search query:', this.searchService.searchQuery());
-
     this.router.navigate(['/search'], {
       queryParams: { search: query }
     });
