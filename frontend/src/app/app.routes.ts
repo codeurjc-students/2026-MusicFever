@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { MainLayout } from './main-layout/main-layout';
+import { MainLayout } from './layout/main-layout';
 import { Login } from './auth/login/login';
 import { Register } from './auth/register/register';
 
