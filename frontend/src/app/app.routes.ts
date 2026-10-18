@@ -9,6 +9,9 @@ import { Player } from './pages/player/player';
 import { Rooms } from './pages/rooms/rooms';
 import { Stats } from './pages/stats/stats';
 import { Search } from './pages/search/search';
+import { Faq } from './pages/faq/faq';
+import { Privacy } from './pages/privacy/privacy';
+import { Terms } from './pages/terms/terms';
 
 export const routes: Routes = [
   {
@@ -20,7 +23,10 @@ export const routes: Routes = [
       { path: 'search', component: Search },
       { path: 'player', component: Player },
       { path: 'rooms', component: Rooms },
-      { path: 'stats', component: Stats }
+      { path: 'stats', component: Stats },
+      { path: 'faq', component: Faq },
+      { path: 'privacy', component: Privacy },
+      { path: 'terms', component: Terms }
     ]
   },
   { path: 'login', component: Login },
