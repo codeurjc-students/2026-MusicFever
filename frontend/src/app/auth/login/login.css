@@ -33,12 +33,6 @@
     backdrop-filter: blur(11px);
 }
 
-img {
-    /* Layout */
-    width: 158px;
-    height: 55px;
-}
-
 #login-form-div {
     /* Layout*/
     display: flex;

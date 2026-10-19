@@ -1,0 +1,59 @@
+<div class="component">
+    <div style="width: 100%;">
+        <img class="logo" src="/logo.png" alt="Music Fever logo">
+        <hr>
+    </div>
+    
+
+    <div id="user-layout">
+        @if (authService.currentUser(); as user) {
+            <img id="profile-picture" src="/image_not_found.png">
+            <div id="text-layout">
+                <p id="say-hi">hi!</p>
+                <p id="username"> {{user.username}}</p>
+            </div>
+        } @else {
+            <img id="profile-picture" src="/image_not_found.png">
+            <div id="auth-links">
+                <a id="auth-link" (click)="login()">Log In</a>
+                <span>/</span>
+                <a id="auth-link" (click)="register()">Register</a>
+            </div>
+        }
+    </div>
+
+    <hr>
+
+    <div id="header-elements">
+        <app-menu-item id="home" label="Home" icon="home" route="/home"/>
+        @if (isSearchPage()) {
+            <app-menu-item id="search" label="Search" icon="search" route="/search" />
+        }
+        <app-menu-item id="player" label="Player" icon="play_circle" route="/player" />
+        <app-menu-item id="rooms" label="Rooms" icon="groups" route="/rooms"/>
+        <app-menu-item id="stats" label="Stats" icon="bar_chart" route="/stats"/>
+    </div>
+
+    <hr>
+
+    <div id="toggle-frame">
+        <div class="gap"></div>
+        <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+            <path d="M11.5 1.5V2.61111M11.5 20.3889V21.5M2.61111 11.5H1.5M5.18236 5.18236L4.27778 4.27778M17.8177 5.18236L18.7222 4.27778M5.18236 17.8222L4.27778 18.7223M17.8177 17.8222L18.7222 18.7223M21.5 11.5H20.3889M15.9444 11.5C15.9444 13.9546 13.9546 15.9444 11.5 15.9444C9.0454 15.9444 7.05556 13.9546 7.05556 11.5C7.05556 9.0454 9.0454 7.05556 11.5 7.05556C13.9546 7.05556 15.9444 9.0454 15.9444 11.5Z" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#9292A3"/>
+        </svg>
+        <div class="gap"></div>
+        <mat-slide-toggle> </mat-slide-toggle>
+        <div class="gap"></div>
+        <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+            <path d="M1.5 11.1275C1.5 16.8561 6.14315 21.5 11.8708 21.5C16.2348 21.5 19.9692 18.8041 21.5 14.9866C20.3055 15.4668 18.9985 15.7374 17.6323 15.7374C11.9046 15.7374 7.26153 11.0935 7.26153 5.36487C7.26153 4.00487 7.52811 2.69011 8.00387 1.5C4.19149 3.0332 1.5 6.76597 1.5 11.1275Z" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#9292A3"/>
+        </svg>
+        <div class="gap"></div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div id="links-layout">
+        <a class="link" id="how-it-works-link" (click)="howItWorks()">How It Works</a>
+        <a class="link" id="contact-us-link" (click)="contactUs()">Contact Us</a>
+    </div>
+</div>

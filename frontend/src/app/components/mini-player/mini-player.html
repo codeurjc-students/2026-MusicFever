@@ -1,0 +1,17 @@
+<div id="mini-player">
+    <div class="frame">
+        <img id="album-photo" src="/image_not_found.png">
+        <div class="text-layout">
+            <p id="song-name">Song Name</p>
+            <p id="artist-name">Artist Name</p>
+        </div>
+    </div>
+
+    <div id="actions-layout">
+        <mat-icon
+            [fontIcon]="isPlaying ? 'pause' : 'play_arrow'"
+            (click)="isPlaying = !isPlaying">
+        </mat-icon>
+        <mat-icon fontIcon="skip_next"></mat-icon>
+    </div>
+</div>

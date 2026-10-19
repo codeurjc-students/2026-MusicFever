@@ -1,0 +1,150 @@
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20%;
+    padding: 2%;
+    width: 100%;
+    box-sizing: border-box;
+    background: #F3E8FF;
+}
+
+#left-layout {
+    display: flex;
+    align-items: center;
+}
+
+#app-name {
+    margin: 0;
+    color: #756F7D;
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#center-layout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+#center-layout a {
+    color: #6F6878;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#right-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+#external-apis {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#apis-text {
+    margin: 0;
+    color: #707070;
+    font-family: Inter, sans-serif;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+#spotify_logo, #apple_logo {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+}
+
+#spotify_logo {
+    width: 60px;
+    height: 20px;
+    background-image: url("/spotify_logo.png");
+}
+
+#apple_logo {
+    width: 60px;
+    height: 20px;
+    background-image: url("/apple_logo.webp");
+}
+
+#app-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#github, #ig {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+
+@media (max-width: 1024px) {
+    .container {
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+
+    #right-frame {
+        width: 100%;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 700px) {
+    .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    #left-layout, #center-layout, #right-frame {
+        width: 100%;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    #center-layout {
+        flex-wrap: wrap;
+        gap: 8px;
+        white-space: normal;
+    }
+
+    #right-frame {
+        gap: 15px;
+    }
+
+    #external-apis {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    #app-icons {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 25px 15px;
+    }
+
+    #app-name {
+        font-size: 16px;
+    }
+
+    #center-layout a, #apis-text {
+        font-size: 14px;
+    }
+}

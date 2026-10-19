@@ -1,0 +1,174 @@
+.component {
+    /* Layout */
+    display: flex;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding: 10px 20px 30px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    /* Styles */
+    border: 1px solid #F3E8FF;
+    background: #FCFAFF;
+}
+
+#user-layout {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+#profile-picture {
+    /* Layout */
+    width: 30%;
+    height: fit-content;
+
+    /* Styles */
+    border-radius: 99px;
+    fill: #937796;
+    stroke-width: 1px;
+    stroke: #BFA2DB;
+}
+
+#text-layout {
+    /* Layout */
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+
+#auth-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+#auth-links a {
+    cursor: pointer;
+}
+
+#auth-link {
+    /* Layout */
+    width: 70%;
+
+    /* Typography */
+    color: #4B2E83;
+    font-family: Inter, sans-serif;
+    font-size: 120%;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 5%;
+    letter-spacing: 0.2px;
+}
+
+#auth-link:hover {
+    color: #A05A95;
+}
+
+#say-hi {
+    /* Layout */
+    align-self: stretch;
+    margin: 10%;
+
+    /* Typography */
+    color: #4B2E83;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 76.923%;
+}
+
+#username {
+    /* Layout */
+    width: 99px;
+    margin: 10%;
+    cursor: pointer;
+
+    /* Typography */
+    color: #4B2E83;
+    font-family: "Inter", sans-serif;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 5%;
+    letter-spacing: 0.2px;
+}
+
+#username:hover {
+    color: #A05A95;
+}
+
+hr {
+    /* Layout */
+    width: 100%;
+    height: 0;
+    border: none;
+    border-top: 2px solid #F3E8FF;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+#header-elements {
+    /* Layout */
+    display: flex;
+    width: 230px;
+    padding: 10px 10px 10px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+app-menu-item {
+    width: 100%;
+}
+
+#toggle-frame {
+    /* Layout */
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    align-items: center;
+}
+
+.icon-svg {
+    /* Layout*/
+    width: 20px;
+    height: 20px;
+
+    /* Style */
+    width: 20px;
+    height: 20px;
+}
+
+#links-layout {
+    display: flex;
+    margin-bottom: 5%;
+    flex-direction: column;
+    gap: 70%;
+}
+
+.link {
+    /* Typography */
+    color: #A05A95;
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+}
+
+a {
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+}

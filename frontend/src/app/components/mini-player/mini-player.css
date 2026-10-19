@@ -1,0 +1,90 @@
+#mini-player {
+    /* Layout */
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
+    flex-shrink: 0;
+    align-items: center;
+    gap: clamp(15px, 8vw, 120px);
+    padding: 10px;
+    box-sizing: border-box;
+
+    /* Styles */
+    border-radius: 8px;
+    border: 1px solid rgba(140, 107, 184, 0.10);
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.07) inset, 0 8px 30px 0 rgba(81, 58, 107, 0.10);
+    backdrop-filter: blur(9px);
+}
+
+.frame {
+    /* Layout */
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#album-photo {
+    /* Layout */
+    width: 50px;
+    height: 50px;
+}
+
+.text-layout {
+    /* Layout */
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: left;
+    gap: 5px;
+}
+
+#song-name {
+    white-space: nowrap;
+
+    /* Typography */
+    color: #2F2936;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 93.75%;
+    margin: 0;
+}
+
+#artist-name {
+    white-space: nowrap;
+
+    /* Typography */
+    color: #8B8494;
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 250;
+    line-height: 100%;
+    margin: 0;
+}
+
+#actions-layout {
+    /* Layout */
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: clamp(10px, 3vh, 15px);
+    margin-right: 3%;
+}
+
+mat-icon {
+    /* Layout */
+    width: 220%;
+    height: 220%;
+    font-size: 200%;
+    cursor: pointer;
+
+    /* Styles */
+    color: rgba(111, 104, 120, 0.72);
+}

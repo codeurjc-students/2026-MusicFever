@@ -78,10 +78,10 @@ public class AuthSystemTest {
 
         // Check if log in was successful
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
-        assertThat(driver.getCurrentUrl()).isEqualTo(BASE_URL + "/");
+        assertThat(driver.getCurrentUrl()).isEqualTo(BASE_URL + "/home");
 
-        WebElement title = driver.findElement(By.tagName("h1"));
-        assertThat(title.getText()).contains("armiiin");
+        WebElement username = driver.findElement(By.id("user-layout")).findElement(By.id("username"));
+        assertThat(username.getText()).contains("armiiin");
     }
 
     @Test
@@ -90,7 +90,7 @@ public class AuthSystemTest {
         login("armiiin", true);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
-        assertThat(driver.getCurrentUrl()).isEqualTo(BASE_URL + "/");
+        assertThat(driver.getCurrentUrl()).isEqualTo(BASE_URL + "/home");
 
         // Logout
         driver.findElement(By.id("logout-link")).click();
@@ -120,8 +120,8 @@ public class AuthSystemTest {
         driver.findElement(By.id("register-button")).click();
 
         // Check if registration was successful
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
-        assertThat(driver.getCurrentUrl()).isEqualTo(BASE_URL + "/");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-layout")));
+        assertThat(driver.getCurrentUrl()).isEqualTo(BASE_URL + "/home");
 
         WebElement title = driver.findElement(By.tagName("h1"));
         assertThat(title.getText()).contains("test");
