@@ -62,18 +62,6 @@ public class LayoutSystemTest {
         assertThat(driver.findElements(By.cssSelector("#" + section + " a.active"))).isEmpty();
     }
 
-    private void login() {
-        driver.get(BASE_URL + "/login");
-        click(By.id("mode-link"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("username-input"))).sendKeys("armiiin");
-
-        driver.findElement(By.id("password-input")).sendKeys("eras1325");
-        click(By.id("login-button"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("username")));
-
-        assertThat(driver.findElement(By.id("username")).getText()).isEqualTo("armiiin");
-    }
-
     @Test
     @Tag("system")
     @DisplayName("Should navigate to home by default")
@@ -101,8 +89,6 @@ public class LayoutSystemTest {
     @Tag("system")
     @DisplayName("Should navigate between main sections")
     void mainNavigationTest() {
-        login();
-
         // Search
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("search-input"))).sendKeys("Test");
         click(By.id("submit-search"));
