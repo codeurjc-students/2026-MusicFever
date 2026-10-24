@@ -1,1 +1,99 @@
-<app-track-list></app-track-list>
+<div class="banner">
+    <div class="blur">
+        <div id="title">
+            @if (authService.currentUser(); as user) {
+                <h1>Welcome back,</h1>
+                <h1 style="color: #7C3AED;">{{ user.username }}!</h1>
+            } @else {
+                <h1>Welcome to</h1>
+                <h1 style="color: #7C3AED;">Music Fever!</h1>
+            }
+            <p>Ready to listen together?</p>
+        </div>
+    </div>
+</div>
+
+<div class="sep"></div>
+
+<div id="actions-layout">
+    <div id="main-action">
+        <div class="tab-layout">
+            <div class="tab" style="background-color: #FFF;">
+                <mat-icon>star</mat-icon>
+                <p id="tab-name">Featured</p>
+            </div>
+        </div>
+        <div class="icon-layout">
+            <mat-icon>people</mat-icon>
+        </div>
+        <p class="action-name" style="color: #7C3AED;">Rooms</p>
+        <p class="description">Private space to listen together</p>
+        <button id="main-action-button" mat-fab extended>
+            <mat-icon>arrow_forward</mat-icon>
+            Go to Rooms
+        </button>
+    </div>
+
+    <div class="action-card">
+        <div class="icon-layout">
+            <mat-icon>search</mat-icon>
+        </div>
+        <p class="action-name">Search</p>
+        <p class="description">Search for artists, albums and songs</p>
+        <button style="visibility: hidden;" id="action-button" matButton="tonal" >
+            Activate Search
+        </button>
+    </div>
+
+    <div class="action-card">
+        <div class="icon-layout">
+            <mat-icon>play_arrow</mat-icon>
+        </div>
+        <p class="action-name">Player</p>
+        <p class="description">Play your music and create playlists with your favourite songs</p>
+        <button id="action-button" matButton="tonal" >
+            Open Player
+        </button>
+    </div>
+
+    <div class="action-card">
+        <div class="icon-layout">
+            <mat-icon>bar_chart</mat-icon>
+        </div>
+        <p class="action-name">Stats</p>
+        <p class="description">See your listening stats and trends</p>
+        <button id="action-button" matButton="tonal" >
+            View Stats
+        </button>
+    </div>
+</div>
+
+<div class="sep"></div>
+
+<div class="card">
+    <div id="info-layout">
+        <div id="info">
+            <div class="row">
+                <mat-icon class="icon">people</mat-icon>
+                <p id="rooms">Rooms</p>
+                <div class="tab">
+                    <p id="tab-name">Music Fever's core</p>
+                </div>
+            </div>
+            <p class="description">Create private listening rooms, invite friends and enjoy music in perfect sync</p>
+            <div class="gap"></div>
+            <div class="button-row">
+                <button id="create-room" matFab extended>
+                    Create Room
+                    <mat-icon>add</mat-icon>
+                </button>
+                <div class="gap"></div>
+                <button id="join-room" matFab extended>
+                    Join with Code
+                    <mat-icon fontIcon="qr_code"></mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="image-frame"></div>
+</div>

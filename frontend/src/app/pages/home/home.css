@@ -1,0 +1,266 @@
+.banner{
+    /* Layout */
+    width: 100%;
+    height: fit-content;
+    min-width: 0;
+    align-items: flex-start;
+    box-sizing: border-box;
+
+    /* Style */
+    border-radius: 16px;
+    background: linear-gradient(90deg, #FFF 48.61%, #7B4880 100%);
+    background-image: url("/home_banner.jpg");
+    background-size: 90%;
+    background-position: right 40%;
+    background-repeat: no-repeat;
+}
+
+.blur {
+    /* Layout */
+    width: 100%;
+    height: fit-content;
+    min-width: 0;
+    box-sizing: border-box;
+
+    /* Style */
+    background: linear-gradient(90deg, #FFF 9.63%, rgba(255, 255, 255, 0.00) 99.82%);
+}
+
+#title {
+    /* Layout */
+    display: flex;
+    width: fit-content;
+    padding: clamp(20px, 4vw, 60px) 0 clamp(20px, 4vw, 60px) clamp(15px, 2vw, 30px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10%;
+    align-self: stretch;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 1.1;
+
+    /* Typography */
+    color: #000;
+    font-family: Inter, sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+#title p {
+    /* Typography */
+    color: #707070;
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* ----------------------------------------- */
+
+#actions-layout {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+}
+
+.action-card {
+    /* Layout */
+    display: flex;
+    padding: clamp(25px, 4vw, 60px) clamp(10px, 1vw, 15px) clamp(10px, 1.5vw, 20px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(10px, 1.5vw, 20px);
+    flex: 1 0 0;
+    align-self: stretch;
+
+    /* Style */
+    border-radius: 16px;
+    border: 1px solid #F3E8FF;
+    background: #FFF;
+}
+
+#main-action {
+    /* Layout */
+    display: flex;
+    padding: clamp(10px, 1vw, 15px) clamp(10px, 1vw, 15px) clamp(10px, 1.5vw, 20px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(10px, 1.5vw, 20px);
+    flex: 1 0 0;
+    align-self: stretch;
+
+    /* Style */
+    border-radius: clamp(8px, 1.2vw, 16px);
+    border: 1px solid #7C3AED;
+    background: linear-gradient(126deg, #F3E8FF 23.19%, #FFF 100%);
+}
+
+.icon-layout {
+    /* Layout */
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Style */
+    border-radius: 50%;
+    background-color: #7C3AED;
+
+    mat-icon {
+        width: clamp(30px, 4vw, 50px);
+        height: clamp(30px, 4vw, 50px);
+        font-size: clamp(30px, 4vw, 50px);
+        color: #FFF;
+    }
+}
+
+.action-name {
+    margin: 0;
+
+    /* Typography */
+    color: #000;
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 75%;
+}
+
+.description {
+    /* Layout */
+    margin: 0;
+    align-self: stretch;
+
+    /* Typography */
+    color: #707070;
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%;
+}
+
+#action-button {
+    --mat-button-tonal-container-color: #F3E8FF;
+    --mat-button-tonal-label-text-color: #7C3AED;
+}
+
+#main-action-button {
+    height: clamp(36px, 3vw, 48px);
+    min-height: 0;
+    --mat-fab-container-color: #7C3AED;
+    --mat-fab-foreground-color: #FFFFFF;
+}
+
+/* ----------------------------------------- */
+
+.card {
+    /* Layout */
+    display: grid;
+    grid-template-columns: 40% minmax(0, 1fr);
+    width: 100%;
+
+    /* Style */
+    border-radius: 24px;
+    border: 1px solid #DDD6FE;
+    background: #F9F3FF;
+    box-shadow: 0 8px 28px 0 rgba(76, 29, 149, 0.12);
+    overflow: hidden;
+}
+
+#info-layout {
+    /* Layout */
+    width: auto;
+    min-width: 0;
+    display: flex;
+    padding: 50px 30px;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+#info {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+
+    .description {
+        text-align: left;
+    }
+}
+
+.row {
+    /* Layout */
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 30px;
+    align-self: stretch;
+}
+
+.icon {
+    width: clamp(30px, 4vw, 60px);
+    height: clamp(30px, 4vw, 60px);
+    font-size: clamp(30px, 4vw, 60px);
+    color: #7C3AED;
+}
+
+#rooms {
+    /* Layout */
+    margin: 0;
+
+    /* Typography */
+    color: #7C3AED;
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 62.5%;
+}
+
+.button-row {
+    /* Layout */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.image-frame {
+    /* Layout */
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
+
+    /* Style */
+    background-image: url("/room_icon.png");
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+#create-room {
+    --mat-fab-container-color: #7C3AED;
+    --mat-fab-foreground-color: #FFFFFF;
+}
+
+#join-room {
+    --mat-fab-container-color: #FFF;
+    --mat-fab-foreground-color: #7C3AED;
+}
