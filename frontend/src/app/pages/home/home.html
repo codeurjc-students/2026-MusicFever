@@ -28,7 +28,7 @@
         </div>
         <p class="action-name" style="color: #7C3AED;">Rooms</p>
         <p class="description">Private space to listen together</p>
-        <button id="main-action-button" mat-fab extended>
+        <button (click)="rooms()" id="main-action-button" mat-fab extended>
             <mat-icon>arrow_forward</mat-icon>
             Go to Rooms
         </button>
@@ -51,7 +51,7 @@
         </div>
         <p class="action-name">Player</p>
         <p class="description">Play your music and create playlists with your favourite songs</p>
-        <button id="action-button" matButton="tonal" >
+        <button (click)="player()" id="action-button" matButton="tonal" >
             Open Player
         </button>
     </div>
@@ -62,7 +62,7 @@
         </div>
         <p class="action-name">Stats</p>
         <p class="description">Explore your listening stats and music trends over time</p>
-        <button id="action-button" matButton="tonal" >
+        <button (click)="stats()" id="action-button" matButton="tonal" >
             View Stats
         </button>
     </div>

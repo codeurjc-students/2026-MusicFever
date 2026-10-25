@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.services';
 
@@ -12,6 +13,7 @@ import { AuthService } from '../../services/auth.services';
 })
 export class Home {
   authService = inject(AuthService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe({
@@ -22,5 +24,17 @@ export class Home {
         this.authService.setCurrentUser(null);
       }
     });
+  }
+
+  player(): void {
+    this.router.navigate(['/player']);
+  }
+
+  stats(): void {
+    this.router.navigate(['/stats']);
+  }
+
+  rooms(): void {
+    this.router.navigate(['/rooms']);
   }
 }
