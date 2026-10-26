@@ -1,9 +1,14 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptors,
+  HttpInterceptorFn,
+  HttpResponse
+} from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { firstValueFrom, of, filter, take, timeout } from 'rxjs';
+import { firstValueFrom, of, from, filter, take, timeout } from 'rxjs';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 import { Register } from '../../app/auth/register/register';
@@ -15,17 +20,53 @@ describe('Register integration test', () => {
   let component: Register;
   let authService: AuthService;
 
+  const apiUrl = 'https://localhost:8443/api/v1/auth';
+
   const routerMock = {
     navigate: vi.fn().mockResolvedValue(true)
   };
 
+  // Cookie used only by the integration test
+  let authCookie: string | null = null;
+
+  // Forward authenticated requests to the real API
+  const authInterceptor: HttpInterceptorFn = (req, next) => {
+    if (req.url === `${apiUrl}/me` && authCookie) {
+      return from(
+        (async () => {
+          const response = await fetch(req.url, {
+            method: 'GET',
+            headers: {
+              Cookie: authCookie
+            }
+          });
+
+          if (!response.ok) {
+            throw new Error(`GET /me failed: ${response.status}`);
+          }
+
+          const user = await response.json();
+
+          return new HttpResponse({
+            body: user,
+            status: response.status,
+            url: req.url
+          });
+        })()
+      );
+    }
+
+    return next(req);
+  };
+
   beforeEach(async () => {
     vi.clearAllMocks();
+    authCookie = null;
 
     await TestBed.configureTestingModule({
       imports: [Register, Home],
       providers: [
-        provideHttpClient(),
+        provideHttpClient(withInterceptors([authInterceptor])),
         { provide: Router, useValue: routerMock },
         {
           provide: ActivatedRoute,
@@ -102,12 +143,35 @@ describe('Register integration test', () => {
     expect(routerMock.navigate).toHaveBeenCalledWith(['/']);
     expect(fixture.nativeElement.querySelector('.login-error')).toBeNull();
 
-    // Verify that the new user can authenticate through the real API
-    const response = await firstValueFrom(
-      authService.login(null, newUser.email, newUser.password)
-    );
+    // Login using Node.js fetch to capture the authentication cookie
+    const loginResponse = await fetch(`${apiUrl}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: null,
+        email: newUser.email,
+        password: newUser.password
+      })
+    });
+
+    expect(loginResponse.ok).toBe(true);
+
+    const response = await loginResponse.json();
 
     expect(response.status).toBe('SUCCESS');
+
+    // Extract AuthToken from the Set-Cookie headers
+    const cookies = loginResponse.headers.getSetCookie();
+
+    const tokenCookie = cookies.find(cookie =>
+      cookie.startsWith('AuthToken=')
+    );
+
+    expect(tokenCookie).toBeDefined();
+
+    authCookie = tokenCookie!.split(';')[0];
 
     // Verify that the new user can be retrieved from the real API
     const user = await firstValueFrom(authService.getCurrentUser());
@@ -141,7 +205,7 @@ describe('Register integration test', () => {
 
       // Verify the authenticated user
       expect(homeUser).not.toBeNull();
-expect(homeUser?.username).toBe(newUser.username);
+      expect(homeUser?.username).toBe(newUser.username);
       expect(authService.currentUser()?.username).toBe(newUser.username);
 
       // Verify the welcome message in the DOM
