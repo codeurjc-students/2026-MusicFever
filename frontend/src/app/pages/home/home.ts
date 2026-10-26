@@ -37,4 +37,12 @@ export class Home {
   rooms(): void {
     this.router.navigate(['/rooms']);
   }
+
+  createRoom(): void {
+    this.router.navigate(['/rooms']);
+  }
+
+  joinRoom(): void {
+    this.router.navigate(['/rooms']);
+  }
 }

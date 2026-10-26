@@ -239,12 +239,12 @@
         </div>
         <div class="gap"></div>
         <div class="button-row">
-            <button id="create-room" matFab extended>
+            <button (click)="createRoom()" id="create-room" matFab extended>
                 Create Room
                 <mat-icon>add</mat-icon>
             </button>
             <div class="gap"></div>
-            <button id="join-room" matFab extended>
+            <button (click)="joinRoom()" id="join-room" matFab extended>
                 Join with Code
                 <mat-icon fontIcon="qr_code"></mat-icon>
             </button>
