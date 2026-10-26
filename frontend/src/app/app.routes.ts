@@ -10,8 +10,8 @@ import { Rooms } from './pages/rooms/rooms';
 import { Stats } from './pages/stats/stats';
 import { Search } from './pages/search/search';
 import { Faq } from './pages/faq/faq';
-import { Privacy } from './pages/privacy/privacy';
-import { Terms } from './pages/terms/terms';
+import { Privacy } from './pages/legal/privacy/privacy';
+import { Terms } from './pages/legal/terms/terms';
 import { Info } from './pages/info/info';
 
 export const routes: Routes = [

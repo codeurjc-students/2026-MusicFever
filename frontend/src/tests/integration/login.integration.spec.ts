@@ -1,3 +1,4 @@
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,6 +6,7 @@ import { firstValueFrom, of } from 'rxjs';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 import { Login } from '../../app/auth/login/login';
+import { Home } from '../../app/pages/home/home';
 import { AuthService } from '../../app/services/auth.services';
 
 describe('Login integration test', () => {
@@ -27,7 +29,7 @@ describe('Login integration test', () => {
     vi.clearAllMocks();
 
     await TestBed.configureTestingModule({
-      imports: [Login],
+      imports: [Login, Home],
       providers: [
         provideHttpClient(),
         { provide: Router, useValue: routerMock },
@@ -121,5 +123,40 @@ describe('Login integration test', () => {
     expect(component.loading()).toBe(false);
     expect(component.errorMessage()).toBe('');
     expect(routerMock.navigate).toHaveBeenCalledWith(['/']);
+  });
+
+  it('should display the authenticated user in Home after login', async () => {
+    // Login using the real API
+    const response = await firstValueFrom(
+      authService.login(null, credentials.email, credentials.password)
+    );
+
+    expect(response.status).toBe('SUCCESS');
+
+    // Create Home after authentication
+    const homeFixture = TestBed.createComponent(Home);
+
+    try {
+      // Initialize Home and retrieve the current user
+      homeFixture.detectChanges();
+
+      await homeFixture.whenStable();
+      homeFixture.detectChanges();
+
+      // Verify the authenticated user
+      const user = authService.currentUser();
+
+      expect(user).not.toBeNull();
+      expect(user?.username).toBe(credentials.username);
+
+      // Verify the welcome message in the DOM
+      const title = homeFixture.nativeElement.querySelector('#title');
+
+      expect(title).not.toBeNull();
+      expect(title.textContent).toContain('Welcome back,');
+      expect(title.textContent).toContain(credentials.username);
+    } finally {
+      homeFixture.destroy();
+    }
   });
 });
