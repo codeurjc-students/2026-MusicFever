@@ -40,7 +40,7 @@ export class SideHeader {
   }
 
   howItWorks() {
-    // Pending implementation
+    this.router.navigate(['/info']);
   }
 
   contactUs() {

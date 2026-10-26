@@ -94,6 +94,7 @@ public class LayoutSystemTest {
         click(By.id("submit-search"));
         wait.until(ExpectedConditions.urlContains("/search"));
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("search")));
         assertThat(driver.findElements(By.id("search"))).isNotEmpty();
         assertThat(driver.findElements(By.cssSelector("#search a.active"))).isNotEmpty();
         assertInactive("home");

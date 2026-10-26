@@ -1,0 +1,430 @@
+.banner {
+    /* Layout */
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    align-items: flex-start;
+
+    /* Style */
+    border-radius: 16px;
+    background: linear-gradient(90deg, #FAFAFA 26.68%, #D6C2EB 47.12%);
+}
+
+#title-layout {
+    /* Layout */
+    display: flex;
+    padding: 2.5%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    align-self: stretch;
+
+    p {
+        /* Layout */
+        align-self: stretch;
+
+        /* Typography */
+        color: #707070;
+        font-family: Inter, sans-serif;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+}
+
+h1 {
+    margin: 0;
+
+    /* Typography */
+    color: #000;
+    font-family: Inter, sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+h3 {
+    margin: 0;
+
+    /* Typography */
+    color: #000;
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+#image-frame-rooms {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    width: 40%;    
+    align-self: stretch;
+
+    /* Style */
+    background-image: url("/room_icon.png");
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+/* ---------------------------------------------------- */
+
+.content {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 40px;
+    align-self: stretch;
+
+    /* Style */
+    border-radius: 18px;
+    border: 1px solid #DDD6FE;
+    background: #FFF;
+    box-shadow: 0 8px 28px 0 rgba(76, 29, 149, 0.12);
+}
+
+#info-layout {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+h4 {
+    margin: 0;
+
+    /* Typography */
+    color: #000;
+    font-family: Inter, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 166.667%;
+}
+
+.info-strip {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    align-self: stretch;
+}
+
+.icon-frame {
+    /* Layout */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Style */
+    border-radius: 50%;
+    background-color: #F3E8FF;
+
+    mat-icon {
+        width: clamp(20px, 4vw, 25px);
+        height: clamp(20px, 4vw, 25px);
+        font-size: clamp(20px, 4vw, 25px);
+        color: #7C3AED;
+    }
+
+}
+
+.info-layout {
+    /* Layout */
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main-info {
+    /* Layout */
+    align-self: left;
+    margin: 0;
+
+    /* Typography */
+    color: #000;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 175%;
+}
+
+.description {
+    /* Layout */
+    align-self: stretch;
+    margin: 0;
+
+    /* Typography */
+    color: #707070;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 125%;
+}
+
+#image-frame-info {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    width: 50%;    
+    flex: 0 0 40%;
+    align-self: stretch;
+
+    /* Style */
+    background-image: url("/access_code_icon.png");
+    background-size: 140%;
+    background-position: center left;
+    background-repeat: no-repeat;
+}
+
+/* ---------------------------------------------------- */
+
+.row-layout {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    height: fit-content;
+    gap: 0.5%;
+}
+
+.mini-card {
+    /* Layout */
+    display: flex;
+    padding: 2%;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    flex: 1 0 0;
+    align-self: stretch;
+
+    /* Style */
+    border-radius: 16px;
+    border: 1px solid #DDD6FE;
+    background: #FFF;
+    box-shadow: 0 8px 28px 0 rgba(0, 0, 0, 0.12);
+}
+
+.image-frame-step {
+    /* Layout */
+    width: 80%;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+}
+
+#step-1 {
+    background: url("/icons/step_1.png") #FFF 50% / contain no-repeat;
+}
+
+#step-2 {
+    background: url("/icons/step_2.png") #FFF 50% / contain no-repeat;
+}
+
+#step-3 {
+    background: url("/icons/step_3.png") #FFF 50% / contain no-repeat;
+}
+
+#step-4 {
+    background: url("/icons/step_4.png") #FFF 50% / contain no-repeat;
+}
+
+#step-5 {
+    background: url("/icons/step_5.png") #FFF 50% / contain no-repeat;
+}
+
+.dashed-line {
+  width: 40px;
+  border-top: 2px dashed #7C3AED;
+}
+
+/* ---------------------------------------------------- */
+
+#requirements {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.card {
+    /* Layout */
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+
+    /* Style */
+    border-radius: 12px;
+    border: 1px solid #DDD6FE;
+    background: #F3E8FF;
+    box-shadow: 0 8px 28px 0 rgba(76, 29, 149, 0.12);
+}
+
+#card-title {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 5px;
+    width: 100%;
+
+    mat-icon {
+        width: clamp(10px, 4vw, 25px);
+        height: clamp(10px, 4vw, 25px);
+        font-size: clamp(10px, 4vw, 25px);
+        color: #7C3AED;
+    }
+}
+
+.title {
+    margin: 0;
+
+    /* Typography */
+    color: #4B365B;
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+}
+
+.more-info {
+    padding-left: 1%;
+
+    /* Typography */
+    color: rgba(112, 112, 112, 0.80);
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 133.333%;
+
+    a {
+        font-weight: bold;
+        color: rgba(112, 112, 112, 0.80);
+        text-decoration: underline;
+    }
+}
+
+/* ---------------------------------------------------- */
+
+.cases-card {
+    /* Layout */
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+
+    /* Style */
+    border-radius: 16px;
+    border: 1px solid #DDD6FE;
+    box-shadow: 0 8px 28px 0 rgba(0, 0, 0, 0.12);
+
+    .gap {
+        min-height: 130px;
+    }
+
+    .description {
+        /* Style */
+        background: radial-gradient(
+            ellipse,
+            rgba(255, 255, 255, 0.85) 30%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        padding: 15px;
+    }
+}
+
+#party {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0.20) 100%), url("/party_icon.png") lightgray 50% / cover no-repeat;
+     
+}
+
+#dinner {
+    background: url("/dinner_icon.png")
+}
+
+#get-together {
+    background: url("/reunion_icon.png")
+}
+
+.title-icon-frame {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 15px;
+    align-self: stretch;
+
+    /* Style */
+    background: rgba(255, 255, 255, 0.70);
+}
+
+/* ---------------------------------------------------- */
+
+.image-frame {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    width: 100%;    
+    align-self: center;
+    height: 200px;
+    flex-shrink: 0;
+
+    /* Style */
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+#search {
+    background-image: url("/search_icon.png");
+}
+
+#play {
+    background-image: url("/player_icon.png");
+}
+
+#playlist {
+    background-image: url("/playlist_icon.png");
+}
+
+#stats {
+    background-image: url("/stats_icon.png");
+}
+
+.button-row {
+    /* Layout */
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#create-room {
+    --mat-fab-container-color: #7C3AED;
+    --mat-fab-foreground-color: #FFFFFF;
+}
+
+#join-room {
+    --mat-fab-container-color: #FFF;
+    --mat-fab-foreground-color: #7C3AED;
+}

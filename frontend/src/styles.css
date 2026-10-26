@@ -2,9 +2,67 @@
     flex: 1;
 }
 
+.sep {
+    margin: 2%;
+}
+
 .logo {
     /* Layout */
     width: 158px;
     height: 55px;
     flex-shrink: 0;
+}
+
+#page-layout > router-outlet + * {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.tab-layout {
+    /* Layout */
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: clamp(5px, 0.75vw, 10px);
+    align-self: stretch;
+}
+
+.tab {
+    /* Layout */
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    padding: clamp(2px, 3vw, 4px) clamp(8px, 1vw, 10px);
+    align-items: center;
+    gap: clamp(3px, 0.4vw, 5px);
+
+    /* Style */
+    border-radius: 999px;
+    background: #F3E8FF;
+
+    mat-icon {
+        /* Layout */
+        width: clamp(15px, 1.5vw, 24px);
+        height: clamp(15px, 1.5vw, 24px);
+        
+        /* Style */
+        font-size: clamp(15px, 1.5vw, 24px);
+        line-height: 1;
+        color: #7C3AED;
+    }
+}
+
+#tab-name {
+    /* Layout */
+    margin: 0;
+
+    /* Typography */
+    color: #7C3AED;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
 }

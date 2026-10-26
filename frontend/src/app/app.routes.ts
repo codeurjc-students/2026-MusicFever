@@ -10,8 +10,9 @@ import { Rooms } from './pages/rooms/rooms';
 import { Stats } from './pages/stats/stats';
 import { Search } from './pages/search/search';
 import { Faq } from './pages/faq/faq';
-import { Privacy } from './pages/privacy/privacy';
-import { Terms } from './pages/terms/terms';
+import { Privacy } from './pages/legal/privacy/privacy';
+import { Terms } from './pages/legal/terms/terms';
+import { Info } from './pages/info/info';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },
+      { path: 'info', component: Info},
       { path: 'search', component: Search },
       { path: 'player', component: Player },
       { path: 'rooms', component: Rooms },

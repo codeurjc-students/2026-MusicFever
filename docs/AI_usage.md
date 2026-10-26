@@ -613,3 +613,27 @@ The AI assisted in identifying and resolving errors during test execution, parti
 
 #### Usage
 The AI was used to guide the implementation of the app's main layout in Angular, ensuring that the interface followed the original Figma design. The assistance focused on organizing the fixed navigation headers, displaying different pages within the main content area, implementing reusable navigation items with active states, and keeping the login and registration pages separate from the main layout. It also helped adapt Figma's visual styles to CSS and resolve layout and styling issues.
+
+### 7.5 Layout Fixes and Responsive Figma Design
+#### Entry Details
+| Entry details | Value |
+|---|---|
+| **Date** | 24/10/2026 |
+| **Phase** | 3 (Basic functionality development) |
+| **Objective** | Responsive UI development and layout refinement |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-6 |
+
+#### Tool Configuration
+| Setting | Value |
+|---|---|
+| **Model** | GPT-6 |
+| **Reasoning level** | Not specified |
+| **Interaction mode** | Conversational |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used |
+| **Connected tools** | None |
+
+#### Usage
+The AI was used to support the adaptation of static CSS styles exported from Figma into responsive layouts, primarily by converting fixed dimensions and spacing into flexible values using `clamp()`. It also assisted in resolving layout issues such as overlapping elements, content overflow and duplicate scrollbars, adjusting background image positioning and scaling, and customizing Angular Material buttons to match the application's visual design.
