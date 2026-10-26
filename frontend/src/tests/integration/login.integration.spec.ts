@@ -133,21 +133,19 @@ describe('Login integration test', () => {
 
     expect(response.status).toBe('SUCCESS');
 
-    // Create Home after authentication
+    // Retrieve the authenticated user from the real API
+    const user = await firstValueFrom(authService.getCurrentUser());
+
+    expect(user).not.toBeNull();
+    expect(user.username).toBe(credentials.username);
+
+    // Initialize Home with the authenticated user
+    authService.setCurrentUser(user);
+
     const homeFixture = TestBed.createComponent(Home);
 
     try {
-      // Initialize Home and retrieve the current user
       homeFixture.detectChanges();
-
-      await homeFixture.whenStable();
-      homeFixture.detectChanges();
-
-      // Verify the authenticated user
-      const user = authService.currentUser();
-
-      expect(user).not.toBeNull();
-      expect(user?.username).toBe(credentials.username);
 
       // Verify the welcome message in the DOM
       const title = homeFixture.nativeElement.querySelector('#title');

@@ -2,7 +2,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { firstValueFrom, of } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { firstValueFrom, of, filter, take, timeout } from 'rxjs';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 import { Register } from '../../app/auth/register/register';
@@ -108,21 +109,40 @@ describe('Register integration test', () => {
 
     expect(response.status).toBe('SUCCESS');
 
+    // Verify that the new user can be retrieved from the real API
+    const user = await firstValueFrom(authService.getCurrentUser());
+
+    expect(user).not.toBeNull();
+    expect(user.username).toBe(newUser.username);
+
     // Create Home after authentication
     const homeFixture = TestBed.createComponent(Home);
 
     try {
+      // Observe the authenticated user before initializing Home
+      const userObservable = TestBed.runInInjectionContext(() =>
+        toObservable(authService.currentUser)
+      );
+
+      const userPromise = firstValueFrom(
+        userObservable.pipe(
+          filter(user => user?.username === newUser.username),
+          take(1),
+          timeout(5000)
+        )
+      );
+
       // Initialize Home and retrieve the current user
       homeFixture.detectChanges();
 
-      await homeFixture.whenStable();
+      const homeUser = await userPromise;
+
       homeFixture.detectChanges();
 
       // Verify the authenticated user
-      const user = authService.currentUser();
-
-      expect(user).not.toBeNull();
-      expect(user?.username).toBe(newUser.username);
+      expect(homeUser).not.toBeNull();
+expect(homeUser?.username).toBe(newUser.username);
+      expect(authService.currentUser()?.username).toBe(newUser.username);
 
       // Verify the welcome message in the DOM
       const title = homeFixture.nativeElement.querySelector('#title');
