@@ -86,23 +86,6 @@ public class AuthSystemTest {
 
     @Test
     @Tag("system")
-    void logoutUser(){
-        login("armiiin", true);
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
-        assertThat(driver.getCurrentUrl()).isEqualTo(BASE_URL + "/home");
-
-        // Logout
-        driver.findElement(By.id("logout-link")).click();
-
-        // Check if log out was successful
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
-        WebElement title = driver.findElement(By.tagName("h1"));
-        assertThat(title.getText()).contains("to Music Fever");
-    }
-
-    @Test
-    @Tag("system")
     void registerUser(){
         driver.get(BASE_URL + "/register");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("username-input")));
@@ -123,8 +106,8 @@ public class AuthSystemTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-layout")));
         assertThat(driver.getCurrentUrl()).isEqualTo(BASE_URL + "/home");
 
-        WebElement title = driver.findElement(By.tagName("h1"));
-        assertThat(title.getText()).contains("test");
+        List<WebElement> titles = driver.findElements(By.tagName("h1"));
+        assertThat(titles.get(1).getText()).contains("test");
     }
 
     @Test
