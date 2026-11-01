@@ -1,5 +1,6 @@
-package com.musicfever.music_fever.dto.user;
+package com.musicfever.music_fever.mapper;
 
+import com.musicfever.music_fever.dto.user.ActiveUserDTO;
 import com.musicfever.music_fever.model.UserEntity;
 
 import java.util.Collection;

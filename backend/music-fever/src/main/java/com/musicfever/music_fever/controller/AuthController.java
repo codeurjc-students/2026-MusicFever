@@ -14,9 +14,9 @@ import com.musicfever.music_fever.config.jwt.AuthResponse;
 import com.musicfever.music_fever.config.jwt.LoginRequest;
 import com.musicfever.music_fever.config.jwt.UserLoginService;
 import com.musicfever.music_fever.dto.user.ActiveUserDTO;
-import com.musicfever.music_fever.dto.user.UserMapper;
 import com.musicfever.music_fever.exception.UserAlreadyExistsException;
 import com.musicfever.music_fever.exception.UserNotFoundException;
+import com.musicfever.music_fever.mapper.UserMapper;
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.service.UserService;
 
