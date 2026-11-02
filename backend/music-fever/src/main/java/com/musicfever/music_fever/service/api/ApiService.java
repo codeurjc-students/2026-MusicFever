@@ -1,0 +1,46 @@
+package com.musicfever.music_fever.service.api;
+
+import org.springframework.stereotype.Service;
+
+import com.musicfever.music_fever.dto.api.iTunes.iTunesAlbumDTO;
+import com.musicfever.music_fever.dto.api.spotify.ItemsPage;
+import com.musicfever.music_fever.dto.api.spotify.SearchResponse;
+import com.musicfever.music_fever.dto.api.spotify.SpotifyAlbumDTO;
+import com.musicfever.music_fever.dto.api.spotify.SpotifyArtistDTO;
+import com.musicfever.music_fever.dto.api.spotify.SpotifyTrackDTO;
+
+@Service 
+public class ApiService {
+    private final SpotifyService spotify;
+    private final iTunesService iTunes;
+
+    public ApiService(SpotifyService spotifyService, iTunesService iTunesService){
+        this.spotify = spotifyService;
+        this.iTunes = iTunesService;
+    }
+
+    // Looks in Spotify for the main entities of the search
+    public SearchResponse getSearch(String searchString) {
+        return this.spotify.getSearch(searchString);
+    }
+
+    public SpotifyArtistDTO getSpotifyArtist(String id) {
+        return this.spotify.getArtistById(id);
+    }
+
+    public SpotifyAlbumDTO getSpotifyAlbum(String id) {
+        return this.spotify.getAlbumById(id);
+    }
+
+    public iTunesAlbumDTO getITunesAlbum(String albumName, String artistName) {
+        return this.iTunes.getAlbum(albumName, artistName);
+    }
+
+    public ItemsPage<SpotifyTrackDTO> getAlbumTracks(String id) {
+        return this.spotify.getAlbumsTracks(id);
+    }
+
+    public ItemsPage<SpotifyAlbumDTO> getArtistAlbums(String id){
+        return this.spotify.getArtistsAlbums(id);
+    }
+}

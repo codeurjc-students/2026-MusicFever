@@ -1,6 +1,6 @@
-package com.musicfever.music_fever.mapper;
+package com.musicfever.music_fever.mapper.api;
 
-import com.musicfever.music_fever.dto.api.iTunesAlbumDTO;
+import com.musicfever.music_fever.dto.api.iTunes.iTunesAlbumDTO;
 import com.musicfever.music_fever.model.Album;
 
 public class iTunesAlbumMapper {

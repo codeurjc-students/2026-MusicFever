@@ -1,9 +1,17 @@
 package com.musicfever.music_fever.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,8 +26,27 @@ public class Artist {
     private String spotifyId;
     private String spotifyHref;
     private String name;
+
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "url", column = @Column(name = "small_image_url")),
+        @AttributeOverride(name = "width", column = @Column(name = "small_image_width")),
+        @AttributeOverride(name = "height", column = @Column(name = "small_image_height"))
+    })
     private Image smallImage;
+
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "url", column = @Column(name = "big_image_url")),
+        @AttributeOverride(name = "width", column = @Column(name = "big_image_width")),
+        @AttributeOverride(name = "height", column = @Column(name = "big_image_height"))
+    })
     private Image bigImage;
+
+    private boolean loaded = false; // if all albums have been loaded
+
+    @ManyToMany(mappedBy = "artists")
+    private List<Album> albums = new ArrayList<>();
 
     public Artist(){}
 }

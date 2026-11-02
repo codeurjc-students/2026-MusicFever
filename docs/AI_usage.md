@@ -637,3 +637,27 @@ The AI was used to guide the implementation of the app's main layout in Angular,
 
 #### Usage
 The AI was used to support the adaptation of static CSS styles exported from Figma into responsive layouts, primarily by converting fixed dimensions and spacing into flexible values using `clamp()`. It also assisted in resolving layout issues such as overlapping elements, content overflow and duplicate scrollbars, adjusting background image positioning and scaling, and customizing Angular Material buttons to match the application's visual design.
+
+### 7.6 Debug and API Endpoints
+#### Entry Details
+| Entry details | Value |
+| --- | --- |
+| **Date** | November 1–2, 2026 |
+| **Phase** | 3 (Basic functionality development) |
+| **Objective** | Implementation and debugging of music search functionality, integration with Spotify and iTunes APIs, DTO mapping, database persistence, and service architecture. |
+| **AI Tool** | ChatGPT |
+| **Tool version** | GPT-6 |
+
+#### Tool Configuration
+| Setting | Value |
+| --- | --- |
+| **Model** | GPT-6 |
+| **Reasoning level** | Not specified |
+| **Interaction mode** | Interactive chat |
+| **Agent mode** | Not used |
+| **Plan mode** | Not used |
+| **Web search** | Not used for development assistance |
+| **Connected tools** | None used |
+
+#### Usage
+The AI was used to assist in the development of the `iTunesService`, specifically with implementing the HTTP requests to retrieve album information from the iTunes API. It also provided the necessary Spring beans for the service to work properly. Additionally, it helped identify and resolve several minor errors that arose during implementation, most of which were simple coding mistakes.

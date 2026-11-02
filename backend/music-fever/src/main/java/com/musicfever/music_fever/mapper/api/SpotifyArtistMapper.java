@@ -1,6 +1,6 @@
-package com.musicfever.music_fever.mapper;
+package com.musicfever.music_fever.mapper.api;
 
-import com.musicfever.music_fever.dto.api.SpotifyArtistDTO;
+import com.musicfever.music_fever.dto.api.spotify.SpotifyArtistDTO;
 import com.musicfever.music_fever.model.Artist;
 
 public class SpotifyArtistMapper {

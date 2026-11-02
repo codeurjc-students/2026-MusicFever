@@ -1,4 +1,4 @@
-package com.musicfever.music_fever.mapper;
+package com.musicfever.music_fever.mapper.model;
 
 import com.musicfever.music_fever.dto.user.ActiveUserDTO;
 import com.musicfever.music_fever.model.UserEntity;

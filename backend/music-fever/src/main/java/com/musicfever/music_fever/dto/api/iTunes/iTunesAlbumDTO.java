@@ -1,9 +1,10 @@
-package com.musicfever.music_fever.dto.api;
+package com.musicfever.music_fever.dto.api.iTunes;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.Setter;
 
 @Getter 
 @Setter 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class iTunesAlbumDTO {
     private String collectionId;
     private String artistName;

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +26,9 @@ public class Track {
     private boolean explicit;
     private int discNumber;
     private int totalDiscCount;
+
+    @ManyToOne
+    private Album album;
 
     public Track(){}
     

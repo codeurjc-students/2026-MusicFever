@@ -1,10 +1,10 @@
 package com.musicfever.music_fever.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity 
+@Embeddable
 @Setter 
 @Getter 
 public class Image {

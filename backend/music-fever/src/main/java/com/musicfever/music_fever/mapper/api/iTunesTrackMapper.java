@@ -1,6 +1,6 @@
-package com.musicfever.music_fever.mapper;
+package com.musicfever.music_fever.mapper.api;
 
-import com.musicfever.music_fever.dto.api.iTunesTrackDTO;
+import com.musicfever.music_fever.dto.api.iTunes.iTunesTrackDTO;
 import com.musicfever.music_fever.model.Track;
 
 public class iTunesTrackMapper {

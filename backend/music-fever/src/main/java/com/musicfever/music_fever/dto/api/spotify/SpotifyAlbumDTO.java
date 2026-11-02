@@ -1,7 +1,8 @@
-package com.musicfever.music_fever.dto.api;
+package com.musicfever.music_fever.dto.api.spotify;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.musicfever.music_fever.model.Image;
 
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 @Getter 
 @Setter 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SpotifyAlbumDTO {
     private String id;
     private String href;
@@ -20,6 +22,8 @@ public class SpotifyAlbumDTO {
 
     @JsonProperty("total_tracks")
     private int totalTracks;
+
+    private List<SpotifyArtistDTO> artists;
 
     private Image smallImage;
     private Image bigImage;
