@@ -20,4 +20,6 @@ public class SpotifyTrackDTO {
 
     @JsonProperty("track_number")
     private int number;
+
+    private SpotifyAlbumDTO album;
 }

@@ -50,26 +50,36 @@ public class TrackService {
         Optional<Track> op = this.repository.findBySpotifyId(dto.getId());
 
         if (op.isEmpty()){
+            dto = this.apiService.getSpotifyTrack(dto.getId());
             Track newTrack = new Track();
             SpotifyTrackMapper.updateEntity(dto, newTrack);
-            return this.repository.save(newTrack);
+            Album album = this.albumService.loadAlbum(dto.getAlbum());
+            newTrack.setAlbum(album);
+            newTrack = this.repository.save(newTrack);
+
+            this.albumService.updateTrack(album, newTrack);
+
+            return newTrack;
         } else {
             return op.get();
         }
     }
 
-    public void loadAlbumsTracks(List<Album> albums){
+    public List<Album> loadAlbumsTracks(List<Album> albums){
+        List<Album> loadedAlbums = new ArrayList<>();
         for(Album album: albums){
-            this.loadAlbumTracks(album);
+            loadedAlbums.add(this.loadAlbumTracks(album));
         }
+        return loadedAlbums;
     }
 
-    public void loadAlbumTracks(Album album) {
+    public Album loadAlbumTracks(Album album) {
         if (!album.isLoaded()){
             ItemsPage<SpotifyTrackDTO> tracksPage = this.apiService.getAlbumTracks(album.getSpotifyId());
             List<Track> tracks = this.loadTracks(tracksPage.getItems());
-            this.albumService.updateTracks(album, tracks);
+            return this.albumService.updateTracks(album, tracks);
         }
+        return this.albumService.findAlbumById(album.getId());
     }
 
 }

@@ -48,14 +48,18 @@ public class ArtistService {
         }
     }
 
-    public void updateAlbum(Artist artist, Album newAlbum) {
+    public Artist updateAlbum(Artist artist, Album newAlbum) {
         artist.getAlbums().add(newAlbum);
-        this.repository.save(artist);
+        return this.repository.save(artist);
     }
 
-    public void updateAlbums(Artist artist, List<Album> albums) {
+    public Artist updateAlbums(Artist artist, List<Album> albums) {
         artist.setAlbums(albums);
         artist.setLoaded(true);
-        this.repository.save(artist);
+        return this.repository.save(artist);
+    }
+
+    public Artist getArtistById(Long id) {
+        return this.repository.findById(id).get();
     }
 }

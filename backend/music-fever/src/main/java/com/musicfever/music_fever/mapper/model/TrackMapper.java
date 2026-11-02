@@ -11,7 +11,6 @@ import com.musicfever.music_fever.model.Track;
 
 @Mapper(componentModel = "spring")
 public interface TrackMapper {
-    @Mapping(target = "artists", ignore = true)
     TrackDTO toDTO(Track track);
     
     @Mapping(target = "id", ignore = true)

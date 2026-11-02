@@ -21,6 +21,7 @@ public interface AlbumMapper {
     @Mapping(target = "ITunesId", ignore = true)
     @Mapping(target = "albumType", ignore = true)
     @Mapping(target = "bigImage", ignore = true)
+    @Mapping(target = "loaded", ignore = true)
     List<AlbumDTO> toDTOs(Collection<Album> albums);
 
     @Mapping(target = "id", ignore = true)
@@ -30,5 +31,7 @@ public interface AlbumMapper {
     @Mapping(target = "ITunesId", ignore = true)
     @Mapping(target = "albumType", ignore = true)
     @Mapping(target = "bigImage", ignore = true)
+    @Mapping(target = "genre", ignore = true)
+    @Mapping(target = "loaded", ignore = true)
     Album toDomain(AlbumDTO albumDTO);
 }

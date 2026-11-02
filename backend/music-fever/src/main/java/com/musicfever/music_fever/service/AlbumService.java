@@ -41,13 +41,12 @@ public class AlbumService {
         return newAlbums;
     }
 
-    private Album loadAlbum(SpotifyAlbumDTO basicAlbum) {
+    public Album loadAlbum(SpotifyAlbumDTO basicAlbum) {
         Optional<Album> op = this.repository.findBySpotifyId(basicAlbum.getId());
         if (op.isEmpty()){
             SpotifyAlbumDTO spotifyAlbum = this.apiService.getSpotifyAlbum(basicAlbum.getId());
             List<Artist> albumArtists = this.artistService.loadArtists(spotifyAlbum.getArtists());
             iTunesAlbumDTO iTunesAlbum = this.apiService.getITunesAlbum(basicAlbum.getName(), albumArtists.get(0).getName());
-            
 
             Album newAlbum = new Album();
             SpotifyAlbumMapper.updateEntity(spotifyAlbum, newAlbum);
@@ -69,17 +68,27 @@ public class AlbumService {
         }
     }
 
-    public void updateTracks(Album album, List<Track> tracks) {
+    public Album updateTracks(Album album, List<Track> tracks) {
         album.setTracks(tracks);
         album.setLoaded(true);
-        this.repository.save(album);
+        return this.repository.save(album);
     }
 
-    public void loadArtistAlbums(Artist artist){
+    public Artist loadArtistAlbums(Artist artist){
         if (!artist.isLoaded()){
             ItemsPage<SpotifyAlbumDTO> albumPage = this.apiService.getArtistAlbums(artist.getSpotifyId());
             List<Album> albums = this.loadAlbums(albumPage.getItems());
-            this.artistService.updateAlbums(artist, albums);
+            return this.artistService.updateAlbums(artist, albums);
         }
+        return this.artistService.getArtistById(artist.getId());
+    }
+
+    public Album findAlbumById(Long id) {
+        return this.repository.findById(id).get();
+    }
+
+    public void updateTrack(Album album, Track newTrack) {
+        album.getTracks().add(newTrack);
+        this.repository.save(album);
     }
 }

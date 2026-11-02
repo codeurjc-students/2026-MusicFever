@@ -27,7 +27,7 @@ public class iTunesService {
             String body = restClient.get()
                     .uri(uriBuilder -> uriBuilder
                             .path("/search")
-                            .queryParam("term", albumName)
+                            .queryParam("term", artistName + " " + albumName)
                             .queryParam("media", "music")
                             .queryParam("entity", "album")
                             .queryParam("attribute", "albumTerm")

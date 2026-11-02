@@ -43,4 +43,8 @@ public class ApiService {
     public ItemsPage<SpotifyAlbumDTO> getArtistAlbums(String id){
         return this.spotify.getArtistsAlbums(id);
     }
+
+    public SpotifyTrackDTO getSpotifyTrack(String id) {
+        return this.spotify.getTrackById(id);
+    }
 }
