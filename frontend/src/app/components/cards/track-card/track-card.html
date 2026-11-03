@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="column-display">
+        <img [src]="track().album.smallImage.url" alt="">
+
+        <div class="info-container">
+            <p id="main-name">{{ track().number }}. {{ track().name }}</p>
+            <div class="row-display">
+                <p id="secondary-text"> {{ track().album.name }}</p>
+                <p id="secondary-text"> · </p>
+                <p id="secondary-text">
+                    @for (artist of track().album.artists; track artist.id; let last = $last) {
+                        {{ artist.name }}{{ last ? '' : ', ' }}
+                    }
+                </p>
+            </div>
+        </div>
+
+        <div class="row-display">
+            <button class="bubble" id="main-button" (click)="play()">
+                <mat-icon>play_arrow</mat-icon>
+            </button>
+
+            <button class="bubble" (click)="playNext()">
+                <mat-icon>playlist_play</mat-icon>
+            </button>
+
+            <button class="bubble" (click)="onQueue()">
+                <mat-icon>queue_music</mat-icon>
+            </button>
+
+            <button class="bubble" (click)="addToPlaylist()">
+                <mat-icon>playlist_add</mat-icon>
+            </button>
+        </div>
+
+        <div class="tab-layout">
+            <div class="tab">
+                <p id="tab-name">Track</p>
+            </div>
+        </div>
+    </div>
+</div>

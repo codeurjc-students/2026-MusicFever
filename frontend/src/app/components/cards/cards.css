@@ -1,0 +1,135 @@
+button {
+    cursor: pointer;
+}
+
+.container {
+    /* Layout */
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 20px;
+    align-items: center;
+    gap: 15px;
+
+    /* Style */
+    border-radius: 16px;
+    border: 2px solid #B493FF;
+    background: rgba(247, 242, 255, 0.80);
+    box-shadow: 0 4px 4px 0 rgba(140, 82, 255, 0.25);
+    backdrop-filter: blur(2px);
+}
+
+.column-display {
+    /* Layout */
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+img {
+    /* Layout */
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+.info-container {
+    /* Layout */
+    display: flex;
+    margin-right: auto;
+    width: fit-content;
+    flex-shrink: 0;
+    padding: 5px 2px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+    flex: 0 0 auto;
+}
+
+.row-display {
+    /* Layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+#icon-text {
+    /* Layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+}
+
+#main-name {
+    margin: 0;
+    width: fit-content;
+
+    /* Typography */
+    color: #2F2936;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#secondary-text {
+    margin: 0;
+
+    /* Typography */
+    color: rgba(138, 129, 146, 0.75);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: rgba(124, 58, 237, 0.70);
+}
+
+.bubble {
+    /* Layout */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Style */
+    background-color: rgba(124, 58, 237, 0.15);
+    border-radius: 50%;
+    border: 1.5px solid rgba(124, 58, 237, 0.35);
+    box-sizing: border-box;
+
+    mat-icon{
+        font-size: 25px;
+        width: 25px;
+        height: 25px;
+        color: #7C3AED;
+    }
+}
+
+#main-button {
+    background-color: #7C3AED;
+    mat-icon{
+        color: #FFF;
+    }
+}
+
+button:hover {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+    );
+}

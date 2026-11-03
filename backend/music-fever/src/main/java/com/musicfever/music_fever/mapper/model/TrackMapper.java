@@ -13,7 +13,6 @@ import com.musicfever.music_fever.model.Track;
 public interface TrackMapper {
     TrackDTO toDTO(Track track);
     
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "spotifyId", ignore = true)
     @Mapping(target = "spotifyHref", ignore = true)
     @Mapping(target = "genre", ignore = true)
@@ -22,7 +21,6 @@ public interface TrackMapper {
     @Mapping(target = "totalDiscCount", ignore = true)
     List<TrackDTO> toDTOs(Collection<Track> tracks);
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "spotifyId", ignore = true)
     @Mapping(target = "spotifyHref", ignore = true)
     @Mapping(target = "ITunesId", ignore = true)

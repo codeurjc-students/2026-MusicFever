@@ -1,1 +1,21 @@
-<p>search works!</p>
+@if (loading()) {
+    <p>Loading...</p>
+} @else {
+    <p class="description">{{ searchResult()?.size }} results</p>
+
+    <div class="container">
+        <div class="scroll-content">
+            @for (artist of searchResult()?.artists ?? []; track artist.id) {
+                <app-artist-card [artist]="artist" />
+            }
+
+            @for (album of searchResult()?.albums ?? []; track album.id) {
+                <app-album-card [album]="album" />
+            }
+
+            @for (track of searchResult()?.tracks ?? []; track track.number) {
+                <app-track-card [track]="track" />
+            }
+        </div>
+    </div>
+}

@@ -138,21 +138,6 @@ h1 {
     line-height: 75%;
 }
 
-.description {
-    /* Layout */
-    margin: 0;
-    align-self: stretch;
-
-    /* Typography */
-    color: #707070;
-    text-align: center;
-    font-family: Inter, sans-serif;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 130%;
-}
-
 #action-button {
     --mat-button-tonal-container-color: #F3E8FF;
     --mat-button-tonal-label-text-color: #7C3AED;

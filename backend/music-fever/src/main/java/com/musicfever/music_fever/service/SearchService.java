@@ -56,6 +56,7 @@ public class SearchService {
 
     private SearchDTO mapResponse(List<Artist> artistsSearch, List<Album> albumsSearch, List<Track> tracksSearch) {
         return new SearchDTO(
+            artistsSearch.size() + albumsSearch.size() + tracksSearch.size(),
             artistMapper.toDTOs(artistsSearch),
             albumMapper.toDTOs(albumsSearch),
             trackMapper.toDTOs(tracksSearch)

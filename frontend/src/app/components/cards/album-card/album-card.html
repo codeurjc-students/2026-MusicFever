@@ -1,0 +1,31 @@
+<button class="container" (click)="albumPage()">
+    <div class="column-display">
+        <img [src]="album().smallImage.url" alt="">
+
+        <div class="info-container">
+            <p id="main-name">{{ album().name }}</p>
+            <div class="row-display">
+                <p id="secondary-text">
+                    @for (artist of album().artists; track artist.id; let last = $last) {
+                        {{ artist.name }}{{ last ? '' : ', ' }}
+                    }
+                </p>
+                <p id="secondary-text"> · </p>
+                <div id="icon-text">
+                    <mat-icon>calendar_today</mat-icon>
+                    <p id="secondary-text">
+                        {{ album().releaseDate ?? 'XX-XX-XXXX' }}
+                    </p>
+                </div>
+                <p id="secondary-text"> · </p>
+                <p id="secondary-text"> {{album().totalTracks}} tracks</p>
+            </div>
+        </div>
+
+        <div class="tab-layout">
+            <div class="tab">
+                <p id="tab-name">Album</p>
+            </div>
+        </div>
+    </div>
+</button>

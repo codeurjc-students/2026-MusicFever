@@ -13,7 +13,6 @@ import com.musicfever.music_fever.model.Album;
 public interface AlbumMapper {
     AlbumDTO toDTO(Album album);
     
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "spotifyId", ignore = true)
     @Mapping(target = "spotifyHref", ignore = true)
     @Mapping(target = "tracks", ignore = true)
@@ -24,7 +23,6 @@ public interface AlbumMapper {
     @Mapping(target = "loaded", ignore = true)
     List<AlbumDTO> toDTOs(Collection<Album> albums);
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "spotifyId", ignore = true)
     @Mapping(target = "spotifyHref", ignore = true)
     @Mapping(target = "tracks", ignore = true)
