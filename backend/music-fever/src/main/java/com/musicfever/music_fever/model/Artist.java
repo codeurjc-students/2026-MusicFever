@@ -1,7 +1,9 @@
 package com.musicfever.music_fever.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -47,6 +49,11 @@ public class Artist {
 
     @ManyToMany(mappedBy = "artists")
     private List<Album> albums = new ArrayList<>();
+
+    @ManyToMany
+    private List<Track> topTracks = new ArrayList<>();
+
+    private Set<String> genres = new HashSet<>();
 
     public Artist(){}
 }

@@ -10,4 +10,5 @@ import com.musicfever.music_fever.model.Album;
 public interface AlbumRepository extends JpaRepository<Album, Long>{
     public List<Album> findByNameContainingIgnoreCase(String search);
     public Optional<Album> findBySpotifyId(String id);
+    public Optional<Album> findById(Long id);
 }

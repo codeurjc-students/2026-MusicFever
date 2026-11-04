@@ -47,7 +47,7 @@ public class SearchService {
             SearchResponse response = this.apiService.getSearch(searchString);
             artistsSearch = this.artistService.loadArtists(response.getArtists().getItems());
             albumsSearch = this.albumService.loadAlbums(response.getAlbums().getItems());
-            this.trackService.loadAlbumsTracks(albumsSearch);
+            this.albumService.loadAlbumsTracks(albumsSearch);
             tracksSearch = this.trackService.loadTracks(response.getTracks().getItems());
         }
 

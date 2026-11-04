@@ -8,6 +8,7 @@ import com.musicfever.music_fever.dto.api.spotify.SearchResponse;
 import com.musicfever.music_fever.dto.api.spotify.SpotifyAlbumDTO;
 import com.musicfever.music_fever.dto.api.spotify.SpotifyArtistDTO;
 import com.musicfever.music_fever.dto.api.spotify.SpotifyTrackDTO;
+import com.musicfever.music_fever.dto.api.spotify.TracksResponse;
 
 @Service 
 public class ApiService {
@@ -46,5 +47,13 @@ public class ApiService {
 
     public SpotifyTrackDTO getSpotifyTrack(String id) {
         return this.spotify.getTrackById(id);
+    }
+
+    public ItemsPage<SpotifyAlbumDTO> getNextPage(String next, Class<SpotifyAlbumDTO> class1) {
+        return this.spotify.getNextPage(next, class1);
+    }
+
+    public TracksResponse getArtistTopTracks(String spotifyId) {
+        return this.spotify.getArtistsTopTracks(spotifyId);
     }
 }

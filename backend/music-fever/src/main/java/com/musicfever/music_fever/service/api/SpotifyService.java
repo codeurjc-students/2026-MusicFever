@@ -1,6 +1,7 @@
 package com.musicfever.music_fever.service.api;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -161,5 +162,24 @@ public class SpotifyService {
         HttpEntity<Void> entity = new HttpEntity<>(headers);
         ParameterizedTypeReference<ItemsPage<SpotifyTrackDTO>> responseType = new ParameterizedTypeReference<ItemsPage<SpotifyTrackDTO>>() {};
         return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseType).getBody();
+    }
+
+    public <T> ItemsPage<T> getNextPage(String next, Class<T> dtoClass) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", tokenService.getTokenType() + " " + tokenService.getAccessToken());
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        ParameterizedTypeReference<ItemsPage<T>> responseType =
+                ParameterizedTypeReference.forType(
+                        ResolvableType.forClassWithGenerics(ItemsPage.class, dtoClass).getType()
+                );
+
+        return restTemplate.exchange(
+                next,
+                HttpMethod.GET,
+                entity,
+                responseType
+        ).getBody();
     }
 }

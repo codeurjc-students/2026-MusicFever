@@ -7,20 +7,23 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.musicfever.music_fever.dto.api.spotify.SpotifyArtistDTO;
-import com.musicfever.music_fever.mapper.api.SpotifyArtistMapper;
+import com.musicfever.music_fever.dto.artist.ArtistDisplayDTO;
+import com.musicfever.music_fever.exception.ArtistNotFoundException;
+import com.musicfever.music_fever.mapper.model.ArtistMapper;
 import com.musicfever.music_fever.model.Album;
 import com.musicfever.music_fever.model.Artist;
 import com.musicfever.music_fever.repository.ArtistRepository;
-import com.musicfever.music_fever.service.api.ApiService;
 
 @Service 
 public class ArtistService {
     private final ArtistRepository repository;
-    private final ApiService apiService;
+    private final MusicService musicService;
+    private final ArtistMapper mapper;
 
-    public ArtistService(ArtistRepository artistRepository, ApiService apiService){
+    public ArtistService(ArtistRepository artistRepository, ArtistMapper mapper, MusicService musicService){
         this.repository = artistRepository;
-        this.apiService = apiService;
+        this.musicService = musicService;
+        this.mapper = mapper;
     }
 
     public List<Artist> searchName(String searchString) {
@@ -39,10 +42,7 @@ public class ArtistService {
         Optional<Artist> op = this.repository.findBySpotifyId(basicArtist.getId());
 
         if (op.isEmpty()){
-            SpotifyArtistDTO spotifyArtist = this.apiService.getSpotifyArtist(basicArtist.getId());
-            Artist newArtist = new Artist();
-            SpotifyArtistMapper.updateEntity(spotifyArtist, newArtist);
-            return this.repository.save(newArtist);
+            return this.musicService.loadArtist(basicArtist);
         } else {
             return op.get();
         }
@@ -61,5 +61,19 @@ public class ArtistService {
 
     public Artist getArtistById(Long id) {
         return this.repository.findById(id).get();
+    }
+
+    public ArtistDisplayDTO getArtistDTOById(Long id) {
+        Optional<Artist> op = this.repository.findById(id);
+        if(op.isEmpty()){
+            throw new ArtistNotFoundException("Artist does not exist");
+        }
+
+        Artist artist = op.get();
+        if(!artist.isLoaded()){
+            artist = this.musicService.loadArtistAlbums(artist);
+            artist = this.musicService.loadArtistTopTracks(artist);
+        }
+        return mapper.toDisplayDTO(artist);
     }
 }

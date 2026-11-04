@@ -12,13 +12,7 @@ import com.musicfever.music_fever.model.Track;
 @Mapper(componentModel = "spring")
 public interface TrackMapper {
     TrackDTO toDTO(Track track);
-    
-    @Mapping(target = "spotifyId", ignore = true)
-    @Mapping(target = "spotifyHref", ignore = true)
-    @Mapping(target = "genre", ignore = true)
-    @Mapping(target = "ITunesId", ignore = true)
-    @Mapping(target = "discNumber", ignore = true)
-    @Mapping(target = "totalDiscCount", ignore = true)
+
     List<TrackDTO> toDTOs(Collection<Track> tracks);
 
     @Mapping(target = "spotifyId", ignore = true)
