@@ -29,6 +29,9 @@ public class Artist {
     private String spotifyHref;
     private String name;
 
+    private String lastFMId;
+    private long listeners;
+
     @Embedded
     @AttributeOverrides({
         @AttributeOverride(name = "url", column = @Column(name = "small_image_url")),

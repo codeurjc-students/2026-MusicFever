@@ -8,11 +8,13 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 
 import com.musicfever.music_fever.dto.api.iTunes.iTunesAlbumDTO;
+import com.musicfever.music_fever.dto.api.lastFM.LastFMArtistDTO;
 import com.musicfever.music_fever.dto.api.spotify.ItemsPage;
 import com.musicfever.music_fever.dto.api.spotify.SpotifyAlbumDTO;
 import com.musicfever.music_fever.dto.api.spotify.SpotifyArtistDTO;
 import com.musicfever.music_fever.dto.api.spotify.SpotifyTrackDTO;
 import com.musicfever.music_fever.dto.api.spotify.TracksResponse;
+import com.musicfever.music_fever.mapper.api.LastFMArtistMapper;
 import com.musicfever.music_fever.mapper.api.SpotifyAlbumMapper;
 import com.musicfever.music_fever.mapper.api.SpotifyArtistMapper;
 import com.musicfever.music_fever.mapper.api.SpotifyTrackMapper;
@@ -51,8 +53,10 @@ public class MusicService {
 
     public Artist loadArtist(SpotifyArtistDTO basicArtist){
         SpotifyArtistDTO spotifyArtist = this.apiService.getSpotifyArtist(basicArtist.getId());
+        LastFMArtistDTO lastFMArtist = this.apiService.getLastFMArtist(basicArtist.getName());
         Artist newArtist = new Artist();
         SpotifyArtistMapper.updateEntity(spotifyArtist, newArtist);
+        LastFMArtistMapper.updateEntity(lastFMArtist, newArtist);
         return this.artistRepository.save(newArtist);
     }
 
@@ -137,6 +141,13 @@ public class MusicService {
         return this.updateTracks(album, tracks);
     }
 
+    public Artist loadArtistTopTracks(Artist artist) {
+        TracksResponse response = this.apiService.getArtistTopTracks(artist.getSpotifyId());
+        List<Track> topTracks = this.loadTracks(response.getTracks());
+        artist.setTopTracks(topTracks);
+        return this.artistRepository.save(artist);
+    }
+
     // UPDATE
     public Artist updateAlbum(Artist artist, Album newAlbum) {
         artist.getAlbums().add(newAlbum);
@@ -148,7 +159,9 @@ public class MusicService {
         artist.setAlbums(albums);
         Set<String> albumGenres = new HashSet<>();
         for (Album album: albums){
-            albumGenres.add(album.getGenre());
+            if (album.getGenre() != null){
+                albumGenres.add(album.getGenre());
+            }
         }
         artist.setGenres(albumGenres);
         artist.setLoaded(true);
@@ -165,12 +178,4 @@ public class MusicService {
         album.getTracks().add(newTrack);
         this.albumRepository.save(album);
     }
-
-    public Artist loadArtistTopTracks(Artist artist) {
-        TracksResponse response = this.apiService.getArtistTopTracks(artist.getSpotifyId());
-        List<Track> topTracks = this.loadTracks(response.getTracks());
-        artist.setTopTracks(topTracks);
-        return this.artistRepository.save(artist);
-    }
-    
 }

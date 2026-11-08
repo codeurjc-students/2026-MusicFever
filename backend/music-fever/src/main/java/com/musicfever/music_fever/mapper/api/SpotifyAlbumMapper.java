@@ -8,6 +8,7 @@ public class SpotifyAlbumMapper {
         album.setSpotifyId(dto.getId());
         album.setSpotifyHref(dto.getHref());
         album.setName(dto.getName());
+        album.setReleaseDate(dto.getReleaseDate());
         album.setAlbumType(dto.getAlbumType());
         album.setTotalTracks(dto.getTotalTracks());
         album.setSmallImage(dto.getSmallImage());

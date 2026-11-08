@@ -7,7 +7,6 @@ public class iTunesAlbumMapper {
     public static void updateEntity(iTunesAlbumDTO dto, Album album){
         album.setITunesId(dto.getCollectionId());
         album.setGenre(dto.getPrimaryGenreName());
-        album.setReleaseDate(dto.getReleaseDateFormat());
         album.setExplicit(dto.isExplicit());
     }
 }

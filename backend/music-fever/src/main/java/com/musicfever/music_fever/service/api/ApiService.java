@@ -3,6 +3,7 @@ package com.musicfever.music_fever.service.api;
 import org.springframework.stereotype.Service;
 
 import com.musicfever.music_fever.dto.api.iTunes.iTunesAlbumDTO;
+import com.musicfever.music_fever.dto.api.lastFM.LastFMArtistDTO;
 import com.musicfever.music_fever.dto.api.spotify.ItemsPage;
 import com.musicfever.music_fever.dto.api.spotify.SearchResponse;
 import com.musicfever.music_fever.dto.api.spotify.SpotifyAlbumDTO;
@@ -14,10 +15,12 @@ import com.musicfever.music_fever.dto.api.spotify.TracksResponse;
 public class ApiService {
     private final SpotifyService spotify;
     private final iTunesService iTunes;
+    private final LastFMService lastFM;
 
-    public ApiService(SpotifyService spotifyService, iTunesService iTunesService){
+    public ApiService(SpotifyService spotifyService, iTunesService iTunesService, LastFMService lastFMService){
         this.spotify = spotifyService;
         this.iTunes = iTunesService;
+        this.lastFM = lastFMService;
     }
 
     // Looks in Spotify for the main entities of the search
@@ -56,4 +59,8 @@ public class ApiService {
     public TracksResponse getArtistTopTracks(String spotifyId) {
         return this.spotify.getArtistsTopTracks(spotifyId);
     }
+
+    public LastFMArtistDTO getLastFMArtist(String name) {
+    return this.lastFM.getArtist(name);
+}
 }

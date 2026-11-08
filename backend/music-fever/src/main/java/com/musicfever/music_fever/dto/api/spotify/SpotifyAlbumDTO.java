@@ -1,5 +1,6 @@
 package com.musicfever.music_fever.dto.api.spotify;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,10 +24,23 @@ public class SpotifyAlbumDTO {
     @JsonProperty("total_tracks")
     private int totalTracks;
 
+    private LocalDate releaseDate;
+
     private List<SpotifyArtistDTO> artists;
 
     private Image smallImage;
     private Image bigImage;
+
+    @JsonProperty("release_date")
+    private void setReleaseDate(String date) {
+        if (date == null) return;
+
+        this.releaseDate = switch (date.length()) {
+            case 4 -> LocalDate.parse(date + "-01-01");
+            case 7 -> LocalDate.parse(date + "-01");
+            default -> LocalDate.parse(date);
+        };
+    }
 
     @JsonProperty("images")
     private void stablishImage(List<Image> images) {

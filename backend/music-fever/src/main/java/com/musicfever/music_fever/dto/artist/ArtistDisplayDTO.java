@@ -4,4 +4,4 @@ import java.util.Set;
 
 import com.musicfever.music_fever.model.Image;
 
-public record ArtistDisplayDTO(Long id, String name, Image bigImage, Set<String> genres){}
+public record ArtistDisplayDTO(Long id, String name, Long listeners, Image bigImage, Set<String> genres){}
