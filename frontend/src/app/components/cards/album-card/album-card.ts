@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -12,8 +12,9 @@ import { Album } from '../../../model/album.model';
 })
 export class AlbumCard {
   album = input.required<Album>();
+  private router = inject(Router);
 
   albumPage(){
-    // moves to album page
+    this.router.navigate(['/album', this.album().id]);
   }
 }

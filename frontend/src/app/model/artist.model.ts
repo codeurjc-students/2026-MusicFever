@@ -5,3 +5,11 @@ export interface Artist{
     name: string;
     smallImage: Image;
 }
+
+export interface ArtistDisplay{
+    id: number;
+    name: string;
+    bigImage: Image;
+    genres: string[];
+    listeners: number;
+}

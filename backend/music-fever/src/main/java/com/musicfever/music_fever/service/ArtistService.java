@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.musicfever.music_fever.dto.album.AlbumDTO;
 import com.musicfever.music_fever.dto.api.spotify.SpotifyArtistDTO;
 import com.musicfever.music_fever.dto.artist.ArtistDisplayDTO;
+import com.musicfever.music_fever.dto.track.TrackDTO;
 import com.musicfever.music_fever.exception.ArtistNotFoundException;
 import com.musicfever.music_fever.mapper.model.ArtistMapper;
 import com.musicfever.music_fever.model.Album;
@@ -19,11 +23,16 @@ public class ArtistService {
     private final ArtistRepository repository;
     private final MusicService musicService;
     private final ArtistMapper mapper;
+    private final AlbumService albumService;
+    private final TrackService trackService;
 
-    public ArtistService(ArtistRepository artistRepository, ArtistMapper mapper, MusicService musicService){
+    public ArtistService(ArtistRepository artistRepository, ArtistMapper mapper, 
+        AlbumService albumService, TrackService trackService, MusicService musicService){
         this.repository = artistRepository;
         this.musicService = musicService;
         this.mapper = mapper;
+        this.albumService = albumService;
+        this.trackService = trackService;
     }
 
     public List<Artist> searchName(String searchString) {
@@ -53,12 +62,6 @@ public class ArtistService {
         return this.repository.save(artist);
     }
 
-    public Artist updateAlbums(Artist artist, List<Album> albums) {
-        artist.setAlbums(albums);
-        artist.setLoaded(true);
-        return this.repository.save(artist);
-    }
-
     public Artist getArtistById(Long id) {
         return this.repository.findById(id).get();
     }
@@ -75,5 +78,21 @@ public class ArtistService {
             artist = this.musicService.loadArtistTopTracks(artist);
         }
         return mapper.toDisplayDTO(artist);
+    }
+
+    public Page<AlbumDTO> getArtistAlbums(Long id, Pageable pageable) {
+        Optional<Artist> artist = this.repository.findById(id);
+        if (artist.isEmpty()){
+            throw new ArtistNotFoundException("Artist not found");
+        }
+        return this.albumService.getArtistAlbums(artist.get(), pageable);
+    }
+
+    public Page<TrackDTO> getArtistPopularTracks(Long id, Pageable pageable) {
+        Optional<Artist> artist = this.repository.findById(id);
+        if (artist.isEmpty()){
+            throw new ArtistNotFoundException("Artist not found");
+        }
+        return this.trackService.getArtistPopularTracks(artist.get(), pageable);
     }
 }

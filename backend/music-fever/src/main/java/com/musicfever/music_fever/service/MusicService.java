@@ -3,6 +3,7 @@ package com.musicfever.music_fever.service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -46,7 +47,12 @@ public class MusicService {
     public List<Artist> loadArtists(List<SpotifyArtistDTO> artists) {
         List<Artist> newArtists = new ArrayList<>();
         for(SpotifyArtistDTO dto: artists){
-            newArtists.add(this.loadArtist(dto));
+            Optional<Artist> op = this.artistRepository.findBySpotifyId(dto.getId());
+            if (op.isPresent()){
+                newArtists.add(op.get());
+            } else {
+                newArtists.add(this.loadArtist(dto));
+            }
         }
         return newArtists;
     }
@@ -62,7 +68,6 @@ public class MusicService {
 
     public Artist loadArtistAlbums(Artist artist) {
         List<Album> albums = new ArrayList<>();
-
         ItemsPage<SpotifyAlbumDTO> albumPage = this.apiService.getArtistAlbums(artist.getSpotifyId());
 
         while (albumPage != null) {
@@ -86,24 +91,29 @@ public class MusicService {
     }
 
     public Album loadAlbum(SpotifyAlbumDTO basicAlbum) {
-        SpotifyAlbumDTO spotifyAlbum = this.apiService.getSpotifyAlbum(basicAlbum.getId());
-        List<Artist> albumArtists = this.loadArtists(spotifyAlbum.getArtists());
-        iTunesAlbumDTO iTunesAlbum = this.apiService.getITunesAlbum(basicAlbum.getName(), albumArtists.get(0).getName());
+        Optional<Album> op = this.albumRepository.findBySpotifyId(basicAlbum.getId());
+        if(op.isPresent()){
+            return op.get();
+        } else {
+            SpotifyAlbumDTO spotifyAlbum = this.apiService.getSpotifyAlbum(basicAlbum.getId());
+            List<Artist> albumArtists = this.loadArtists(spotifyAlbum.getArtists());
+            iTunesAlbumDTO iTunesAlbum = this.apiService.getITunesAlbum(basicAlbum.getName(), albumArtists.get(0).getName());
 
-        Album newAlbum = new Album();
-        SpotifyAlbumMapper.updateEntity(spotifyAlbum, newAlbum);
-        if (iTunesAlbum != null) {
-            iTunesAlbumMapper.updateEntity(iTunesAlbum, newAlbum);
+            Album newAlbum = new Album();
+            SpotifyAlbumMapper.updateEntity(spotifyAlbum, newAlbum);
+            if (iTunesAlbum != null) {
+                iTunesAlbumMapper.updateEntity(iTunesAlbum, newAlbum);
+            }
+            newAlbum.setArtists(albumArtists);
+
+            newAlbum = this.albumRepository.save(newAlbum);
+
+            for (Artist artist : albumArtists) {
+                this.updateAlbum(artist, newAlbum);
+            }
+
+            return newAlbum;
         }
-        newAlbum.setArtists(albumArtists);
-
-        newAlbum = this.albumRepository.save(newAlbum);
-
-        for (Artist artist : albumArtists) {
-            this.updateAlbum(artist, newAlbum);
-        }
-
-        return newAlbum;
     }
 
     public List<Track> loadTracks(List<SpotifyTrackDTO> tracks) {

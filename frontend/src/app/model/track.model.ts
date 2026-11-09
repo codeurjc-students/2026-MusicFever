@@ -6,3 +6,11 @@ export interface Track {
     explicit: boolean;
     album: Album;
 }
+
+export interface TrackPage {
+  content: Track[];
+  totalElements: number;
+  totalPages: number;
+  number: number;
+  size: number;
+}

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Artist } from '../../../model/artist.model';
@@ -11,8 +11,9 @@ import { Artist } from '../../../model/artist.model';
 })
 export class ArtistCard {
   artist = input.required<Artist>();
+  private router = inject(Router);
 
   artistPage(){
-    // moves to artist page
+    this.router.navigate(['/artist', this.artist().id]);
   }
 }

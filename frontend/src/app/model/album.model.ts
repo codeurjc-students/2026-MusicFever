@@ -9,3 +9,11 @@ export interface Album{
     releaseDate: string;
     smallImage: Image;
 }
+
+export interface AlbumPage {
+  content: Album[];
+  totalElements: number;
+  totalPages: number;
+  number: number;
+  size: number;
+}
