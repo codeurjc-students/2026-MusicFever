@@ -17,3 +17,13 @@ export interface AlbumPage {
   number: number;
   size: number;
 }
+
+export interface AlbumDisplay {
+  id: number;
+  name: string;
+  artists: Artist[];
+  totalTracks: number;
+  genre: string;
+  bigImage: Image;
+  releaseDate: string;
+}

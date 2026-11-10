@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.musicfever.music_fever.dto.api.spotify.SpotifyTrackDTO;
 import com.musicfever.music_fever.dto.track.TrackDTO;
 import com.musicfever.music_fever.mapper.model.TrackMapper;
+import com.musicfever.music_fever.model.Album;
 import com.musicfever.music_fever.model.Artist;
 import com.musicfever.music_fever.model.Track;
 import com.musicfever.music_fever.repository.TrackRepository;
@@ -59,6 +60,11 @@ public class TrackService {
 
     public Page<TrackDTO> getArtistPopularTracks(Artist artist, Pageable pageable) {
         Page<Track> page = this.repository.findTopTracksByArtist(artist.getId(), pageable);
+        return page.map(mapper::toDTO);
+    }
+
+    public Page<TrackDTO> getAlbumTracklist(Album album, Pageable pageable) {
+        Page<Track> page = this.repository.findByAlbumIdOrderByDiscNumberAscNumberAsc(album.getId(), pageable);
         return page.map(mapper::toDTO);
     }
 }

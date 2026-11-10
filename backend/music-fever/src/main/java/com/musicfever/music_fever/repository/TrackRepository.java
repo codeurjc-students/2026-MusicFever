@@ -21,4 +21,6 @@ public interface TrackRepository extends JpaRepository<Track, Long>{
         WHERE a.id = :artistId
     """)
     Page<Track> findTopTracksByArtist(@Param("artistId") Long id, Pageable pageable);
+
+    Page<Track> findByAlbumIdOrderByDiscNumberAscNumberAsc(Long albumId, Pageable pageable);
 }

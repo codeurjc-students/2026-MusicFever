@@ -88,7 +88,8 @@ public class SecurityConfig {
                     "/api/v1/auth/register",
                     "/api/v1/search",
                     "/api/v1/search/**",
-                    "/api/v1/artists/**"
+                    "/api/v1/artists/**",
+                    "/api/v1/albums/**"
                 ).permitAll()
                 .anyRequest().authenticated();
             })

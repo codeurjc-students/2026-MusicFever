@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController 
-@Tag(name = "Tracks", description = "Endpoints for managing artists")
+@Tag(name = "Artists", description = "Endpoints for managing artists")
 @RequestMapping("/api/v1/artists/{id}")
 public class ArtistController {
     private final ArtistService service;

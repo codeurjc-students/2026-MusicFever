@@ -1,1 +1,50 @@
-<p>album works!</p>
+@if (loading()) {
+    <div class="container">
+        <mat-spinner diameter="40"></mat-spinner>
+    </div>
+} @else if (album()) {
+    <div class="container">
+        <div class="row-display">
+            <img [src]="album()?.bigImage.url" alt="Album image">
+            <div class="column-display">
+                <h3>{{album()?.name}}</h3>
+
+                @for (artist of album()?.artists; track artist.id; let last = $last) {
+                    <p class="description"><a (click)="artistPage(artist.id)">{{artist.name}}</a>{{ last ? '' : ', ' }}</p>
+                }
+
+                <div class="row-display">
+                    <mat-icon>calendar_today</mat-icon>
+                    <p class="description">{{ album()?.releaseDate }} · {{ album()?.totalTracks }} tracks</p>
+                </div>
+
+                @if (album()?.genre != null) {
+                    <div class="tab">
+                        <p id="tab-name">{{ album()?.genre }}</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div id="tracklist">
+            <p class="description">tracklist</p>
+            <div class="container">
+                <div class="scroll-content">
+                    @for (track of tracklist(); track track.number) {
+                        <app-track-card [track]="track" />
+                    }
+
+                    <mat-paginator
+                        [length]="totalTracks()"
+                        [pageSize]="pageSize"
+                        [pageIndex]="pageIndex"
+                        [pageSizeOptions]="[5, 10, 25]"
+                        (page)="onPageChange($event)">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+} @else {
+    <h1>Album No Encontrado (prov)</h1>
+}

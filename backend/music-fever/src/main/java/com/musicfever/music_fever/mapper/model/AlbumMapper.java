@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import com.musicfever.music_fever.dto.album.AlbumDTO;
+import com.musicfever.music_fever.dto.album.AlbumDisplayDTO;
 import com.musicfever.music_fever.model.Album;
 
 @Mapper(componentModel = "spring", uses = ArtistMapper.class)
@@ -24,4 +25,6 @@ public interface AlbumMapper {
     @Mapping(target = "genre", ignore = true)
     @Mapping(target = "loaded", ignore = true)
     Album toDomain(AlbumDTO albumDTO);
+
+    AlbumDisplayDTO toDisplayDTO(Album album);
 }
