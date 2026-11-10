@@ -16,4 +16,10 @@ export class SearchService {
       params: { search: query },
     });
   }
+
+  externalSearch(query: string) {
+    return this.http.get<SearchResponse>(`${this.apiUrl}/external-search`, {
+      params: { search: query },
+    });
+  }
 }

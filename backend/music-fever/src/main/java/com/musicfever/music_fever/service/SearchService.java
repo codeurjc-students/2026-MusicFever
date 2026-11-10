@@ -44,11 +44,7 @@ public class SearchService {
         List<Track> tracksSearch = this.trackService.searchName(searchString);
 
         if (artistsSearch.isEmpty() && albumsSearch.isEmpty() && tracksSearch.isEmpty()){
-            SearchResponse response = this.apiService.getSearch(searchString);
-            artistsSearch = this.artistService.loadArtists(response.getArtists().getItems());
-            albumsSearch = this.albumService.loadAlbums(response.getAlbums().getItems());
-            this.albumService.loadTracklists(albumsSearch);
-            tracksSearch = this.trackService.loadTracks(response.getTracks().getItems());
+            return this.externalSearch(searchString);
         }
 
         return this.mapResponse(artistsSearch, albumsSearch, tracksSearch);
@@ -61,5 +57,15 @@ public class SearchService {
             albumMapper.toDTOs(albumsSearch),
             trackMapper.toDTOs(tracksSearch)
         );
+    }
+
+    public SearchDTO externalSearch(String search) {
+        SearchResponse response = this.apiService.getSearch(search);
+        List<Artist> artistsSearch = this.artistService.loadArtists(response.getArtists().getItems());
+        List<Album> albumsSearch = this.albumService.loadAlbums(response.getAlbums().getItems());
+        this.albumService.loadTracklists(albumsSearch);
+        List<Track> tracksSearch = this.trackService.loadTracks(response.getTracks().getItems());
+
+        return this.mapResponse(artistsSearch, albumsSearch, tracksSearch);
     }
 }

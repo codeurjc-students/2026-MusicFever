@@ -42,4 +42,21 @@ export class Search implements OnInit {
       }
     });
   }
+
+  forceExternalSearch(): void {
+    const query = this.searchService.searchQuery();
+
+    this.loading.set(true);
+
+    this.searchService.externalSearch(query).subscribe({
+      next: (result) => {
+        this.searchResult.set(result);
+        this.loading.set(false);
+      },
+      error: (error) => {
+        console.error(error);
+        this.loading.set(false);
+      }
+    });
+  }
 }

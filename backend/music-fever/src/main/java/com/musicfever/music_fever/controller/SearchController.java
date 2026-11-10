@@ -26,4 +26,10 @@ public class SearchController {
     public SearchDTO getSearch(@RequestParam String search) {
         return this.service.getSearch(search);
     }
+
+    @GetMapping("/external-search")
+    public SearchDTO getExternalSearch(@RequestParam String search) {
+        return this.service.externalSearch(search);
+    }
+    
 }
