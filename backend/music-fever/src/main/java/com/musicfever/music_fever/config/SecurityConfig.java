@@ -18,6 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import jakarta.servlet.DispatcherType;
 
 import com.musicfever.music_fever.config.jwt.JwtRequestFilter;
 import com.musicfever.music_fever.config.jwt.UnauthorizedHandlerJwt;
@@ -58,6 +59,10 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+            .authorizeHttpRequests(auth -> {
+                auth.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll();
+            })
+
             .authenticationProvider(authenticationProvider())
 
             .cors(Customizer.withDefaults())
@@ -85,7 +90,11 @@ public class SecurityConfig {
                 ).permitAll()
                 .requestMatchers(
                     "/api/v1/auth/login",
-                    "/api/v1/auth/register"
+                    "/api/v1/auth/register",
+                    "/api/v1/search",
+                    "/api/v1/search/**",
+                    "/api/v1/artists/**",
+                    "/api/v1/albums/**"
                 ).permitAll()
                 .anyRequest().authenticated();
             })

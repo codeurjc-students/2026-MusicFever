@@ -1,0 +1,15 @@
+<button class="container" (click)="artistPage()">
+    <div class="column-display">
+        <img [src]="artist().smallImage.url" alt="">
+
+        <div class="info-container">
+            <p id="main-name">{{ artist().name }}</p>
+        </div>
+
+        <div class="tab-layout">
+            <div class="tab">
+                <p id="tab-name">Artist</p>
+            </div>
+        </div>
+    </div>
+</button>

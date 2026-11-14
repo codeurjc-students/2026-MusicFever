@@ -1,0 +1,85 @@
+package com.musicfever.music_fever.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.musicfever.music_fever.dto.album.AlbumDTO;
+import com.musicfever.music_fever.dto.api.spotify.SpotifyArtistDTO;
+import com.musicfever.music_fever.dto.artist.ArtistDisplayDTO;
+import com.musicfever.music_fever.dto.track.TrackDTO;
+import com.musicfever.music_fever.exception.ArtistNotFoundException;
+import com.musicfever.music_fever.mapper.model.ArtistMapper;
+import com.musicfever.music_fever.model.Artist;
+import com.musicfever.music_fever.repository.ArtistRepository;
+
+@Service 
+public class ArtistService {
+    private final ArtistRepository repository;
+    private final MusicService musicService;
+    private final ArtistMapper mapper;
+    private final AlbumService albumService;
+    private final TrackService trackService;
+
+    public ArtistService(ArtistRepository artistRepository, ArtistMapper mapper, 
+        AlbumService albumService, TrackService trackService, MusicService musicService){
+        this.repository = artistRepository;
+        this.musicService = musicService;
+        this.mapper = mapper;
+        this.albumService = albumService;
+        this.trackService = trackService;
+    }
+
+    public List<Artist> searchName(String searchString) {
+        return repository.findByNameContainingIgnoreCase(searchString);
+    }
+
+    public List<Artist> searchArtists(List<SpotifyArtistDTO> artists) {
+        List<Artist> newArtists = new ArrayList<>();
+        for(SpotifyArtistDTO dto: artists){
+            newArtists.add(this.loadArtist(dto));
+        }
+        return newArtists;
+    }
+
+    private Artist loadArtist(SpotifyArtistDTO basicArtist){
+        Optional<Artist> op = this.repository.findBySpotifyId(basicArtist.getId());
+
+        if (op.isEmpty()){
+            return this.musicService.loadArtist(basicArtist);
+        } else {
+            return op.get();
+        }
+    }
+
+    public Artist getArtistById(Long id) {
+        Optional<Artist> op = this.repository.findById(id);
+        if (op.isEmpty()){
+            throw new ArtistNotFoundException("Artist not found");
+        }
+        return op.get();
+    }
+
+    public ArtistDisplayDTO getArtistDTOById(Long id) {
+        Artist artist = this.getArtistById(id);
+        if(!artist.isLoaded()){
+            artist = this.musicService.loadArtistAlbums(artist);
+            artist = this.musicService.loadArtistTopTracks(artist);
+        }
+        return mapper.toDisplayDTO(artist);
+    }
+
+    public Page<AlbumDTO> getArtistAlbums(Long id, Pageable pageable) {
+        Artist artist = this.getArtistById(id);
+        return this.albumService.getArtistAlbums(artist, pageable);
+    }
+
+    public Page<TrackDTO> getArtistPopularTracks(Long id, Pageable pageable) {
+        Artist artist = this.getArtistById(id);
+        return this.trackService.getArtistPopularTracks(artist, pageable);
+    }
+}

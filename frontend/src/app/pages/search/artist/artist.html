@@ -1,0 +1,70 @@
+@if (loading()) {
+    <div class="container">
+        <mat-spinner diameter="40"></mat-spinner>
+    </div>
+} @else if (artist()) {
+    <div class="container">
+        <div class="row-display">
+            <img [src]="artist()?.bigImage.url" alt="Artist image">
+            <div class="column-display">
+                <h3>{{artist()?.name}}</h3>
+                <p class="description">Listeners: {{artist()?.listeners}}</p>
+
+                <div class="gap"></div>
+
+                <div class="row-display">
+                    @for (genre of artist()!.genres; track genre) {
+                        @if (genre != null) {
+                            <div class="tab">
+                                <p id="tab-name">{{ genre }}</p>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <mat-tab-group [dynamicHeight]="true" 
+            mat-stretch-tabs="false"
+            mat-align-tabs="start" 
+            (selectedTabChange)="onTabChange($event.index)"
+        >
+            <mat-tab label="albums">
+                <div class="container">
+                    <div class="scroll-content">
+                        @for (album of albums(); track album.id) {
+                            <app-album-card [album]="album" />
+                        }
+
+                        <mat-paginator
+                            [length]="totalAlbums()"
+                            [pageSize]="pageSize"
+                            [pageIndex]="pageIndex"
+                            [pageSizeOptions]="[5, 10, 25]"
+                            (page)="onPageChange($event)">
+                        </mat-paginator>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="popular tracks">
+                <div class="container">
+                    <div class="scroll-content">
+                        @for (track of popularTracks(); track track.number) {
+                            <app-track-card [track]="track" />
+                        }
+
+                        <mat-paginator
+                            [length]="totalTracks()"
+                            [pageSize]="tracksPageSize"
+                            [pageIndex]="tracksPageIndex"
+                            [pageSizeOptions]="[5, 10, 25]"
+                            (page)="onTracksPageChange($event)">
+                        </mat-paginator>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+} @else {
+    <h1>Artista No Encontrado (prov)</h1>
+}
