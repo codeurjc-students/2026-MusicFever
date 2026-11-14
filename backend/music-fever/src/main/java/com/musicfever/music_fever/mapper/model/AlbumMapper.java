@@ -3,6 +3,7 @@ package com.musicfever.music_fever.mapper.model;
 import java.util.Collection;
 import java.util.List;
 
+import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -10,7 +11,7 @@ import com.musicfever.music_fever.dto.album.AlbumDTO;
 import com.musicfever.music_fever.dto.album.AlbumDisplayDTO;
 import com.musicfever.music_fever.model.Album;
 
-@Mapper(componentModel = "spring", uses = ArtistMapper.class)
+@Mapper(componentModel = "spring", uses = ArtistMapper.class, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface AlbumMapper {
     AlbumDTO toDTO(Album album);
     

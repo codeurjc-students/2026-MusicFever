@@ -23,6 +23,8 @@ public interface ArtistMapper{
     @Mapping(target = "loaded", ignore = true)
     @Mapping(target = "genres", ignore = true)
     @Mapping(target = "topTracks", ignore = true)
+    @Mapping(target = "lastFMId", ignore = true)
+    @Mapping(target = "listeners", ignore = true)
     Artist toDomain(ArtistDTO artistDTO);
 
     ArtistDisplayDTO toDisplayDTO(Artist artist);

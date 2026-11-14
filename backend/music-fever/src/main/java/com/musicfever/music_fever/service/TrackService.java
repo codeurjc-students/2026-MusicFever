@@ -28,19 +28,11 @@ public class TrackService {
         this.mapper = trackMapper;
     }
 
-    public void saveTrack(Track track){
-        this.repository.save(track);
-    }
-
-    public List<Track> findAll(){
-        return this.repository.findAll();
-    }
-
     public List<Track> searchName(String searchString) {
         return this.repository.findByNameContainingIgnoreCase(searchString);
     }
 
-    public List<Track> loadTracks(List<SpotifyTrackDTO> tracks) {
+    public List<Track> searchTracks(List<SpotifyTrackDTO> tracks) {
         List<Track> newTracks = new ArrayList<>();
         for (SpotifyTrackDTO dto: tracks){
             newTracks.add(this.loadTrack(dto));

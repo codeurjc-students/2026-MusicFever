@@ -36,7 +36,7 @@ public class AlbumService {
         return this.repository.findByNameContainingIgnoreCase(searchString);
     }
 
-    public List<Album> loadAlbums(List<SpotifyAlbumDTO> albums) {
+    public List<Album> searchAlbums(List<SpotifyAlbumDTO> albums) {
         List<Album> newAlbums = new ArrayList<>();
         for(SpotifyAlbumDTO dto: albums){
             newAlbums.add(this.loadAlbum(dto));
@@ -44,7 +44,7 @@ public class AlbumService {
         return newAlbums;
     }
 
-    public Album loadAlbum(SpotifyAlbumDTO basicAlbum) {
+    private Album loadAlbum(SpotifyAlbumDTO basicAlbum) {
         Optional<Album> op = this.repository.findBySpotifyId(basicAlbum.getId());
         if (op.isEmpty()){
             return this.musicService.loadAlbum(basicAlbum);
@@ -54,7 +54,11 @@ public class AlbumService {
     }
 
     public Album findAlbumById(Long id) {
-        return this.repository.findById(id).get();
+        Optional<Album> op = this.repository.findById(id);
+        if (op.isEmpty()){
+            throw new AlbumNotFoundException("Album not found");
+        }
+        return op.get();
     }
 
     public List<Album> loadTracklists(List<Album> albums){
@@ -65,7 +69,8 @@ public class AlbumService {
         return loadedAlbums;
     }
 
-    public Album loadTracklist(Album album) {
+    private Album loadTracklist(Album album) {
+        album = this.findAlbumById(album.getId());
         if (!album.isLoaded()){
             return this.musicService.loadTracklist(album);
         }
@@ -78,24 +83,15 @@ public class AlbumService {
     }
 
     public AlbumDisplayDTO getAlbumDisplayDTO(Long id) {
-        Optional<Album> op = this.repository.findById(id);
-        if (op.isEmpty()){
-            throw new AlbumNotFoundException("Album not found");
-        }
-
-        Album album = op.get();
+        Album album = this.findAlbumById(id);
         if (!album.isLoaded()){
             album = this.musicService.loadTracklist(album);
         }
-
         return this.mapper.toDisplayDTO(album);
     }
 
     public Page<TrackDTO> getAlbumTracklist(Long id, Pageable pageable) {
-        Optional<Album> album = this.repository.findById(id);
-        if (album.isEmpty()){
-            throw new AlbumNotFoundException("Album not found");
-        }
-        return this.trackService.getAlbumTracklist(album.get(), pageable);
+        Album album = this.findAlbumById(id);
+        return this.trackService.getAlbumTracklist(album, pageable);
     }
 }

@@ -1,4 +1,4 @@
-package com.musicfever.music_fever.integration;
+package com.musicfever.music_fever.integration.repository;
 
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.repository.UserRepository;

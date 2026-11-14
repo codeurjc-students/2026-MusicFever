@@ -61,10 +61,10 @@ public class SearchService {
 
     public SearchDTO externalSearch(String search) {
         SearchResponse response = this.apiService.getSearch(search);
-        List<Artist> artistsSearch = this.artistService.loadArtists(response.getArtists().getItems());
-        List<Album> albumsSearch = this.albumService.loadAlbums(response.getAlbums().getItems());
+        List<Artist> artistsSearch = this.artistService.searchArtists(response.getArtists().getItems());
+        List<Album> albumsSearch = this.albumService.searchAlbums(response.getAlbums().getItems());
         this.albumService.loadTracklists(albumsSearch);
-        List<Track> tracksSearch = this.trackService.loadTracks(response.getTracks().getItems());
+        List<Track> tracksSearch = this.trackService.searchTracks(response.getTracks().getItems());
 
         return this.mapResponse(artistsSearch, albumsSearch, tracksSearch);
     }

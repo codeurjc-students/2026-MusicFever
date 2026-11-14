@@ -14,7 +14,6 @@ import com.musicfever.music_fever.dto.artist.ArtistDisplayDTO;
 import com.musicfever.music_fever.dto.track.TrackDTO;
 import com.musicfever.music_fever.exception.ArtistNotFoundException;
 import com.musicfever.music_fever.mapper.model.ArtistMapper;
-import com.musicfever.music_fever.model.Album;
 import com.musicfever.music_fever.model.Artist;
 import com.musicfever.music_fever.repository.ArtistRepository;
 
@@ -39,7 +38,7 @@ public class ArtistService {
         return repository.findByNameContainingIgnoreCase(searchString);
     }
 
-    public List<Artist> loadArtists(List<SpotifyArtistDTO> artists) {
+    public List<Artist> searchArtists(List<SpotifyArtistDTO> artists) {
         List<Artist> newArtists = new ArrayList<>();
         for(SpotifyArtistDTO dto: artists){
             newArtists.add(this.loadArtist(dto));
@@ -47,7 +46,7 @@ public class ArtistService {
         return newArtists;
     }
 
-    public Artist loadArtist(SpotifyArtistDTO basicArtist){
+    private Artist loadArtist(SpotifyArtistDTO basicArtist){
         Optional<Artist> op = this.repository.findBySpotifyId(basicArtist.getId());
 
         if (op.isEmpty()){
@@ -57,22 +56,16 @@ public class ArtistService {
         }
     }
 
-    public Artist updateAlbum(Artist artist, Album newAlbum) {
-        artist.getAlbums().add(newAlbum);
-        return this.repository.save(artist);
-    }
-
     public Artist getArtistById(Long id) {
-        return this.repository.findById(id).get();
+        Optional<Artist> op = this.repository.findById(id);
+        if (op.isEmpty()){
+            throw new ArtistNotFoundException("Artist not found");
+        }
+        return op.get();
     }
 
     public ArtistDisplayDTO getArtistDTOById(Long id) {
-        Optional<Artist> op = this.repository.findById(id);
-        if(op.isEmpty()){
-            throw new ArtistNotFoundException("Artist does not exist");
-        }
-
-        Artist artist = op.get();
+        Artist artist = this.getArtistById(id);
         if(!artist.isLoaded()){
             artist = this.musicService.loadArtistAlbums(artist);
             artist = this.musicService.loadArtistTopTracks(artist);
@@ -81,18 +74,12 @@ public class ArtistService {
     }
 
     public Page<AlbumDTO> getArtistAlbums(Long id, Pageable pageable) {
-        Optional<Artist> artist = this.repository.findById(id);
-        if (artist.isEmpty()){
-            throw new ArtistNotFoundException("Artist not found");
-        }
-        return this.albumService.getArtistAlbums(artist.get(), pageable);
+        Artist artist = this.getArtistById(id);
+        return this.albumService.getArtistAlbums(artist, pageable);
     }
 
     public Page<TrackDTO> getArtistPopularTracks(Long id, Pageable pageable) {
-        Optional<Artist> artist = this.repository.findById(id);
-        if (artist.isEmpty()){
-            throw new ArtistNotFoundException("Artist not found");
-        }
-        return this.trackService.getArtistPopularTracks(artist.get(), pageable);
+        Artist artist = this.getArtistById(id);
+        return this.trackService.getArtistPopularTracks(artist, pageable);
     }
 }

@@ -61,6 +61,6 @@ public class ApiService {
     }
 
     public LastFMArtistDTO getLastFMArtist(String name) {
-    return this.lastFM.getArtist(name);
-}
+        return this.lastFM.getArtist(name);
+    }
 }

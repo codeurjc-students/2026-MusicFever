@@ -1,7 +1,7 @@
 @if (loading()) {
     <p>Loading...</p>
 } @else {
-    <p class="description">{{ searchResult()?.size }} results</p>
+    <p class="description" id="results">{{ searchResult()?.size }} results</p>
 
     <div class="container">
         <div class="scroll-content">
@@ -18,6 +18,6 @@
             }
         </div>
         <div class="sep"></div>
-        <p class="description">Can't find what you're looking for? <a (click)="forceExternalSearch()">Click here to expand your search</a></p>
+        <p class="description">Can't find what you're looking for? <a id="forceExternal" (click)="forceExternalSearch()">Click here to expand your search</a></p>
     </div>
 }
