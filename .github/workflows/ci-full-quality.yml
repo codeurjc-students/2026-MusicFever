@@ -10,9 +10,6 @@ on:
       - 'docs/**'
       - 'CHANGELOG.md'
 
-on:
-  workflow-dispatch:
-
 jobs:
   test:
     name: Full test suite
