@@ -1,5 +1,7 @@
 package com.musicfever.music_fever.config;
 
+import java.time.LocalDate;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,8 @@ public class DatabaseInitializer {
 
     @PostConstruct 
     public void initDatabase(){
-        this.userService.saveUser(new UserEntity("armiiin", passwordEncoder.encode("eras1325"), "armin@gmail.com"));
+        UserEntity user = new UserEntity("armiiin", passwordEncoder.encode("eras1325"), "armin@gmail.com");
+        user.setAccountCreatedDate(LocalDate.of(2026, 7, 13));
+        this.userService.saveUser(user);
     }
 }

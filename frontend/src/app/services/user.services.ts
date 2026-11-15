@@ -16,4 +16,13 @@ export class UserService {
       withCredentials: true,
     });
   }
+
+  updateProfile(changes: { email?: string; image?: string }) {
+    const { email, image: profilePicture } = changes;
+
+    return this.http.patch<UserDisplay>(`${this.apiUrl}`,
+      { email, profilePicture },
+      { withCredentials: true },
+    );
+  }
 }

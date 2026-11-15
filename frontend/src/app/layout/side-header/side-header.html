@@ -8,7 +8,7 @@
     <div id="user-layout">
         @if (authService.currentUser(); as user) {
             <div id="user-info" (click)="profile()" [class.active]="isProfileActive()">
-                <img id="profile-picture" [src]="user.image?.url ?? '/image_not_found.png'">
+                <img id="profile-picture" [src]="user.profilePicture?.url ?? '/image_not_found.png'">
                 <div id="text-layout">
                     <p id="say-hi">hi!</p>
                     <p id="username"> {{user.username}}</p>

@@ -3,6 +3,7 @@ package com.musicfever.music_fever.unit;
 import com.musicfever.music_fever.config.jwt.LoginRequest;
 import com.musicfever.music_fever.exception.UserAlreadyExistsException;
 import com.musicfever.music_fever.exception.UserNotFoundException;
+import com.musicfever.music_fever.mapper.model.UserMapper;
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.repository.UserRepository;
 import com.musicfever.music_fever.service.UserService;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mapstruct.factory.Mappers;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -18,12 +20,14 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ActiveProfiles("unit")
 public class UserServiceTest {
     UserService service;
     PasswordEncoder encoder;
+    UserMapper mapper;
 
     UserRepository repository;
 
@@ -35,7 +39,8 @@ public class UserServiceTest {
         // Given
         repository = mock(UserRepository.class);
         encoder = mock(PasswordEncoder.class);
-        this.service = new UserService(repository, encoder);
+        mapper = Mappers.getMapper(UserMapper.class);
+        this.service = new UserService(repository, mapper, encoder);
 
         usersTest[0] = new UserEntity("Test1", "pass1", "Test1@gmail.com");
         usersTest[1] = new UserEntity("Test2", "pass2", "Test2@gmail.com");

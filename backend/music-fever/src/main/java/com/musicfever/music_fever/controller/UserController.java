@@ -4,10 +4,13 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.musicfever.music_fever.dto.user.ActiveUserDTO;
 import com.musicfever.music_fever.dto.user.UserDTO;
 import com.musicfever.music_fever.mapper.model.UserMapper;
@@ -53,4 +56,20 @@ public class UserController {
         UserDTO dto = mapper.toDTO(user.get());
         return ResponseEntity.ok(dto);
     }
+
+    @PatchMapping("")
+    public ResponseEntity<UserDTO> updateProfile(Authentication auth, @RequestBody UpdateProfileRequest changes) {
+        String username = auth.getName();
+        UserDTO dto = this.userService.updateProfile(username, changes.email(), changes.profilePicture());
+
+        if (dto == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(dto);
+    }
+
+    public record UpdateProfileRequest(
+        String email,
+        @JsonProperty("profilePicture") String profilePicture
+    ) {}
 }
