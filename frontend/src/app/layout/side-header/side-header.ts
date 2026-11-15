@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, isActive } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs';
 
@@ -45,6 +45,12 @@ export class SideHeader {
 
   contactUs() {
     // Pending implementation
+  }
+
+  readonly isProfileActive = isActive('/profile', this.router);
+  
+  profile() {
+    this.router.navigate(['/profile']);
   }
 
   ngOnInit(): void {

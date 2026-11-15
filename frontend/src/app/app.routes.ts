@@ -15,6 +15,7 @@ import { Terms } from './pages/legal/terms/terms';
 import { Info } from './pages/info/info';
 import { ArtistPage } from './pages/search/artist/artist';
 import { AlbumPage } from './pages/search/album/album';
+import { Profile } from './pages/profile/profile';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,7 @@ export const routes: Routes = [
       { path: 'home', component: Home },
       { path: 'info', component: Info},
       { path: 'search', component: Search },
+      { path: 'profile', component: Profile },
       { path: 'artist/:id', component: ArtistPage },
       { path: 'album/:id', component: AlbumPage },
       { path: 'player', component: Player },

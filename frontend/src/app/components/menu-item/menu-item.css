@@ -37,3 +37,9 @@ a.active {
 a.active span, a.active mat-icon {
   color: #7C3AED;
 }
+
+a:not(.active):hover {
+    cursor: pointer;
+    border-radius: 8px;
+    background: rgba(232, 217, 230, 0.20);
+}

@@ -1,7 +1,10 @@
 package com.musicfever.music_fever.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+
+import com.musicfever.music_fever.enums.MusicProvider;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -29,11 +32,13 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    private String profilePicture;
+    private Image profilePicture;
 
     @ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
 
+    private LocalDate accountCreatedDate;
+    private MusicProvider musicProvider = MusicProvider.NONE;
 
     public UserEntity() {
         /* Constructor used by the JPA interface. */
@@ -47,6 +52,7 @@ public class UserEntity {
             this.password = password;
             this.email = email;
             this.roles = List.of("USER");
+            this.accountCreatedDate = LocalDate.now();
         }
     }
 

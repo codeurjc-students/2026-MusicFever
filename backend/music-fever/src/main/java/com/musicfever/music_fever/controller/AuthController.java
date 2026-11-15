@@ -76,5 +76,4 @@ public class AuthController {
         this.userLoginService.logout(response);
         return ResponseEntity.noContent().build();
     }
-    
 }

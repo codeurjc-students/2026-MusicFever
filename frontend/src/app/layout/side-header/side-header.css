@@ -22,6 +22,27 @@
     align-self: stretch;
 }
 
+#user-info {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    gap: 10px;
+    align-self: stretch;
+}
+
+#user-info:not(.active):hover {
+    cursor: pointer;
+    border-radius: 16px;
+    background: rgba(232, 217, 230, 0.20);
+}
+
+.active {
+  border-radius: 16px;
+  background: rgba(232, 217, 250, 0.50);
+  backdrop-filter: blur(5%);
+  font-style: bold;
+}
+
 #profile-picture {
     /* Layout */
     width: 30%;
