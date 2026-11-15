@@ -1,7 +1,6 @@
 name: Full Quality Check
 
 on:
-  workflow-dispatch:
   pull_request:
     branches:
       - main
@@ -10,6 +9,9 @@ on:
       - 'README.md'
       - 'docs/**'
       - 'CHANGELOG.md'
+
+on:
+  workflow-dispatch:
 
 jobs:
   test:
