@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.services';
 import { UserDisplay } from '../../model/user.model';
 import { AuthService } from '../../services/auth.services';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [MatTabsModule, MatIconModule, MatButtonModule, FormsModule],
@@ -15,6 +16,7 @@ import { AuthService } from '../../services/auth.services';
   templateUrl: './profile.html',
 })
 export class Profile {
+  router = inject(Router);
   private readonly userService = inject(UserService);
   private readonly authService = inject(AuthService);
   readonly userProfile = signal<UserDisplay | null>(null);
@@ -87,5 +89,9 @@ export class Profile {
 
   logout(){
     this.authService.logout();
+  }
+
+  stats(){
+    this.router.navigate(['/stats']);
   }
 }

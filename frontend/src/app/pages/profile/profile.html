@@ -23,7 +23,7 @@
           } @else {
             <h4>Your Profile</h4>
             <div class="gap"></div>
-            <button matFab extended class="edit-profile-btn" (click)="startEditing()">
+            <button matFab extended class="purple-btn" (click)="startEditing()">
               <mat-icon>edit</mat-icon>
               Edit Profile
             </button>
@@ -119,6 +119,27 @@
         </div>
       </div>
       
+      <div class="container">
+        <div class="title">
+          <h5>Your Music Snapshot</h5>
+          <p class="description">A quick look into your listening activity</p>
+        </div>
+
+        <div class="tbd-container">
+          <span class="tbd-icon" aria-hidden="true">✦</span>
+          <h2>Coming soon</h2>
+          <p>We're working on this feature. Stay tuned!</p>
+        </div>
+
+        <div class="row-display">
+          <p class="description">Thanks for being part of the music</p>
+          <div class="gap"></div>
+          <button matFab extended class="purple-btn" (click)="stats()">
+              <mat-icon>insert_chart_outlined</mat-icon>
+              Go to Analytics
+            </button>
+        </div>
+      </div>
     </mat-tab>
 
     <mat-tab>
@@ -126,6 +147,45 @@
         <mat-icon>headphones</mat-icon>
         <span class="tab-section">My Rooms</span>
       </ng-template>
+
+      <div class="sep"></div>
+      <div class="sep"></div>
+      <div class="container">
+        <mat-tab-group class="profile-room-filter" [mat-stretch-tabs]="false">
+          <mat-tab label="All">
+            <div class="sep"></div>
+            <div class="container" id="min-height">
+              <div class="tbd-container">
+                <span class="tbd-icon" aria-hidden="true">✦</span>
+                <h2>Coming soon</h2>
+                <p>We're working on this feature. Stay tuned!</p>
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Hosted">
+            <div class="sep"></div>
+            <div class="container" id="min-height">
+              <div class="tbd-container">
+                <span class="tbd-icon" aria-hidden="true">✦</span>
+                <h2>Coming soon</h2>
+                <p>We're working on this feature. Stay tuned!</p>
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Joined">
+            <div class="sep"></div>
+            <div class="container" id="min-height">
+              <div class="tbd-container">
+                <span class="tbd-icon" aria-hidden="true">✦</span>
+                <h2>Coming soon</h2>
+                <p>We're working on this feature. Stay tuned!</p>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
 
     </mat-tab>
   </mat-tab-group>

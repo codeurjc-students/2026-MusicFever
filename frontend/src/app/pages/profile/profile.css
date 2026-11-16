@@ -1,38 +1,38 @@
 /* Angular Material CSS */
-:host ::ng-deep .profile-tabs [role="tab"] {
+:host ::ng-deep .profile-tabs > mat-tab-header [role="tab"] {
   --tab-color: #707070;
   background-color: transparent;
 }
 
-:host ::ng-deep .profile-tabs [role="tab"][aria-selected="true"] {
+:host ::ng-deep .profile-tabs > mat-tab-header [role="tab"][aria-selected="true"] {
   --tab-color: #7c3aed;
   background-color: #f1e7fc;
   border-radius: 12px 12px 0 0;
 }
 
-:host ::ng-deep .profile-tabs [role="tab"] :is(mat-icon, span) {
+:host ::ng-deep .profile-tabs > mat-tab-header [role="tab"] :is(mat-icon, span) {
   color: var(--tab-color);
 }
 
-:host ::ng-deep .profile-tabs [role="tab"] mat-icon {
+:host ::ng-deep .profile-tabs > mat-tab-header [role="tab"] mat-icon {
   margin-inline-end: 8px;
 }
 
-button.edit-profile-btn {
+button.purple-btn {
   background-color: #7c3aed;
   color: #fff;
   box-shadow: none;
-  padding: 6px 12px;
+  padding: 6px 15px;
   height: auto;
 }
 
-button.edit-profile-btn:hover,
-button.edit-profile-btn:focus-visible,
-button.edit-profile-btn:active {
+button.purple-btn:hover,
+button.purple-btn:focus-visible,
+button.purple-btn:active {
   box-shadow: none;
 }
 
-button.edit-profile-btn mat-icon {
+button.purple-btn mat-icon {
   color: inherit;
   margin-inline-end: 4px;
 }
@@ -53,6 +53,53 @@ button.logout-btn {
     color: inherit;
     margin-inline: 0 4px;
   }
+}
+
+button:is(.discard-btn, .save-btn, .photo-btn) {
+  min-width: 0;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: none;
+
+  &:is(:hover, :focus-visible, :active) {
+    box-shadow: none;
+  }
+
+  mat-icon {
+    color: inherit;
+    margin-inline: 0 4px;
+  }
+}
+
+button.discard-btn {
+  background-color: #e6e6e6;
+  color: #707070;
+}
+
+button.save-btn {
+  background-color: #7c3aed;
+  color: #fff;
+}
+
+button.photo-btn {
+  background-color: transparent;
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+:host ::ng-deep .profile-room-filter > mat-tab-header [role="tab"] {
+  --tab-color: #707070;
+  background-color: transparent;
+}
+
+:host ::ng-deep .profile-room-filter > mat-tab-header [role="tab"][aria-selected="true"] {
+  --tab-color: #7c3aed;
+}
+
+:host ::ng-deep .profile-room-filter > mat-tab-header [role="tab"] :is(mat-icon, span) {
+  color: var(--tab-color);
 }
 
 /* Music Fever CSS */
@@ -232,36 +279,33 @@ img {
     background-color: #e2ffe8;
 }
 
-button:is(.discard-btn, .save-btn, .photo-btn) {
-  min-width: 0;
-  height: 36px;
-  padding: 0 12px;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  box-shadow: none;
+/* Stats Insight */
 
-  &:is(:hover, :focus-visible, :active) {
-    box-shadow: none;
-  }
+.container {
+  /* Layout */
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1%;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 20px;
 
-  mat-icon {
-    color: inherit;
-    margin-inline: 0 4px;
-  }
+  /* Style */
+  border-radius: 18px;
+  border: 1px solid #DDD6FE;
+  background: #FFF;
+  box-shadow: 0 8px 28px rgba(76, 29, 149, 0.12);
 }
 
-button.discard-btn {
-  background-color: #e6e6e6;
-  color: #707070;
+#min-height{
+  min-height: 345px;
 }
 
-button.save-btn {
-  background-color: #7c3aed;
-  color: #fff;
-}
-
-button.photo-btn {
-  background-color: transparent;
-  border-color: #7c3aed;
-  color: #7c3aed;
+.title {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
 }
