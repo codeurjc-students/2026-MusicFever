@@ -27,7 +27,7 @@ public class UserSystemTest {
     private static final String BASE_URL = "http://localhost:4200";
     private static final String[] USERNAME = {"testUser", "editableUser"};
     private static final String PASSWORD = "passTest123";
-    private static final String[] EMAIL = {"test@gmail.com", "editableEmail@gmail.com"};
+    private static final String[] EMAIL = {"testUser@gmail.com", "editableEmail@gmail.com"};
 
     private static final String NEW_EMAIL = "newEmail@gmail.com";
 
@@ -285,13 +285,11 @@ public class UserSystemTest {
         assertEquals(expectedSrc, profilePicture.getDomAttribute("src"));
 
         // Check image is changed in side-header
-        WebElement sideHeaderPicture = wait.until(
-            ExpectedConditions.presenceOfElementLocated(
-                By.cssSelector("app-side-header img#profile-picture")
-            )
-        );
+        By sideHeaderPicture = By.cssSelector("app-side-header img#profile-picture");
 
-        assertEquals(expectedSrc, sideHeaderPicture.getDomAttribute("src"));
+        wait.until(ExpectedConditions.attributeToBe(
+            sideHeaderPicture, "src", expectedSrc
+        ));
     }
 
     @Test 
