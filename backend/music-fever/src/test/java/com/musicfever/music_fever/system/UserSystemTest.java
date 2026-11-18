@@ -171,6 +171,7 @@ public class UserSystemTest {
 
         analyticsButton.click();
 
+        wait.until(ExpectedConditions.urlToBe(BASE_URL + "/stats"));
         assertTrue(driver.getCurrentUrl().endsWith("/stats"));
     }
 
@@ -232,6 +233,7 @@ public class UserSystemTest {
 
         saveChangesButton.click();
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("info-dt")));
         List<WebElement> infoBits = driver.findElements(By.className("info-dt"));
 
         String emailDisplay = infoBits.get(1).findElement(By.tagName("dd")).getText();
