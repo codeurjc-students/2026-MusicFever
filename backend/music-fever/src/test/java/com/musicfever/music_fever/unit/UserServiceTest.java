@@ -1,9 +1,11 @@
 package com.musicfever.music_fever.unit;
 
 import com.musicfever.music_fever.config.jwt.LoginRequest;
+import com.musicfever.music_fever.dto.user.UserDTO;
 import com.musicfever.music_fever.exception.UserAlreadyExistsException;
 import com.musicfever.music_fever.exception.UserNotFoundException;
 import com.musicfever.music_fever.mapper.model.UserMapper;
+import com.musicfever.music_fever.model.Image;
 import com.musicfever.music_fever.model.UserEntity;
 import com.musicfever.music_fever.repository.UserRepository;
 import com.musicfever.music_fever.service.UserService;
@@ -11,12 +13,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mapstruct.factory.Mappers;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -31,8 +36,9 @@ public class UserServiceTest {
 
     UserRepository repository;
 
-    UserEntity[] usersTest = new UserEntity[3];
-    LoginRequest[] requestsTest = new LoginRequest[3];
+    private static final int TEST_OBJECT = 3;
+    UserEntity[] usersTest;
+    LoginRequest[] requestsTest;
 
     @BeforeEach
     void setup(){
@@ -42,13 +48,13 @@ public class UserServiceTest {
         mapper = Mappers.getMapper(UserMapper.class);
         this.service = new UserService(repository, mapper, encoder);
 
-        usersTest[0] = new UserEntity("Test1", "pass1", "Test1@gmail.com");
-        usersTest[1] = new UserEntity("Test2", "pass2", "Test2@gmail.com");
-        usersTest[2] = new UserEntity("Test3", "pass3", "Test3@gmail.com");
+        usersTest = new UserEntity[TEST_OBJECT];
+        requestsTest = new LoginRequest[TEST_OBJECT];
 
-        requestsTest[0] = new LoginRequest("Test1@gmail.com", "Test1","pass1");
-        requestsTest[1] = new LoginRequest("Test2@gmail.com", "Test2","pass2");
-        requestsTest[2] = new LoginRequest("Test3@gmail.com", "Test3","pass3");
+        for (int i = 0; i < TEST_OBJECT; i++){
+            usersTest[i] = new UserEntity("Test" + (i+1), "pass" + (i+1), "Test" + (i+1) + "@gmail.com");
+            requestsTest[i] = new LoginRequest("Test" + (i+1) + "@gmail.com", "Test" + (i+1), "pass" + (i+1));
+        }
     }
 
     @Test
@@ -140,5 +146,68 @@ public class UserServiceTest {
             verify(this.repository, times(1)).findByEmail(anyString());
             verify(this.encoder, times(1)).encode(anyString());
         }
+    }
+
+    public static Stream<Arguments> setInputs(){
+        return Stream.of(
+            Arguments.of("Test1", "newEmail@gmail.com\"", null, 0),
+            Arguments.of("Test1", null, "url/image.jpeg", 0),
+            Arguments.of("Test2", null, null, 1),
+            Arguments.of("Test3", "newEmail@gmail.com", "url/image.jpeg", 2)
+        );
+    }
+
+    @ParameterizedTest 
+    @MethodSource("setInputs")
+    @DisplayName("Updates a user profile given the updated data")
+    void verifyProfileUpdate(String username, String email, String profilePicture, int index){
+        // When
+        for (int i = 0; i < TEST_OBJECT; i++){
+            when(repository.findByUsername(this.usersTest[i].getUsername()))
+                .thenReturn(Optional.of(this.usersTest[i]));
+        }
+
+        String emailUpdate = email == null ? this.usersTest[index].getEmail() : email;
+        Image newImage = new Image();
+        newImage.setUrl(profilePicture);
+        Image pictureUpdate = profilePicture == null
+            ? this.usersTest[index].getProfilePicture() : newImage;
+
+        UserEntity expectedResult = new UserEntity();
+        expectedResult.setUsername(username);
+        expectedResult.setEmail(emailUpdate);
+        expectedResult.setProfilePicture(pictureUpdate);
+        when(repository.save(this.usersTest[index])).thenReturn(expectedResult);
+
+        UserDTO result = this.service.updateProfile(username, email, profilePicture);
+
+        // Then
+        if (email == null){
+            assertEquals(this.usersTest[index].getEmail(), result.email());
+        } else {
+            assertEquals(email, result.email());
+        }
+
+        if (profilePicture == null){
+            assertEquals(this.usersTest[index].getProfilePicture(), result.profilePicture());
+        } else {
+            assertEquals(pictureUpdate, result.profilePicture());
+        }
+
+        verify(this.repository, times(1)).findByUsername(anyString());
+        verify(this.repository, times(1)).save(any());
+    }
+
+    @Test 
+    @DisplayName("Throws exception when trying to update an inexisting profile")
+    void verifyProfileUpdate_throwsExceptionWhenUserNotFound(){
+        // When
+        when(repository.findByUsername(anyString())).thenReturn(Optional.empty());
+
+        // Then
+        assertThrows(UserNotFoundException.class, () -> {
+                this.service.updateProfile("Test4", "newEmail@gmail.com", null);
+            });
+
     }
 }

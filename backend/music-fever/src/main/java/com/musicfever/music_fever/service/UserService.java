@@ -67,7 +67,7 @@ public class UserService {
     public UserDTO updateProfile(String username, String email, String profilePicture) {
         Optional<UserEntity> op = this.findByUsername(username);
         if (op.isEmpty()){
-            return null;
+            throw new UserNotFoundException("User not found");
         }
 
         UserEntity user = op.get();
