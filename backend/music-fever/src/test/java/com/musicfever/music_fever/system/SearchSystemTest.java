@@ -10,17 +10,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
-
-import java.util.logging.Level;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -35,11 +29,7 @@ public class SearchSystemTest {
 
     @BeforeEach
     void setUpTest() {
-        LoggingPreferences logs = new LoggingPreferences();
-        logs.enable(LogType.BROWSER, Level.ALL);
-        
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setCapability("goog:loggingPrefs", logs);
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--headless=new");
         chromeOptions.addArguments("--window-size=1920,1080");
@@ -80,21 +70,9 @@ public class SearchSystemTest {
         }
 
         // Navigate to the artist page
-        String urlBeforeClick = driver.getCurrentUrl();
         correctCard.click();
 
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h3")));
-        } catch (org.openqa.selenium.TimeoutException e) {
-            System.err.println("URL antes del clic: " + urlBeforeClick);
-            
-            System.err.println("URL al fallar: " + driver.getCurrentUrl());
-            System.err.println("Texto visible: " + driver.findElement(By.tagName("body")).getText());
-
-            driver.manage().logs().get(LogType.BROWSER)
-                .forEach(entry -> System.out.println(entry.getMessage()));
-            throw e;
-        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h3")));
         assertEquals(SEARCH, driver.findElement(By.tagName("h3")).getText());
 
         // Check the album tab
