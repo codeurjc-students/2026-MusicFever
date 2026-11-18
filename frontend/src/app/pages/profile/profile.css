@@ -1,0 +1,311 @@
+/* Angular Material CSS */
+:host ::ng-deep .profile-tabs > mat-tab-header [role="tab"] {
+  --tab-color: #707070;
+  background-color: transparent;
+}
+
+:host ::ng-deep .profile-tabs > mat-tab-header [role="tab"][aria-selected="true"] {
+  --tab-color: #7c3aed;
+  background-color: #f1e7fc;
+  border-radius: 12px 12px 0 0;
+}
+
+:host ::ng-deep .profile-tabs > mat-tab-header [role="tab"] :is(mat-icon, span) {
+  color: var(--tab-color);
+}
+
+:host ::ng-deep .profile-tabs > mat-tab-header [role="tab"] mat-icon {
+  margin-inline-end: 8px;
+}
+
+button.purple-btn {
+  background-color: #7c3aed;
+  color: #fff;
+  box-shadow: none;
+  padding: 6px 15px;
+  height: auto;
+}
+
+button.purple-btn:hover,
+button.purple-btn:focus-visible,
+button.purple-btn:active {
+  box-shadow: none;
+}
+
+button.purple-btn mat-icon {
+  color: inherit;
+  margin-inline-end: 4px;
+}
+
+button.logout-btn {
+  background-color: #e8e8e8;
+  color: #707070;
+  height: 36px;
+  padding-inline: 12px;
+  border-radius: 10px;
+  box-shadow: none;
+
+  &:is(:hover, :focus-visible, :active) {
+    box-shadow: none;
+  }
+
+  mat-icon {
+    color: inherit;
+    margin-inline: 0 4px;
+  }
+}
+
+button:is(.discard-btn, .save-btn, .photo-btn) {
+  min-width: 0;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: none;
+
+  &:is(:hover, :focus-visible, :active) {
+    box-shadow: none;
+  }
+
+  mat-icon {
+    color: inherit;
+    margin-inline: 0 4px;
+  }
+}
+
+button.discard-btn {
+  background-color: #e6e6e6;
+  color: #707070;
+}
+
+button.save-btn {
+  background-color: #7c3aed;
+  color: #fff;
+}
+
+button.photo-btn {
+  background-color: transparent;
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+:host ::ng-deep .profile-room-filter > mat-tab-header [role="tab"] {
+  --tab-color: #707070;
+  background-color: transparent;
+}
+
+:host ::ng-deep .profile-room-filter > mat-tab-header [role="tab"][aria-selected="true"] {
+  --tab-color: #7c3aed;
+}
+
+:host ::ng-deep .profile-room-filter > mat-tab-header [role="tab"] :is(mat-icon, span) {
+  color: var(--tab-color);
+}
+
+/* Music Fever CSS */
+.tab-section {
+    /* Typography */
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+    line-height: 200%;
+}
+
+h4 {
+    margin: 0;
+    padding: 1%;
+
+    /* Typography */
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px; /* 150% */
+}
+
+h5 {
+    margin: 0;
+    white-space: nowrap;
+
+    /* Typography */
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px; /* 187.5% */
+}
+
+.row-display {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    align-self: stretch;
+}
+
+.column-display {
+    /* Layout */
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+}
+
+.profile-container {
+    /* Layout */
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+}
+
+.profile-info {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 10%;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 999px;
+}
+
+.vertical-line {
+  flex: 0 0 2px;
+  align-self: stretch;
+  height: fill;
+  background-color: #F4EAFF;
+  border-radius: 2px;
+}
+
+.info-dt {
+  margin: 0;
+  display: grid;
+  gap: 1px;
+
+  dt {
+    font-size: 12px;
+    color: #707070;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.app-container {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 8px 12px;
+    white-space: nowrap;
+
+    /* Style */
+    border-radius: 16px;
+    border: 1px solid rgba(112, 112, 112, 0.60);
+
+    p {
+        align-self: stretch;
+        color: #000;
+        font-family: Inter;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 30px; /* 150% */
+    }
+}
+
+.lock-icon {
+  color: #707070;
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.icon-image {
+    width: 24px;
+    height: 24px;
+}
+
+.description {
+    white-space: nowrap;
+    justify-self: flex-start;
+    text-align: left;
+}
+
+/* Editing */
+.email-field {
+  position: relative;
+  display: inline-block;
+
+  .email-hidden {
+    visibility: hidden;
+  }
+
+  input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    color: inherit;
+    box-shadow: inset 0 -1px #7c3aed;
+  }
+}
+
+#clickable:hover {
+    cursor: pointer;
+    background-color: #e2ffe8;
+}
+
+/* Stats Insight */
+
+.container {
+  /* Layout */
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1%;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 20px;
+
+  /* Style */
+  border-radius: 18px;
+  border: 1px solid #DDD6FE;
+  background: #FFF;
+  box-shadow: 0 8px 28px rgba(76, 29, 149, 0.12);
+}
+
+#min-height{
+  min-height: 345px;
+}
+
+.title {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}

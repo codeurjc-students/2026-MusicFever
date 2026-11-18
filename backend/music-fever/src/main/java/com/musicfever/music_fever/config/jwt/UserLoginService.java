@@ -112,12 +112,13 @@ public class UserLoginService {
 		return cookie;
 	}
 
-	private Cookie removeTokenCookie(TokenType type){
+	private Cookie removeTokenCookie(TokenType type) {
 		Cookie cookie = new Cookie(type.cookieName, "");
 		cookie.setMaxAge(0);
 		cookie.setHttpOnly(true);
 		cookie.setPath("/");
-        cookie.setSecure(true);
+		cookie.setSecure(true);
+		cookie.setAttribute("SameSite", "None");
 		return cookie;
 	}
 }

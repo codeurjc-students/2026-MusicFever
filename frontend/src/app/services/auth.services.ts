@@ -2,7 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { ActiveUser } from '../model/activeuser.model'
+import { ActiveUser, UserDisplay } from '../model/user.model'
 import { throwError } from 'rxjs';
 
 interface Request {

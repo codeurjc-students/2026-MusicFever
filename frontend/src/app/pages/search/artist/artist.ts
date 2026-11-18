@@ -34,7 +34,8 @@ export class ArtistPage {
         this.loading.set(false);
         this.loadAlbums();
       },
-      error: () => {
+      error: err => {
+        console.error(`getArtist(${id}) → HTTP ${err.status} | ${err.message}`);
         this.loading.set(false);
       }
     });

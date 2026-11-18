@@ -1,0 +1,192 @@
+@if (userProfile(); as user) {
+  <mat-tab-group class="profile-tabs" [mat-stretch-tabs]="true">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>person_outline</mat-icon>
+        <span class="tab-section">Profile</span>
+      </ng-template>
+
+      <div class="profile-container">
+        <div class="row-display">
+          @if(isEditing){
+            <h4>Edit Profile</h4>
+            <div class="gap"></div>
+              <button matFab extended class="discard-btn" (click)="discard()">
+              <mat-icon>close</mat-icon>
+              Discard Changes
+            </button>
+            <button matFab extended class="save-btn" (click)="saveChanges()">
+              <mat-icon>edit</mat-icon>
+              Save Changes
+            </button>
+
+          } @else {
+            <h4>Your Profile</h4>
+            <div class="gap"></div>
+            <button matFab extended class="purple-btn" (click)="startEditing()">
+              <mat-icon>edit</mat-icon>
+              Edit Profile
+            </button>
+          }
+        </div>
+
+        <div class="profile-info">
+          <div class="column-display">
+            <img id="profile-picture" [src]="draftImage() ?? user.profilePicture?.url ?? '/image_not_found.png'">
+            @if(!isEditing){
+              <button matFab extended class="logout-btn" (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                Logout
+              </button>
+            } @else {
+              <input #photoInput type="file" accept="image/*" hidden
+                    (change)="onPhotoSelected($event)">
+
+              <button class="photo-btn" type="button" matFab extended (click)="photoInput.click()">
+                <mat-icon>photo_camera</mat-icon>
+                Change photo
+              </button>
+            } 
+          </div>
+
+          <div class="column-display">
+            <dl class="info-dt">
+              <dt>Username</dt>
+              <dd>{{ user.username }}</dd>
+            </dl>
+            <dl class="info-dt">
+              <dt>Email</dt>
+              <dd>
+                <span class="email-field">
+                  <span [class.email-hidden]="isEditing">{{ user.email }}</span>
+
+                  @if (isEditing) {
+                    <input type="email" aria-label="Email" [(ngModel)]="draftEmail">
+                  }
+                </span>
+              </dd>
+            </dl>
+            <dl class="info-dt">
+              <dt>Member since</dt>
+              <dd>{{ user.accountCreatedDate }}</dd>
+            </dl>
+          </div>
+
+          <span class="vertical-line" aria-hidden="true"></span>
+
+          <div class="column-display">
+            <h5>Music Account</h5>
+
+            <div class="app-container">
+              @if (user.musicProvider === 'SPOTIFY') {
+                <img class="icon-image" src="/spotify.webp" alt="Spotify" width="24" height="24">
+                <span>Spotify</span>
+                <div class="gap"></div>
+                <div class="tab">
+                  <mat-icon>check</mat-icon>
+                  <p>Connected</p>
+                </div>
+                @if(isEditing){
+                  <a href="">Disconnect the account</a>
+                }
+              } @else if (user.musicProvider === 'NONE') {
+                <mat-icon>link_off</mat-icon>
+                <span>No music account connected</span>
+              }
+            </div>
+
+            @if(isEditing){
+              <div class="column-display" style="gap: 10px;">
+                <p class="description">Link your account</p>
+                <div class="row-display">
+                  <div class="app-container" id="clickable">
+                    <img class="icon-image" src="/spotify.webp" alt="Spotify" width="24" height="24">
+                    <span>Spotify</span>
+                  </div>
+                </div>
+              </div>
+            }
+
+            <div class="row-display">
+              <mat-icon class="lock-icon">lock</mat-icon>
+              <div class="column-display" style="gap: 0;">
+                <p class="description">We never store your music or login details</p>
+                <p class="description">You can disconnect at anytime</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+      <div class="container">
+        <div class="title">
+          <h5>Your Music Snapshot</h5>
+          <p class="description">A quick look into your listening activity</p>
+        </div>
+
+        <div class="tbd-container">
+          <span class="tbd-icon" aria-hidden="true">✦</span>
+          <h2>Coming soon</h2>
+          <p>We're working on this feature. Stay tuned!</p>
+        </div>
+
+        <div class="row-display">
+          <p class="description">Thanks for being part of the music</p>
+          <div class="gap"></div>
+          <button matFab extended class="purple-btn" (click)="stats()">
+              <mat-icon>insert_chart_outlined</mat-icon>
+              Go to Analytics
+            </button>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>headphones</mat-icon>
+        <span class="tab-section">My Rooms</span>
+      </ng-template>
+
+      <div class="sep"></div>
+      <div class="sep"></div>
+      <div class="container">
+        <mat-tab-group class="profile-room-filter" [mat-stretch-tabs]="false">
+          <mat-tab label="All">
+            <div class="sep"></div>
+            <div class="container" id="min-height">
+              <div class="tbd-container">
+                <span class="tbd-icon" aria-hidden="true">✦</span>
+                <h2>Coming soon</h2>
+                <p>We're working on this feature. Stay tuned!</p>
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Hosted">
+            <div class="sep"></div>
+            <div class="container" id="min-height">
+              <div class="tbd-container">
+                <span class="tbd-icon" aria-hidden="true">✦</span>
+                <h2>Coming soon</h2>
+                <p>We're working on this feature. Stay tuned!</p>
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Joined">
+            <div class="sep"></div>
+            <div class="container" id="min-height">
+              <div class="tbd-container">
+                <span class="tbd-icon" aria-hidden="true">✦</span>
+                <h2>Coming soon</h2>
+                <p>We're working on this feature. Stay tuned!</p>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+}
